@@ -32,8 +32,11 @@ const Header = () => {
           </svg>
         </span>
       </div>
-      <button className="ml-4 bg-white text-blue-500 px-4 py-2 rounded">
+      <button className="ml-4 bg-white hover:bg-gray-400 text-blue-500 hover:text-white px-4 py-2 rounded cursor-pointer">
         Login
+      </button>
+      <button className="ml-4 bg-blue-800 hover:bg-gray-400 text-white hover:text-blue-800 px-4 py-2 rounded cussor-pointer">
+        Sign Up
       </button>
     </header>
   );
