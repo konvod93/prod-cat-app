@@ -1,13 +1,35 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { ShoppingCartIcon } from '@heroicons/react/16/solid';
+
+// Header component for the application
 
 const Header = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <header className="flex bg-blue-500 text-white p-4">
       <ul className="flex pb-2 pt-1 space-x-4 gap-4">
-        <li><Link to='/' className='hover:text-blue-800'>Home</Link></li>
-        <li><Link to='/Products' className='hover:text-blue-800'>Products</Link></li>
-        <li><Link to='/Categories' className='hover:text-blue-800'>Categories</Link></li>
-        <li><Link to='/About' className='hover:text-blue-800'>About Us</Link></li>
+        <li>
+          <Link to="/" className="hover:text-blue-800">
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link to="/Products" className="hover:text-blue-800">
+            Products
+          </Link>
+        </li>
+        <li>
+          <Link to="/Categories" className="hover:text-blue-800">
+            Categories
+          </Link>
+        </li>
+        <li>
+          <Link to="/About" className="hover:text-blue-800">
+            About Us
+          </Link>
+        </li>
       </ul>
       <div className="relative flex items-center ml-auto">
         <input
@@ -33,12 +55,31 @@ const Header = () => {
           </svg>
         </span>
       </div>
-      <button className="ml-4 bg-white hover:bg-gray-400 text-blue-500 hover:text-white px-4 py-2 rounded cursor-pointer">
-        Login
-      </button>
-      <button className="ml-4 bg-blue-800 hover:bg-gray-400 text-white hover:text-blue-800 px-4 py-2 rounded cussor-pointer">
-        Sign Up
-      </button>
+      {!isLoggedIn ? (
+        <div className="flex items-center">
+          <button
+            className="ml-4 bg-white hover:bg-gray-400 text-blue-500 hover:text-white px-4 py-2 rounded cursor-pointer"
+            onClick={() => setIsLoggedIn(true)}
+          >
+            Login
+          </button>
+          <button
+            className="ml-4 bg-blue-800 hover:bg-gray-400 text-white hover:text-blue-800 px-4 py-2 rounded cursor-pointer"
+            onClick={() => setIsLoggedIn(true)}
+          >
+            Sign Up
+          </button>
+        </div>
+      ) : (
+        <div className="flex items-center">
+          <button
+            className="ml-4 bg-white hover:bg-gray-400 text-blue-500 hover:text-white px-4 py-2 rounded cursor-pointer"
+            onClick={() => setIsLoggedIn(false)}
+          >
+            Logout
+          </button>
+        </div>
+      )}
     </header>
   );
 };
