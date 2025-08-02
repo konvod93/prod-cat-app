@@ -83,7 +83,13 @@ const Header = () => {
             <span className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2 py-1 rounded bg-gray-800 text-white text-xs opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap transition">
               My Profile
             </span>
-          </button>          
+          </button>
+          <button className="ml-4 relative rounded-full p-2 bg-white hover:bg-gray-400 cursor-pointer group">
+            <ShoppingCartIcon className="h-6 w-6 text-gray-400 hover:text-white" />
+            <span className="absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2 py-1 rounded bg-gray-800 text-white text-xs opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap transition">
+              My Cart
+            </span>          
+          </button>                              
         </div>
       )}
     </header>
