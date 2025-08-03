@@ -5,7 +5,7 @@ import Home from "./components/pages/Home";
 import Products from "./components/pages/Products";
 import Categories from "./components/pages/Categories";
 import About from "./components/pages/About";
-import NotFound from "./components/NotFound";
+import NotFound from "./components/pages/NotFound";
 import './App.css';
 
 
