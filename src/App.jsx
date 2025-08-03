@@ -2,7 +2,7 @@ import Header from "./components/Header"
 import Footer from "./components/Footer"
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from "./components/pages/Home";
-import Products from "./components/pages/Products";
+import ProductList from "./components/pages/ProductList";
 import Categories from "./components/pages/Categories";
 import About from "./components/pages/About";
 import Contacts from "./components/pages/Contacts.";
@@ -20,7 +20,7 @@ function App() {
         {/* Main content goes here */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
+          <Route path="/product-list" element={<ProductList />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/about" element={<About />} />
           <Route path="/not-found" element={<NotFound />} />
