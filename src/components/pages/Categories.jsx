@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-// Имитация данных для демонстрации
+// Замените на ваш импорт: import { products } from '../../data/mockProducts';
 const mockProducts = [
   { id: 1, category: 'electronics', name: 'Смартфон' },
   { id: 2, category: 'clothing', name: 'Футболка' },
@@ -34,17 +34,6 @@ const Categories = () => {
     return mockProducts.filter(p => p.category === category).length;
   };
 
-  // Имитация навигации (в реальном проекте замените на react-router)
-  const handleCategoryClick = (category) => {
-    console.log(`Переход к категории: ${category}`);
-    // В реальном проекте: navigate(`/Products?category=${category}`)
-  };
-
-  const handleNavClick = (path) => {
-    console.log(`Переход к: ${path}`);
-    // В реальном проекте: navigate(path)
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 p-6">
       <div className="max-w-7xl mx-auto">
@@ -70,10 +59,10 @@ const Categories = () => {
             const count = getCategoryCount(category);
             
             return (
-              <div
+              <Link
                 key={category}
-                onClick={() => handleCategoryClick(category)}
-                className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer"
+                to={`/Products?category=${category}`}
+                className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer block"
               >
                 {/* Градиентный фон */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${categoryInfo.color} opacity-90`}></div>
@@ -91,8 +80,7 @@ const Categories = () => {
                     <div className="bg-white bg-opacity-20 rounded-full px-3 py-1">
                       <span className="text-sm font-medium">{count} товаров</span>
                     </div>
-                  </div>
-                  
+                  </div>                  
                   <h2 className="text-xl font-bold mb-2 group-hover:text-yellow-300 transition-colors duration-300">
                     {categoryInfo.name}
                   </h2>
@@ -105,7 +93,7 @@ const Categories = () => {
                 
                 {/* Эффект ховера */}
                 <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-              </div>
+              </Link>
             );
           })}
         </div>
@@ -136,24 +124,26 @@ const Categories = () => {
           </p>
           
           <div className="flex flex-wrap justify-center gap-4">
-            <button 
-              onClick={() => handleNavClick('/contacts')}
+            <Link 
+              to="/Contacts"
               className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105"
             >
               📞 Связаться с нами
-            </button>
+            </Link>
             
-            <button               
+            <Link 
+              to="/"
               className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-gray-500 to-gray-600 text-white rounded-lg font-medium hover:from-gray-600 hover:to-gray-700 transition-all duration-300 transform hover:scale-105"
             >
-              <Link to='/'>🏠 Главная страница</Link>
-            </button>
+              🏠 Главная страница
+            </Link>
             
-            <button               
+            <Link 
+              to="/Products"
               className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-medium hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105"
             >
-              <Link to='/Products'>📋 Все товары</Link>
-            </button>
+              📋 Все товары
+            </Link>
           </div>
           
           <p className="mt-6 text-gray-500 italic">
