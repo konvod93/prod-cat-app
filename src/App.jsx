@@ -20,7 +20,7 @@ function App() {
         {/* Main content goes here */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/product-list" element={<ProductList />} />
+          <Route path="/products" element={<ProductList />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/about" element={<About />} />
           <Route path="/not-found" element={<NotFound />} />

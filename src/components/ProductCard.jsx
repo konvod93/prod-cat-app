@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { HeartIcon, ShoppingCartIcon, EyeIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
+import { categories } from '../data/mockProducts';
 
 const ProductCard = ({ product, onAddToCart, onViewDetails, onToggleWishlist }) => {
   const [isInWishlist, setIsInWishlist] = useState(false);

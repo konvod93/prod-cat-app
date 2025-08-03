@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import ProductCard from './ProductCard';
-import { products, categories, mockAPI } from '../data/mockProducts';
+import ProductCard from '../ProductCard';
+import { products, categories, mockAPI } from '../../data/mockProducts';
 
 const ProductList = () => {
   const [displayProducts, setDisplayProducts] = useState([]);
