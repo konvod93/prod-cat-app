@@ -5,6 +5,7 @@ import Home from "./components/pages/Home";
 import Products from "./components/pages/Products";
 import Categories from "./components/pages/Categories";
 import About from "./components/pages/About";
+import NotFound from "./components/NotFound";
 import './App.css';
 
 
@@ -21,8 +22,9 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/about" element={<About />} />
-          {/* Redirect any unknown paths to Home */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="/not-found" element={<NotFound />} />
+          {/* Redirect any unknown paths to NotFound */}
+          <Route path="*" element={<Navigate to="/not-found" replace />} />
         </Routes>        
       </main>
       <Footer />
