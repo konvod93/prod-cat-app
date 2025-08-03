@@ -1,7 +1,7 @@
 
 const Home = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="p-4">
       <div>
         {Array.from({ length: 50 }).map((_, i) => (
           <p key={i}>Строка {i + 1}</p>
