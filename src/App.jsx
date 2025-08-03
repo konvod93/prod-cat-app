@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 overflow-auto">
+      <main className="flex-1 pt-16 pb-24 overflow-auto">
         {/* Main content goes here */}
         <Routes>
           <Route path="/" element={<Home />} />
