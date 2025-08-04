@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom";
+import { products } from '../../data/mockProducts';
 
 // Замените на ваш импорт: import { products } from '../../data/mockProducts';
-const mockProducts = [
-  { id: 1, category: 'electronics', name: 'Смартфон' },
-  { id: 2, category: 'clothing', name: 'Футболка' },
-  { id: 3, category: 'books', name: 'Роман' },
-  { id: 4, category: 'electronics', name: 'Ноутбук' },
-  { id: 5, category: 'home', name: 'Кресло' },
-  { id: 6, category: 'sports', name: 'Мяч' },
-  { id: 7, category: 'beauty', name: 'Крем' },
-  { id: 8, category: 'food', name: 'Кофе' },
-];
+// const mockProducts = [
+//   { id: 1, category: 'electronics', name: 'Смартфон' },
+//   { id: 2, category: 'clothing', name: 'Футболка' },
+//   { id: 3, category: 'books', name: 'Роман' },
+//   { id: 4, category: 'electronics', name: 'Ноутбук' },
+//   { id: 5, category: 'home', name: 'Кресло' },
+//   { id: 6, category: 'sports', name: 'Мяч' },
+//   { id: 7, category: 'beauty', name: 'Крем' },
+//   { id: 8, category: 'food', name: 'Кофе' },
+// ];
 
 const Categories = () => {
   // Маппинг категорий с английского на русский и добавление иконок
@@ -27,11 +28,11 @@ const Categories = () => {
     'jewelry': { name: 'Украшения', icon: '💍', color: 'from-violet-500 to-violet-600' }
   };
 
-  const uniqueCategories = [...new Set(mockProducts.map(p => p.category))];
+  const uniqueCategories = [...new Set(products.map(p => p.category))];
   
   // Подсчет товаров в каждой категории
   const getCategoryCount = (category) => {
-    return mockProducts.filter(p => p.category === category).length;
+    return products.filter(p => p.category === category).length;
   };
 
   return (
@@ -106,7 +107,7 @@ const Categories = () => {
               <div className="text-gray-600">Категорий</div>
             </div>
             <div className="p-4">
-              <div className="text-3xl font-bold text-green-600 mb-2">{mockProducts.length}</div>
+              <div className="text-3xl font-bold text-green-600 mb-2">{products.length}</div>
               <div className="text-gray-600">Товаров</div>
             </div>
             <div className="p-4">
