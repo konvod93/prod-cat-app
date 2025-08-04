@@ -1,12 +1,28 @@
 // src/data/mockProducts.js
+
+// Массив категорий (для ProductList.jsx)
 export const categories = [
-  { id: 1, name: 'electronics', label: 'Электроника', icon: '📱' },
-  { id: 2, name: 'clothing', label: 'Одежда', icon: '👕' },
-  { id: 3, name: 'books', label: 'Книги', icon: '📚' },
-  { id: 4, name: 'home', label: 'Дом и сад', icon: '🏠' },
-  { id: 5, name: 'sports', label: 'Спорт', icon: '⚽' },
-  { id: 6, name: 'beauty', label: 'Красота', icon: '💄' }
+    { id: 1, name: 'Электроника', label: 'Электроника', icon: '📱', color: 'from-blue-500 to-blue-600' },
+    { id: 2, name: 'Одежда', label: 'Одежда', icon: '👕', color: 'from-purple-500 to-purple-600' },
+    { id: 3, name: 'Книги', label: 'Книги', icon: '📚', color: 'from-green-500 to-green-600' },
+    { id: 4, name: 'Дом и сад', label: 'Дом и сад', icon: '🏠', color: 'from-orange-500 to-orange-600' },
+    { id: 5, name: 'Спорт', label: 'Спорт', icon: '⚽', color: 'from-red-500 to-red-600' },
+    { id: 6, name: 'Красота', label: 'Красота', icon: '💄', color: 'from-pink-500 to-pink-600' },
+    { id: 7, name: 'Продукты', label: 'Продукты', icon: '🍎', color: 'from-yellow-500 to-yellow-600' },
+    { id: 8, name: 'Игрушки', label: 'Игрушки', icon: '🧸', color: 'from-indigo-500 to-indigo-600' },
+    { id: 9, name: 'Автотовары', label: 'Автотовары', icon: '🚗', color: 'from-gray-500 to-gray-600' },
+    { id: 10, name: 'Украшения', label: 'Украшения', icon: '💍', color: 'from-violet-500 to-violet-600' }
 ];
+
+// Объект категорий (для Categories.jsx) - создается автоматически из массива
+export const categoriesMap = categories.reduce((map, category) => {
+    map[category.name] = {
+        name: category.name,
+        icon: category.icon,
+        color: category.color
+    };
+    return map;
+}, {});
 
 export const products = [
   {
@@ -15,7 +31,7 @@ export const products = [
     description: "Самый продвинутый iPhone с титановым корпусом и чипом A17 Pro",
     price: 999,
     originalPrice: 1199,
-    category: "electronics",
+    category: "Электроника",
     image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400",
     rating: 4.8,
     reviewsCount: 1250,
@@ -35,7 +51,7 @@ export const products = [
     name: "MacBook Air M3",
     description: "Невероятно тонкий и легкий ноутбук с чипом M3",
     price: 1299,
-    category: "electronics",
+    category: "Электроника",
     image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400",
     rating: 4.9,
     reviewsCount: 890,
@@ -55,7 +71,7 @@ export const products = [
     description: "Стильные кроссовки с максимальной амортизацией",
     price: 150,
     originalPrice: 180,
-    category: "sports",
+    category: "Спорт",
     image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
     rating: 4.6,
     reviewsCount: 445,
@@ -74,7 +90,7 @@ export const products = [
     name: "The Psychology of Programming",
     description: "Классическая книга о психологии программирования",
     price: 45,
-    category: "books",
+    category: "Книги",
     image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400",
     rating: 4.7,
     reviewsCount: 234,
@@ -93,7 +109,7 @@ export const products = [
     description: "Премиальные беспроводные наушники с активным шумоподавлением",
     price: 299,
     originalPrice: 349,
-    category: "electronics",
+    category: "Электроника",
     image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400",
     rating: 4.5,
     reviewsCount: 678,
@@ -112,7 +128,7 @@ export const products = [
     name: "Elegant Summer Dress",
     description: "Легкое летнее платье из натурального хлопка",
     price: 89,
-    category: "clothing",
+    category: "Одежда",
     image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400",
     rating: 4.4,
     reviewsCount: 156,
@@ -130,7 +146,7 @@ export const products = [
     name: "Smart Home Hub",
     description: "Центральное устройство для управления умным домом",
     price: 199,
-    category: "home",
+    category: "Дом и сад",
     image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400",
     rating: 4.3,
     reviewsCount: 89,
@@ -149,7 +165,7 @@ export const products = [
     name: "Organic Face Cream",
     description: "Органический крем для лица с натуральными ингредиентами",
     price: 65,
-    category: "beauty",
+    category: "Красота",
     image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400",
     rating: 4.6,
     reviewsCount: 312,
