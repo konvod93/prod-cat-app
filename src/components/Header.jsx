@@ -1,14 +1,20 @@
 import Navigation from './Navigation';
 import { useState } from 'react';
-import { ShoppingCartIcon, UserIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { useNavigate } from 'react-router-dom';
+import { ShoppingCartIcon, UserIcon, MagnifyingGlassIcon} from '@heroicons/react/24/outline';
 import Modal from './Modal';
+import { products } from '../data/mockProducts';
 
 const Header = () => {
+  const navigate = useNavigate();
+  
   const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
   const [isRegisterFormOpen, setIsRegisterFormOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [cartItemsCount, setCartItemsCount] = useState(3);
+  const [searchSuggestions, setSearchSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   // Состояние для форм
   const [loginData, setLoginData] = useState({
@@ -23,11 +29,65 @@ const Header = () => {
     confirmPassword: ''
   });
 
+  // Функция поиска с автодополнением
+  const handleSearchInputChange = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    if (query.trim().length > 1) {
+      // Ищем совпадения в названиях и тегах товаров
+      const suggestions = products
+        .filter(product => 
+          product.name.toLowerCase().includes(query.toLowerCase()) ||
+          product.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase())) ||
+          product.category.toLowerCase().includes(query.toLowerCase())
+        )
+        .slice(0, 5) // Показываем максимум 5 предложений
+        .map(product => ({
+          id: product.id,
+          name: product.name,
+          category: product.category,
+          type: 'product'
+        }));
+
+      // Добавляем категории в предложения
+      const categoryMatches = [...new Set(products.map(p => p.category))]
+        .filter(category => category.toLowerCase().includes(query.toLowerCase()))
+        .slice(0, 3)
+        .map(category => ({
+          name: category,
+          type: 'category'
+        }));
+
+      setSearchSuggestions([...suggestions, ...categoryMatches]);
+      setShowSuggestions(true);
+    } else {
+      setSearchSuggestions([]);
+      setShowSuggestions(false);
+    }
+  };
+
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       console.log('Поиск:', searchQuery);
+      // Перенаправляем на страницу продуктов с поисковым запросом
+      navigate(`/Products?search=${encodeURIComponent(searchQuery.trim())}`);
+      setShowSuggestions(false);
+      setSearchQuery('');
     }
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    if (suggestion.type === 'product') {
+      // Переход к конкретному товару - исправляем URL
+      navigate(`/Products?id=${suggestion.id}`);
+    } else if (suggestion.type === 'category') {
+      // Переход к категории
+      navigate(`/Products?category=${encodeURIComponent(suggestion.name)}`);
+    }
+    setShowSuggestions(false);
+    setSearchQuery('');
   };
 
   const handleLoginClick = () => {
@@ -41,7 +101,6 @@ const Header = () => {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     console.log('Вход с данными:', loginData);
-    // Здесь будет логика входа
     setIsLoggedIn(true);
     setIsLoginFormOpen(false);
     setLoginData({ email: '', password: '' });
@@ -50,7 +109,6 @@ const Header = () => {
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
     console.log('Регистрация с данными:', registerData);
-    // Здесь будет логика регистрации
     setIsLoggedIn(true);
     setIsRegisterFormOpen(false);
     setRegisterData({ name: '', email: '', password: '', confirmPassword: '' });
@@ -63,10 +121,12 @@ const Header = () => {
 
   const handleProfileClick = () => {
     console.log('Переход в профиль');
+    navigate('/Profile');
   };
 
   const handleCartClick = () => {
     console.log('Переход в корзину');
+    navigate('/Cart');
   };
 
   const closeModals = () => {
@@ -85,6 +145,12 @@ const Header = () => {
     setIsLoginFormOpen(true);
   };
 
+  // Закрытие предложений при клике вне поиска
+  const handleSearchBlur = () => {
+    // Задержка для обработки клика по предложению
+    setTimeout(() => setShowSuggestions(false), 200);
+  };
+
   return (
     <>
       <header className="fixed top-0 left-0 w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg z-50">
@@ -94,28 +160,67 @@ const Header = () => {
             {/* Logo + Navigation */}
             <div className="flex items-center space-x-8">
               <div className="flex-shrink-0">
-                <h1 className="text-xl font-bold">🛍️ ProductCat</h1>
+                <h1 className="text-xl font-bold cursor-pointer" onClick={() => navigate('/')}>
+                  🛍️ ProductCat
+                </h1>
               </div>
               <Navigation />
             </div>
 
-            {/* Search Bar */}
-            <div className="flex-1 max-w-lg mx-8">
-              <form onSubmit={handleSearch} className="relative">
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Поиск товаров..."
-                  className="w-full pl-10 pr-4 py-2 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent"
-                />
+            {/* Search Bar with Suggestions and Submit Button */}
+            <div className="flex-1 max-w-lg mx-8 relative">
+              <form onSubmit={handleSearch} className="relative flex">
+                <div className="relative flex-1">
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={handleSearchInputChange}
+                    onBlur={handleSearchBlur}
+                    onFocus={() => searchQuery.length > 1 && setShowSuggestions(true)}
+                    placeholder="Поиск товаров..."
+                    className="w-full pl-10 pr-4 py-2 rounded-l-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent"
+                  />
+                  <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                    <MagnifyingGlassIcon className="h-5 w-5" />
+                  </div>
+                </div>
                 <button 
                   type="submit"
-                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  onClick={handleSuggestionClick}
+                  className="px-4 py-2 bg-white hover:bg-gray-50 text-blue-600 rounded-r-lg border-l border-gray-200 font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
                 >
-                  <MagnifyingGlassIcon className="h-5 w-5" />
+                  Найти
                 </button>
               </form>
+
+              {/* Search Suggestions */}
+              {showSuggestions && searchSuggestions.length > 0 && (
+                <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-lg shadow-lg mt-1 max-h-64 overflow-y-auto z-50">
+                  {searchSuggestions.map((suggestion, index) => (
+                    <div
+                      key={`${suggestion.type}-${suggestion.id || suggestion.name}-${index}`}
+                      onClick={() => handleSuggestionClick(suggestion)}
+                      className="px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="font-medium text-gray-900">
+                            {suggestion.name}
+                          </div>
+                          {suggestion.category && (
+                            <div className="text-sm text-gray-500">
+                              в категории: {suggestion.category}
+                            </div>
+                          )}
+                        </div>
+                        <div className="text-xs text-blue-600 font-medium">
+                          {suggestion.type === 'product' ? 'Товар' : 'Категория'}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Auth + Cart Buttons */}

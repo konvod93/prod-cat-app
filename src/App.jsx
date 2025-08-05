@@ -3,6 +3,7 @@ import Footer from "./components/Footer"
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from "./components/pages/Home";
 import ProductList from "./components/pages/ProductList";
+import Products from "./components/pages/Products";
 import Categories from "./components/pages/Categories";
 import About from "./components/pages/About";
 import Contacts from "./components/pages/Contacts.";
@@ -25,6 +26,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/not-found" element={<NotFound />} />
           <Route path="/contacts" element={<Contacts />} />
+          {/* <Route path="/products/:id" element={<Products />} /> */}
           {/* Redirect any unknown paths to NotFound */}
           <Route path="*" element={<Navigate to="/not-found" replace />} />
         </Routes>        
