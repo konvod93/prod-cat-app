@@ -9,7 +9,7 @@ import Contacts from "./components/pages/Contacts.";
 import NotFound from "./components/pages/NotFound";
 import Cart from "./components/pages/Cart";
 import './App.css';
-import { CartProvider } from "./components/contexts/CartContext";
+import { CartProvider } from "./components/context/CartContext";
 
 
 function App() {

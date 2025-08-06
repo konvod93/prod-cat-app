@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ShoppingCartIcon, UserIcon, MagnifyingGlassIcon} from '@heroicons/react/24/outline';
 import Modal from './Modal';
 import { products } from '../data/mockProducts';
-import { useCart } from '../components/contexts/CartContext';
+import { useCart } from './context/CartContext';
 
 const Header = () => {
   const navigate = useNavigate();
