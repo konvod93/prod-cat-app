@@ -4,15 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { ShoppingCartIcon, UserIcon, MagnifyingGlassIcon} from '@heroicons/react/24/outline';
 import Modal from './Modal';
 import { products } from '../data/mockProducts';
+import { useCart } from '../components/contexts/CartContext';
 
 const Header = () => {
   const navigate = useNavigate();
+  const { totalItems } = useCart(); // Получаем количество товаров из контекста
   
   const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
   const [isRegisterFormOpen, setIsRegisterFormOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [cartItemsCount, setCartItemsCount] = useState(3);
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
@@ -186,7 +187,6 @@ const Header = () => {
                 </div>
                 <button 
                   type="submit"
-                  onClick={handleSuggestionClick}
                   className="px-4 py-2 bg-white hover:bg-gray-50 text-blue-600 rounded-r-lg border-l border-gray-200 font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
                 >
                   Найти
@@ -261,13 +261,13 @@ const Header = () => {
                     title="Корзина"
                   >
                     <ShoppingCartIcon className="h-6 w-6" />
-                    {cartItemsCount > 0 && (
-                      <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
-                        {cartItemsCount > 9 ? '9+' : cartItemsCount}
+                    {totalItems > 0 && (
+                      <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold animate-pulse">
+                        {totalItems > 99 ? '99+' : totalItems}
                       </span>
                     )}
                     <span className="absolute top-full mt-2 left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
-                      Корзина ({cartItemsCount})
+                      Корзина ({totalItems})
                     </span>
                   </button>
 

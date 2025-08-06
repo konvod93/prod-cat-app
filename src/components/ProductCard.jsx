@@ -1,18 +1,29 @@
 import { useState } from 'react';
-import { HeartIcon, ShoppingCartIcon, EyeIcon } from '@heroicons/react/24/outline';
+import { HeartIcon, ShoppingCartIcon, EyeIcon, CheckIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 import { categories } from '../data/mockProducts';
+import { useCart } from '../components/contexts/CartContext';
 
-const ProductCard = ({ product, onAddToCart, onViewDetails, onToggleWishlist }) => {
+const ProductCard = ({ product, onViewDetails, onToggleWishlist }) => {
   const [isInWishlist, setIsInWishlist] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+  
+  const { addToCart, isInCart, getItemQuantity, isLoading } = useCart();
 
-  const handleAddToCart = (e) => {
+  const handleAddToCart = async (e) => {
     e.stopPropagation(); // Предотвращаем переход на детальную страницу
-    if (product.inStock) {
-      onAddToCart?.(product);
-      // Можно добавить toast уведомление
-      console.log(`Добавлен в корзину: ${product.name}`);
+    
+    if (product.inStock && !isAddingToCart) {
+      setIsAddingToCart(true);
+      
+      // Добавляем товар в корзину через контекст
+      await addToCart(product);
+      
+      // Анимация успешного добавления
+      setTimeout(() => {
+        setIsAddingToCart(false);
+      }, 1000);
     }
   };
 
@@ -62,6 +73,8 @@ const ProductCard = ({ product, onAddToCart, onViewDetails, onToggleWishlist }) 
   };
 
   const discount = calculateDiscount();
+  const itemQuantity = getItemQuantity(product.id);
+  const productInCart = isInCart(product.id);
 
   return (
     <div 
@@ -85,6 +98,11 @@ const ProductCard = ({ product, onAddToCart, onViewDetails, onToggleWishlist }) 
           {!product.inStock && (
             <span className="bg-gray-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
               НЕТ В НАЛИЧИИ
+            </span>
+          )}
+          {productInCart && (
+            <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
+              В КОРЗИНЕ ({itemQuantity})
             </span>
           )}
         </div>
@@ -172,15 +190,38 @@ const ProductCard = ({ product, onAddToCart, onViewDetails, onToggleWishlist }) 
         {/* Add to Cart Button */}
         <button
           onClick={handleAddToCart}
-          disabled={!product.inStock}
-          className={`w-full py-2 px-4 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 ${
-            product.inStock
-              ? 'bg-blue-600 hover:bg-blue-700 text-white'
-              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+          disabled={!product.inStock || isAddingToCart || isLoading}
+          className={`w-full py-2 px-4 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
+            !product.inStock
+              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              : productInCart && !isAddingToCart
+              ? 'bg-green-600 hover:bg-green-700 text-white'
+              : isAddingToCart
+              ? 'bg-blue-400 text-white cursor-not-allowed'
+              : 'bg-blue-600 hover:bg-blue-700 text-white'
           }`}
         >
-          <ShoppingCartIcon className="h-4 w-4" />
-          {product.inStock ? 'В корзину' : 'Нет в наличии'}
+          {isAddingToCart ? (
+            <>
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+              Добавляем...
+            </>
+          ) : !product.inStock ? (
+            <>
+              <ShoppingCartIcon className="h-4 w-4" />
+              Нет в наличии
+            </>
+          ) : productInCart ? (
+            <>
+              <CheckIcon className="h-4 w-4" />
+              В корзине ({itemQuantity})
+            </>
+          ) : (
+            <>
+              <ShoppingCartIcon className="h-4 w-4" />
+              В корзину
+            </>
+          )}
         </button>
       </div>
     </div>
