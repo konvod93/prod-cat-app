@@ -13,6 +13,7 @@ import './App.css';
 import { CartProvider } from "./components/context/CartContext";
 import { ThemeProvider } from "./components/context/ThemeContext";
 import CheckoutForm from "./components/pages/CheckoutForm";
+import ThankYou from "./components/pages/ThankYou";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
               <Route path="/cart" element={<Cart />} />
               <Route path="/in-progress" element={<PageInProgress />} />
               <Route path="/checkout" element={<CheckoutForm />} />
+              <Route path="/thank-you" element={<ThankYou />} />
               {/* <Route path="/products/:id" element={<Products />} /> */}
               {/* Redirect any unknown paths to NotFound */}
               <Route path="*" element={<Navigate to="/not-found" replace />} />

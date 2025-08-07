@@ -1,0 +1,13 @@
+import { Link} from "react-router-dom";
+
+export default function Submission() {
+  return (
+    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+      <h1 className="text-4xl font-bold text-gray-800 mb-4">Отправка</h1>
+      <p className="text-lg text-gray-600 mb-6">Спасибо за вашу заявку! Наш менеджер свяжется с вами в ближайшее время.</p>
+      <Link to="/products" className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+        Перейти к товарам
+      </Link>
+    </div>
+  );
+}
