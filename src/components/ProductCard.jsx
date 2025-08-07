@@ -3,7 +3,7 @@ import { HeartIcon, ShoppingCartIcon, EyeIcon, CheckIcon } from '@heroicons/reac
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 import { categories } from '../data/mockProducts';
 import { useCart } from './context/CartContext';
-
+import { Link } from 'react-router-dom';
 const ProductCard = ({ product, onViewDetails, onToggleWishlist }) => {
   const [isInWishlist, setIsInWishlist] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -138,6 +138,7 @@ const ProductCard = ({ product, onViewDetails, onToggleWishlist }) => {
 
         {/* Quick Actions Overlay */}
         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+        <Link to="/in-progress">
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -148,6 +149,7 @@ const ProductCard = ({ product, onViewDetails, onToggleWishlist }) => {
             <EyeIcon className="h-4 w-4" />
             Подробнее
           </button>
+        </Link>
         </div>
       </div>
 

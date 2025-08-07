@@ -8,6 +8,7 @@ import About from "./components/pages/About";
 import Contacts from "./components/pages/Contacts.";
 import NotFound from "./components/pages/NotFound";
 import Cart from "./components/pages/Cart";
+import PageInProgress from "./components/pages/PageInProgress";
 import './App.css';
 import { CartProvider } from "./components/context/CartContext";
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/not-found" element={<NotFound />} />
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/in-progress" element={<PageInProgress />} />
             {/* <Route path="/products/:id" element={<Products />} /> */}
             {/* Redirect any unknown paths to NotFound */}
             <Route path="*" element={<Navigate to="/not-found" replace />} />
