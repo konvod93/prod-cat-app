@@ -1,7 +1,7 @@
 import Navigation from './Navigation';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShoppingCartIcon, UserIcon, MagnifyingGlassIcon} from '@heroicons/react/24/outline';
+import { ShoppingCartIcon, UserIcon, MagnifyingGlassIcon, } from '@heroicons/react/24/outline';
 import Modal from './Modal';
 import { products } from '../data/mockProducts';
 import { useCart } from './context/CartContext';
@@ -170,7 +170,7 @@ const Header = () => {
 
             {/* Search Bar with Suggestions and Submit Button */}
             <div className="flex-1 max-w-lg mx-8 relative">
-              <form onSubmit={handleSearch} className="relative flex">
+              <form onSubmit={handleSearch} className="relative hidden md:flex">
                 <div className="relative flex-1">
                   <input
                     type="text"
