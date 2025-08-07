@@ -4,6 +4,7 @@ import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 import { categories } from '../data/mockProducts';
 import { useCart } from './context/CartContext';
 import { Link } from 'react-router-dom';
+
 const ProductCard = ({ product, onViewDetails, onToggleWishlist }) => {
   const [isInWishlist, setIsInWishlist] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);

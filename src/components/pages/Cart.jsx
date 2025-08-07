@@ -69,7 +69,7 @@ function Cart() {
 
             <div className="flex-1">
               <h3 className="text-lg font-semibold text-gray-700">{item.name}</h3>
-              <p className="text-gray-600">Цена: {item.price} ₽</p>
+              <p className="text-gray-600">Цена: {item.price} $</p>
 
               <div className="flex items-center gap-2 mt-2">
                 <button
@@ -90,7 +90,7 @@ function Cart() {
               </div>
 
               <p className="mt-2 text-gray-700">
-                Сумма: {(item.price * item.quantity).toFixed(2)} ₽
+                Сумма: {(item.price * item.quantity).toFixed(2)} $
               </p>
 
               <button
@@ -107,7 +107,7 @@ function Cart() {
       {/* Footer */}
       <div className="mt-6 border-t pt-4 flex flex-col md:flex-row justify-between items-center">
         <div className="text-gray-800">
-          <h3 className="text-xl font-bold">Общая сумма: {totalPrice.toFixed(2)} ₽</h3>
+          <h3 className="text-xl font-bold">Общая сумма: {totalPrice.toFixed(2)} $</h3>
           <p className="text-sm text-gray-600">Всего товаров: {totalItems}</p>
         </div>
 

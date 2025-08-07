@@ -11,32 +11,35 @@ import Cart from "./components/pages/Cart";
 import PageInProgress from "./components/pages/PageInProgress";
 import './App.css';
 import { CartProvider } from "./components/context/CartContext";
+import { ThemeProvider } from "./components/context/ThemeContext";
 
 
 function App() {
   return (
-    <CartProvider>
-      <div className="min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-1 pt-16 pb-24 overflow-auto">
-          {/* Main content goes here */}
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/products" element={<ProductList />} />
-            <Route path="/categories" element={<Categories />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/not-found" element={<NotFound />} />
-            <Route path="/contacts" element={<Contacts />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/in-progress" element={<PageInProgress />} />
-            {/* <Route path="/products/:id" element={<Products />} /> */}
-            {/* Redirect any unknown paths to NotFound */}
-            <Route path="*" element={<Navigate to="/not-found" replace />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </CartProvider>
+    <ThemeProvider>
+      <CartProvider>
+        <div className="min-h-screen flex flex-col">
+          <Header />
+          <main className="flex-1 pt-16 pb-24 overflow-auto">
+            {/* Main content goes here */}
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/products" element={<ProductList />} />
+              <Route path="/categories" element={<Categories />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/not-found" element={<NotFound />} />
+              <Route path="/contacts" element={<Contacts />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/in-progress" element={<PageInProgress />} />
+              {/* <Route path="/products/:id" element={<Products />} /> */}
+              {/* Redirect any unknown paths to NotFound */}
+              <Route path="*" element={<Navigate to="/not-found" replace />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </CartProvider>
+    </ThemeProvider>
   );
 }
 

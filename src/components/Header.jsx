@@ -1,4 +1,5 @@
 import Navigation from './Navigation';
+import ThemeToggle from './ThemeToggle';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShoppingCartIcon, UserIcon, MagnifyingGlassIcon, } from '@heroicons/react/24/outline';
@@ -154,7 +155,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg z-50">
+      <header className="fixed top-0 left-0 w-full bg-gradient-to-r from-blue-600 to-blue-700 dark:from-gray-800 dark:to-gray-900 text-white shadow-lg z-50 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             
@@ -179,15 +180,15 @@ const Header = () => {
                     onBlur={handleSearchBlur}
                     onFocus={() => searchQuery.length > 1 && setShowSuggestions(true)}
                     placeholder="Поиск товаров..."
-                    className="w-full pl-10 pr-4 py-2 rounded-l-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-2 rounded-l-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-500 focus:border-transparent border border-gray-200 dark:border-gray-600 transition-colors duration-300"
                   />
-                  <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                  <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500">
                     <MagnifyingGlassIcon className="h-5 w-5" />
                   </div>
                 </div>
                 <button 
                   type="submit"
-                  className="px-4 py-2 bg-white hover:bg-gray-50 text-blue-600 rounded-r-lg border-l border-gray-200 font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                  className="px-4 py-2 bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-500 text-blue-600 dark:text-gray-100 rounded-r-lg border-l border-gray-200 dark:border-gray-500 font-medium transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-500"
                 >
                   Найти
                 </button>
@@ -195,25 +196,25 @@ const Header = () => {
 
               {/* Search Suggestions */}
               {showSuggestions && searchSuggestions.length > 0 && (
-                <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-lg shadow-lg mt-1 max-h-64 overflow-y-auto z-50">
+                <div className="absolute top-full left-0 right-0 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg mt-1 max-h-64 overflow-y-auto z-50">
                   {searchSuggestions.map((suggestion, index) => (
                     <div
                       key={`${suggestion.type}-${suggestion.id || suggestion.name}-${index}`}
                       onClick={() => handleSuggestionClick(suggestion)}
-                      className="px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
+                      className="px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer border-b border-gray-100 dark:border-gray-600 last:border-b-0 transition-colors duration-200"
                     >
                       <div className="flex items-center justify-between">
                         <div>
-                          <div className="font-medium text-gray-900">
+                          <div className="font-medium text-gray-900 dark:text-gray-100">
                             {suggestion.name}
                           </div>
                           {suggestion.category && (
-                            <div className="text-sm text-gray-500">
+                            <div className="text-sm text-gray-500 dark:text-gray-400">
                               в категории: {suggestion.category}
                             </div>
                           )}
                         </div>
-                        <div className="text-xs text-blue-600 font-medium">
+                        <div className="text-xs text-blue-600 dark:text-blue-400 font-medium">
                           {suggestion.type === 'product' ? 'Товар' : 'Категория'}
                         </div>
                       </div>
@@ -223,19 +224,22 @@ const Header = () => {
               )}
             </div>
 
-            {/* Auth + Cart Buttons */}
+            {/* Theme Toggle + Auth + Cart Buttons */}
             <div className="flex items-center space-x-3">
+              {/* Theme Toggle */}
+              {/* <ThemeToggle /> */}
+
               {!isLoggedIn ? (
                 <>
                   <button
                     onClick={handleLoginClick}
-                    className="bg-white hover:bg-gray-100 text-blue-600 px-4 py-2 rounded-lg font-medium transition-colors duration-200"
+                    className="bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-blue-600 dark:text-gray-100 px-4 py-2 rounded-lg font-medium transition-colors duration-300"
                   >
                     Вход
                   </button>
                   <button
                     onClick={handleSignUpClick}
-                    className="bg-blue-800 hover:bg-blue-900 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
+                    className="bg-blue-800 dark:bg-gray-600 hover:bg-blue-900 dark:hover:bg-gray-500 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-300"
                   >
                     Регистрация
                   </button>
@@ -245,11 +249,11 @@ const Header = () => {
                   {/* Profile Button */}
                   <button
                     onClick={handleProfileClick}
-                    className="relative p-2 bg-blue-700 hover:bg-blue-800 rounded-lg transition-colors duration-200 group"
+                    className="relative p-2 bg-blue-700 dark:bg-gray-700 hover:bg-blue-800 dark:hover:bg-gray-600 rounded-lg transition-colors duration-300 group"
                     title="Профиль"
                   >
                     <UserIcon className="h-6 w-6" />
-                    <span className="absolute top-full mt-2 left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                    <span className="absolute top-full mt-2 left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-800 dark:bg-gray-700 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                       Профиль
                     </span>
                   </button>
@@ -257,7 +261,7 @@ const Header = () => {
                   {/* Cart Button with Badge */}
                   <button
                     onClick={handleCartClick}
-                    className="relative p-2 bg-blue-700 hover:bg-blue-800 rounded-lg transition-colors duration-200 group"
+                    className="relative p-2 bg-blue-700 dark:bg-gray-700 hover:bg-blue-800 dark:hover:bg-gray-600 rounded-lg transition-colors duration-300 group"
                     title="Корзина"
                   >
                     <ShoppingCartIcon className="h-6 w-6" />
@@ -266,7 +270,7 @@ const Header = () => {
                         {totalItems > 99 ? '99+' : totalItems}
                       </span>
                     )}
-                    <span className="absolute top-full mt-2 left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                    <span className="absolute top-full mt-2 left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-800 dark:bg-gray-700 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                       Корзина ({totalItems})
                     </span>
                   </button>
@@ -274,7 +278,7 @@ const Header = () => {
                   {/* Logout Button */}
                   <button
                     onClick={handleLogout}
-                    className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
+                    className="bg-red-600 dark:bg-red-700 hover:bg-red-700 dark:hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-300"
                   >
                     Выйти
                   </button>
@@ -285,7 +289,7 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Login Modal */}
+       {/* Login Modal */}
       <Modal isOpen={isLoginFormOpen} onClose={closeModals}>
         <div className="px-6 pb-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Вход в аккаунт</h2>
@@ -434,4 +438,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Header
