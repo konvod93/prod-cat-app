@@ -30,9 +30,9 @@ const ProductCard = ({ product, onViewDetails, onToggleWishlist }) => {
     onToggleWishlist?.(product, !isInWishlist);
   };
 
-  const handleViewDetails = () => {
-    onViewDetails?.(product);
-  };
+  // const handleViewDetails = () => {
+  //   onViewDetails?.(product);
+  // };
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat("ru-RU", {
@@ -89,7 +89,7 @@ const ProductCard = ({ product, onViewDetails, onToggleWishlist }) => {
 
   return (
     <div
-      onClick={handleViewDetails}
+      // onClick={handleViewDetails}
       className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group overflow-hidden border border-gray-200 dark:border-gray-700"
     >
       {/* Image Container */}
@@ -153,7 +153,7 @@ const ProductCard = ({ product, onViewDetails, onToggleWishlist }) => {
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                handleViewDetails();
+                // handleViewDetails();
               }}
               className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 flex items-center gap-2"
             >
