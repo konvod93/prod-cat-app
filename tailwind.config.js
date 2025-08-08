@@ -2,6 +2,8 @@
 
 
 export default {
+  darkMode: 'class', // Используем класс для переключения темной темы
+  // Указываем пути к файлам, где будут использоваться классы Tailwind
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -22,7 +24,7 @@ export default {
         'light-surface': '#f9fafb',
         'light-border': '#e5e7eb',
         'light-text': '#1f2937',
-      }
+      },
     },
   },
   plugins: [

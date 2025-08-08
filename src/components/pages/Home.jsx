@@ -106,9 +106,9 @@ const Home = () => {
             <Link
               key={`${category.name}-${index}`}
               to={`/Products?category=${category.name}`}
-              className="group block"
+              className=""
             >
-              <div className="bg-gradient-to-br from-white to-gray-50 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
+              <div className="theme-card home-card p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
                 {/* Иконка и счетчик */}
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-4xl group-hover:scale-110 transition-transform duration-300">

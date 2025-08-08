@@ -9,14 +9,15 @@ const Categories = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 categories-container p-6 transition-all duration-300">
+      {/* Контейнер для контента */}
       <div className="max-w-7xl mx-auto">
         {/* Заголовок */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 bg-clip-text text-transparent">
             🛍️ Категории товаров
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 categories-text max-w-2xl mx-auto transition-colors duration-300">
             Выберите интересующую вас категорию и откройте для себя мир качественных товаров
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-4 rounded-full"></div>
@@ -25,17 +26,9 @@ const Categories = () => {
         {/* Сетка категорий */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
           {uniqueCategories.map((category) => {
-            const categoryInfo = categoriesMap[category]; // Теперь используем объект
+            const categoryInfo = categoriesMap[category];
             const count = getCategoryCount(category);
             
-            // Дополнительная отладка для каждой категории
-            // console.log(`Категория: ${category}`, {
-            //   categoryInfo,
-            //   exists: !!categoryInfo,
-            //   fallback: !categoryInfo
-            // });
-            
-            // Используем данные из categoriesMap или fallback
             const displayInfo = categoryInfo || { 
               name: category, 
               icon: '📦', 
@@ -46,7 +39,7 @@ const Categories = () => {
               <Link
                 key={category}
                 to={`/Products?category=${category}`}
-                className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer block"
+                className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl category-card transition-all duration-300 transform hover:-translate-y-2 cursor-pointer block"
               >
                 {/* Градиентный фон */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${displayInfo.color} opacity-90`}></div>
@@ -91,54 +84,55 @@ const Categories = () => {
           })}
         </div>
 
-        {/* Остальной код без изменений */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-12">
+        {/* Статистика */}
+        <div className="bg-white white-block rounded-2xl shadow-lg p-8 mb-12 transition-all duration-300">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             <div className="p-4">
-              <div className="text-3xl font-bold text-blue-600 mb-2">{uniqueCategories.length}</div>
-              <div className="text-gray-600">Категорий</div>
+              <div className="text-3xl font-bold text-blue-600 stat-blue mb-2">{uniqueCategories.length}</div>
+              <div className="text-gray-600 categories-text">Категорий</div>
             </div>
             <div className="p-4">
-              <div className="text-3xl font-bold text-green-600 mb-2">{products.length}</div>
-              <div className="text-gray-600">Товаров</div>
+              <div className="text-3xl font-bold text-green-600 stat-green mb-2">{products.length}</div>
+              <div className="text-gray-600 categories-text">Товаров</div>
             </div>
             <div className="p-4">
-              <div className="text-3xl font-bold text-purple-600 mb-2">24/7</div>
-              <div className="text-gray-600">Поддержка</div>
+              <div className="text-3xl font-bold text-purple-600 stat-purple mb-2">24/7</div>
+              <div className="text-gray-600 categories-text">Поддержка</div>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
-          <h3 className="text-2xl font-bold text-gray-800 mb-4">Не нашли что искали?</h3>
-          <p className="text-gray-600 mb-6">
+        {/* Призыв к действию */}
+        <div className="bg-white white-block rounded-2xl shadow-lg p-8 text-center transition-all duration-300">
+          <h3 className="text-2xl font-bold text-gray-800 categories-heading mb-4">Не нашли что искали?</h3>
+          <p className="text-gray-600 categories-text mb-6">
             Мы всегда готовы помочь вам найти именно то, что вам нужно
           </p>
           
           <div className="flex flex-wrap justify-center gap-4">
             <Link 
               to="/Contacts"
-              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105"
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 btn-blue text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105"
             >
               📞 Связаться с нами
             </Link>
             
             <Link 
               to="/"
-              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-gray-500 to-gray-600 text-white rounded-lg font-medium hover:from-gray-600 hover:to-gray-700 transition-all duration-300 transform hover:scale-105"
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-gray-500 to-gray-600 btn-gray text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105"
             >
               🏠 Главная страница
             </Link>
             
             <Link 
               to="/Products"
-              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-medium hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105"
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 btn-green text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105"
             >
               📋 Все товары
             </Link>
           </div>
           
-          <p className="mt-6 text-gray-500 italic">
+          <p className="mt-6 text-gray-500 categories-text italic transition-colors duration-300">
             Спасибо за выбор нашего магазина! 🎉
           </p>
         </div>

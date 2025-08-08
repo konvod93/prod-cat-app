@@ -13,7 +13,7 @@ import './App.css';
 import { useTheme } from "./components/context/ThemeContext";
 import CheckoutForm from "./components/pages/CheckoutForm";
 import ThankYou from "./components/pages/ThankYoy";
-import App from "./App";
+
 
 const AppContent = () => {
   const { isDark } = useTheme();
@@ -22,7 +22,7 @@ const AppContent = () => {
       className={`min-h-screen flex flex-col ${isDark ? "dark" : ""}`}>
       <Header />
       <main
-        className="flex-1 pt-16 pb-24 overflow-auto">
+        className="flex-1 pt-16 pb-36 overflow-auto">
         {/* Main content goes here */}
         <Routes>
           <Route path="/" element={<Home />} />

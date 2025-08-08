@@ -1,155 +1,168 @@
 @import "tailwindcss";
 
-/* CSS переменные для плавного переключения тем */
+/* === CSS ПЕРЕМЕННЫЕ === */
 :root {
-  --app-bg: #ffffff;
-  --app-text: #1f2937;
-  --surface-bg: #f9fafb;
-  --border-color: #e5e7eb;
+  /* Светлая тема */
+  --bg-primary: linear-gradient(to bottom right, #f9fafb, #dbeafe);
+  --bg-secondary: #ffffff;
+  --bg-surface: #f9fafb;
+  --text-primary: #1f2937;
   --text-secondary: #6b7280;
+  --border-color: #e5e7eb;
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
 html.dark {
-  --app-bg: #111827;
-  --app-text: #f9fafb;
-  --surface-bg: #374151;
-  --border-color: #4b5563;
+  /* Темная тема */
+  --bg-primary: linear-gradient(to bottom right, #111827, #1f2937);
+  --bg-secondary: #1f2937;
+  --bg-surface: #374151;
+  --text-primary: #f9fafb;
   --text-secondary: #9ca3af;
+  --border-color: #4b5563;
+  --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  --card-shadow-hover: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
 }
 
-/* Применяем переменные только к основным контейнерам */
-html.dark body {
-  background-color: var(--app-bg);
-  color: var(--app-text);
-}
-
-html.dark .app-container {
-  background-color: var(--app-bg);
-  color: var(--app-text);
-}
-
-/* Только основные элементы в темной теме - без !important */
-html.dark .bg-white {
-  background-color: #374151;
-}
-
-html.dark .bg-gray-50 {
-  background-color: #1f2937;
-}
-
-html.dark .bg-gray-100 {
-  background-color: #374151;
-}
-
-html.dark .text-gray-900 {
-  color: #f9fafb;
-}
-
-html.dark .text-gray-800 {
-  color: #f3f4f6;
-}
-
-html.dark .text-gray-700 {
-  color: #e5e7eb;
-}
-
-html.dark .text-gray-600 {
-  color: #d1d5db;
-}
-
-html.dark .text-gray-500 {
-  color: #9ca3af;
-}
-
-/* Карточки товаров в темной теме */
-html.dark .product-card,
-html.dark .shadow-md,
-html.dark .shadow-lg {
-  background-color: #374151;
-  border-color: #4b5563;
-}
-
-/* Модальные окна в темной теме */
-html.dark .modal,
-html.dark .bg-white.rounded-lg {
-  background-color: #1f2937;
-}
-
-/* Формы в темной теме */
-html.dark input:not([type="submit"]):not([type="button"]),
-html.dark select,
-html.dark textarea {
-  background-color: #374151;
-  color: #f9fafb;
-  border-color: #4b5563;
-}
-
-html.dark input::placeholder {
-  color: #9ca3af;
-}
-
-/* Кнопки - сохраняем цветные кнопки */
-html.dark .bg-blue-600 {
-  background-color: #2563eb;
-}
-
-html.dark .bg-blue-700 {
-  background-color: #1d4ed8;
-}
-
-html.dark .bg-green-500 {
-  background-color: #10b981;
-}
-
-html.dark .bg-red-500 {
-  background-color: #ef4444;
-}
-
-/* Градиенты остаются цветными */
-html.dark .bg-gradient-to-r {
-  /* Сохраняем градиенты как есть */
-}
-
-/* Бордеры */
-html.dark .border-gray-300 {
-  border-color: #4b5563;
-}
-
-html.dark .border-gray-200 {
-  border-color: #374151;
-}
-
-/* Hover эффекты */
-html.dark .hover\:bg-gray-50:hover {
-  background-color: #374151;
-}
-
-html.dark .hover\:bg-gray-100:hover {
-  background-color: #4b5563;
-}
-
-/* Переходы для плавности */
+/* === ГЛОБАЛЬНЫЕ ПЕРЕХОДЫ === */
 * {
-  transition-property: background-color, border-color, color;
+  transition-property: background-color, border-color, color, box-shadow;
   transition-duration: 300ms;
   transition-timing-function: ease-in-out;
 }
 
-/* Убираем отладочные стили */
-.debug-theme {
-  position: fixed;
-  top: 100px;
-  right: 20px;
-  padding: 8px 12px;
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  border-radius: 6px;
-  font-size: 11px;
-  z-index: 9999;
-  font-family: monospace;
+/* === ОСНОВНЫЕ КОНТЕЙНЕРЫ === */
+html.dark body,
+html.dark .app-container {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
-html.dark .debug-theme {
-  background: rgba(34, 197, 94, 0.9);
-  color: white;
+/* === УНИВЕРСАЛЬНЫЕ КЛАССЫ === */
+.theme-container {
+  background: var(--bg-primary);
 }
+
+.theme-card {
+  background: var(--bg-surface);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
+}
+
+.theme-card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.theme-block {
+  background-color: var(--bg-secondary);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
+}
+
+.theme-text-primary {
+  color: var(--text-primary);
+}
+
+.theme-text-secondary {
+  color: var(--text-secondary);
+}
+
+/* === ПЕРЕОПРЕДЕЛЕНИЯ TAILWIND === */
+html.dark .bg-white {
+  background-color: var(--bg-surface) !important;
+}
+
+html.dark .bg-gray-50 {
+  background-color: var(--bg-secondary) !important;
+}
+
+html.dark .bg-gray-100 {
+  background-color: var(--bg-surface) !important;
+}
+
+/* Текст */
+html.dark .text-gray-900 { color: #f9fafb !important; }
+html.dark .text-gray-800 { color: var(--text-primary) !important; }
+html.dark .text-gray-700 { color: #e5e7eb !important; }
+html.dark .text-gray-600 { color: var(--text-secondary) !important; }
+html.dark .text-gray-500 { color: #9ca3af !important; }
+
+/* Границы */
+html.dark .border-gray-300,
+html.dark .border-gray-200,
+html.dark .border-gray-100 {
+  border-color: var(--border-color) !important;
+}
+
+/* Градиенты */
+html.dark .bg-gradient-to-br.from-white.to-gray-50 {
+  background: linear-gradient(to bottom right, var(--bg-surface), var(--bg-secondary)) !important;
+}
+
+/* === КОМПОНЕНТНЫЕ КАРТОЧКИ === */
+html.dark .category-card,
+html.dark .home-card,
+html.dark .product-card,
+html.dark .feature-card {
+  background: var(--bg-surface) !important;
+  box-shadow: var(--card-shadow) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+html.dark .category-card:hover,
+html.dark .home-card:hover,
+html.dark .product-card:hover,
+html.dark .feature-card:hover {
+  box-shadow: var(--card-shadow-hover) !important;
+}
+
+/* === СПЕЦИАЛЬНЫЕ КОМПОНЕНТЫ === */
+
+/* Categories */
+html.dark .categories-container {
+  background: var(--bg-primary);
+}
+
+html.dark .categories-text {
+  color: var(--text-secondary);
+}
+
+html.dark .categories-heading {
+  color: var(--text-primary);
+}
+
+html.dark .white-block {
+  background-color: var(--bg-secondary);
+  box-shadow: var(--card-shadow);
+}
+
+/* Формы */
+html.dark input:not([type="submit"]):not([type="button"]),
+html.dark select,
+html.dark textarea {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+html.dark input::placeholder {
+  color: var(--text-secondary);
+}
+
+/* Модальные окна */
+html.dark .modal,
+html.dark .bg-white.rounded-lg {
+  background-color: var(--bg-secondary);
+}
+
+/* Hover эффекты */
+html.dark .hover\:bg-gray-50:hover {
+  background-color: var(--bg-surface);
+}
+
+html.dark .hover\:bg-gray-100:hover {
+  background-color: var(--border-color);
+}
+
