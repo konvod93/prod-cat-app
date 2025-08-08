@@ -227,7 +227,7 @@ const Header = () => {
             {/* Theme Toggle + Auth + Cart Buttons */}
             <div className="flex items-center space-x-3">
               {/* Theme Toggle */}
-              {/* <ThemeToggle /> */}
+              <ThemeToggle />
 
               {!isLoggedIn ? (
                 <>
