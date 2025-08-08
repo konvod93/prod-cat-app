@@ -3,17 +3,18 @@ import { HeartIcon, ShoppingCartIcon, EyeIcon, CheckIcon } from '@heroicons/reac
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 import { categories } from '../data/mockProducts';
 import { useCart } from './context/CartContext';
+import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product, onViewDetails, onToggleWishlist }) => {
   const [isInWishlist, setIsInWishlist] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
-  
+
   const { addToCart, isInCart, getItemQuantity, isLoading } = useCart();
 
   const handleAddToCart = async (e) => {
     e.stopPropagation();
-    
+
     if (product.inStock && !isAddingToCart) {
       setIsAddingToCart(true);
       await addToCart(product);
@@ -34,15 +35,17 @@ const ProductCard = ({ product, onViewDetails, onToggleWishlist }) => {
   };
 
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('ru-RU', {
-      style: 'currency',
-      currency: 'USD'
+    return new Intl.NumberFormat("ru-RU", {
+      style: "currency",
+      currency: "USD",
     }).format(price);
   };
 
   const calculateDiscount = () => {
     if (product.originalPrice && product.originalPrice > product.price) {
-      return Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+      return Math.round(
+        ((product.originalPrice - product.price) / product.originalPrice) * 100
+      );
     }
     return 0;
   };
@@ -53,18 +56,30 @@ const ProductCard = ({ product, onViewDetails, onToggleWishlist }) => {
     const hasHalfStar = rating % 1 !== 0;
 
     for (let i = 0; i < fullStars; i++) {
-      stars.push(<span key={i} className="text-yellow-400">★</span>);
+      stars.push(
+        <span key={i} className="text-yellow-400">
+          ★
+        </span>
+      );
     }
-    
+
     if (hasHalfStar) {
-      stars.push(<span key="half" className="text-yellow-400">☆</span>);
+      stars.push(
+        <span key="half" className="text-yellow-400">
+          ☆
+        </span>
+      );
     }
-    
+
     const remainingStars = 5 - Math.ceil(rating);
     for (let i = 0; i < remainingStars; i++) {
-      stars.push(<span key={`empty-${i}`} className="text-gray-300 dark:text-gray-500">★</span>);
+      stars.push(
+        <span key={`empty-${i}`} className="text-gray-300 dark:text-gray-500">
+          ★
+        </span>
+      );
     }
-    
+
     return stars;
   };
 
@@ -73,7 +88,7 @@ const ProductCard = ({ product, onViewDetails, onToggleWishlist }) => {
   const productInCart = isInCart(product.id);
 
   return (
-    <div 
+    <div
       onClick={handleViewDetails}
       className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group overflow-hidden border border-gray-200 dark:border-gray-700"
     >
@@ -121,10 +136,10 @@ const ProductCard = ({ product, onViewDetails, onToggleWishlist }) => {
           alt={product.name}
           onLoad={() => setImageLoaded(true)}
           className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ${
-            imageLoaded ? 'opacity-100' : 'opacity-0'
+            imageLoaded ? "opacity-100" : "opacity-0"
           }`}
         />
-        
+
         {/* Loading placeholder */}
         {!imageLoaded && (
           <div className="absolute inset-0 bg-gray-200 dark:bg-gray-600 animate-pulse flex items-center justify-center">
@@ -134,16 +149,18 @@ const ProductCard = ({ product, onViewDetails, onToggleWishlist }) => {
 
         {/* Quick Actions Overlay */}
         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handleViewDetails();
-            }}
-            className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 flex items-center gap-2"
-          >
-            <EyeIcon className="h-4 w-4" />
-            Подробнее
-          </button>
+          <Link to="/in-progress" className="text-white text-sm font-semibold">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleViewDetails();
+              }}
+              className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 flex items-center gap-2"
+            >
+              <EyeIcon className="h-4 w-4" />
+              Подробнее
+            </button>
+          </Link>
         </div>
       </div>
 
@@ -152,7 +169,8 @@ const ProductCard = ({ product, onViewDetails, onToggleWishlist }) => {
         {/* Category */}
         <div className="mb-2">
           <span className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">
-            {categories.find(cat => cat.name === product.category)?.label || product.category}
+            {categories.find((cat) => cat.name === product.category)?.label ||
+              product.category}
           </span>
         </div>
 
@@ -163,9 +181,7 @@ const ProductCard = ({ product, onViewDetails, onToggleWishlist }) => {
 
         {/* Rating */}
         <div className="flex items-center gap-2 mb-3">
-          <div className="flex">
-            {renderStars(product.rating)}
-          </div>
+          <div className="flex">{renderStars(product.rating)}</div>
           <span className="text-sm text-gray-600 dark:text-gray-400">
             {product.rating} ({product.reviewsCount})
           </span>
@@ -189,12 +205,12 @@ const ProductCard = ({ product, onViewDetails, onToggleWishlist }) => {
           disabled={!product.inStock || isAddingToCart || isLoading}
           className={`w-full py-2 px-4 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
             !product.inStock
-              ? 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+              ? "bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed"
               : productInCart && !isAddingToCart
-              ? 'bg-green-600 hover:bg-green-700 text-white'
+              ? "bg-green-600 hover:bg-green-700 text-white"
               : isAddingToCart
-              ? 'bg-blue-400 text-white cursor-not-allowed'
-              : 'bg-blue-600 hover:bg-blue-700 text-white'
+              ? "bg-blue-400 text-white cursor-not-allowed"
+              : "bg-blue-600 hover:bg-blue-700 text-white"
           }`}
         >
           {isAddingToCart ? (
@@ -209,13 +225,11 @@ const ProductCard = ({ product, onViewDetails, onToggleWishlist }) => {
             </>
           ) : productInCart ? (
             <>
-              <CheckIcon className="h-4 w-4" />
-              В корзине ({itemQuantity})
+              <CheckIcon className="h-4 w-4" />В корзине ({itemQuantity})
             </>
           ) : (
             <>
-              <ShoppingCartIcon className="h-4 w-4" />
-              В корзину
+              <ShoppingCartIcon className="h-4 w-4" />В корзину
             </>
           )}
         </button>
