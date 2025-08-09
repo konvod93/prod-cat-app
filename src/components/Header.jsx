@@ -6,14 +6,25 @@ import { ShoppingCartIcon, UserIcon, MagnifyingGlassIcon, ArrowRightEndOnRectang
 import Modal from './Modal';
 import { products } from '../data/mockProducts';
 import { useCart } from './context/CartContext';
+import { useUser } from './context/UserContext'; // Добавляем импорт
 
 const Header = () => {
   const navigate = useNavigate();
   const { totalItems } = useCart(); // Получаем количество товаров из контекста
+  // Используем UserContext вместо локального состояния
+  const {
+    user,
+    isAuthenticated,
+    isLoading: userLoading,
+    error: userError,
+    login,
+    register,
+    logout,
+    clearError,
+  } = useUser();
 
   const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
-  const [isRegisterFormOpen, setIsRegisterFormOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isRegisterFormOpen, setIsRegisterFormOpen] = useState(false);  
   const [searchQuery, setSearchQuery] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -97,33 +108,47 @@ const Header = () => {
     setSearchQuery("");
   };
 
+  // Обновленные функции для работы с UserContext
   const handleLoginClick = () => {
+    clearError(); // Очищаем предыдущие ошибки
     setIsLoginFormOpen(true);
   };
 
   const handleSignUpClick = () => {
+    clearError(); // Очищаем предыдущие ошибки
     setIsRegisterFormOpen(true);
   };
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    console.log("Вход с данными:", loginData);
-    setIsLoggedIn(true);
-    setIsLoginFormOpen(false);
-    setLoginData({ email: "", password: "" });
+    const result = await login(loginData);
+
+    if (result.success) {
+      setIsLoginFormOpen(false);
+      setLoginData({ email: "", password: "" });
+    }
+    // Ошибки уже обрабатываются в UserContext
   };
 
-  const handleRegisterSubmit = (e) => {
+  const handleRegisterSubmit = async (e) => {
     e.preventDefault();
-    console.log("Регистрация с данными:", registerData);
-    setIsLoggedIn(true);
-    setIsRegisterFormOpen(false);
-    setRegisterData({ name: "", email: "", password: "", confirmPassword: "" });
+    const result = await register(registerData);
+
+    if (result.success) {
+      setIsRegisterFormOpen(false);
+      setRegisterData({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+    }
+    // Ошибки уже обрабатываются в UserContext
   };
 
   const handleLogout = () => {
     console.log("Выход из системы");
-    setIsLoggedIn(false);
+    logout();
   };
 
   const handleProfileClick = () => {
@@ -242,29 +267,48 @@ const Header = () => {
               {/* Theme Toggle */}
               <ThemeToggle />
 
-              {!isLoggedIn ? (
+              {!isAuthenticated ? (
                 <>
                   <button
                     onClick={handleLoginClick}
+                    disabled={userLoading}
                     className="bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-blue-600 dark:text-gray-100 px-2 py-1 text-sm xl:text-lg sm:px-4 sm:py-2 rounded-lg font-medium transition-colors duration-300"
                   >
                     {/* Иконка — видна только на малых экранах */}
                     <ArrowRightEndOnRectangleIcon className="h-5 w-5 block sm:hidden" />
                     {/* Текст — скрыт на малых, виден на md и выше */}
-                    <span className="hidden sm:inline">Вход</span>
+                    <span className="hidden sm:inline">
+                      {userLoading ? "Загрузка" : "Вход"}
+                    </span>
                   </button>
                   <button
                     onClick={handleSignUpClick}
+                    disabled={userLoading}
                     className="bg-blue-800 dark:bg-gray-600 hover:bg-blue-900 dark:hover:bg-gray-500 text-white px-2 py-1 text-sm xl:text-lg sm:px-4 sm:py-2 rounded-lg font-medium transition-colors duration-300"
                   >
                     {/* Иконка — видна только на малых экранах */}
                     <UserPlusIcon className="h-5 w-5 block sm:hidden" />
                     {/* Текст — скрыт на малых, виден на md и выше */}
-                    <span className="hidden sm:inline">Регистрация</span>
+                    <span className="hidden sm:inline">
+                      {userLoading ? "Загрузка..." : "Регистрация"}
+                    </span>
                   </button>
                 </>
               ) : (
                 <>
+                  {/* User Avatar and Name */}
+                  <div className="flex items-center space-x-2">
+                    {user?.avatar && (
+                      <img
+                        src={user.avatar}
+                        alt={user.name}
+                        className="hidden md:block w-8 h-8 rounded-full border-2 border-white"
+                      />
+                    )}
+                    <span className="hidden md:inline text-sm font-medium">
+                      Привет, {user?.name || "Пользователь"}!
+                    </span>
+                  </div>
                   {/* Profile Button */}
                   <button
                     onClick={handleProfileClick}
@@ -318,6 +362,12 @@ const Header = () => {
             Вход в аккаунт
           </h2>
 
+          {/* Показываем ошибку, если есть */}
+          {userError && (
+            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+              {userError}
+            </div>
+          )}
           <form onSubmit={handleLoginSubmit} className="space-y-4">
             <div>
               <label
@@ -336,6 +386,7 @@ const Header = () => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="example@email.com"
                 required
+                disabled={userLoading}
               />
             </div>
 
@@ -356,14 +407,23 @@ const Header = () => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="••••••••"
                 required
+                disabled={userLoading}
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200"
+              disabled={userLoading}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
             >
-              Войти
+              {userLoading ? (
+                <>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                  Входим...
+                </>
+              ) : (
+                "Войти"
+              )}
             </button>
           </form>
 
@@ -373,6 +433,7 @@ const Header = () => {
               <button
                 onClick={switchToRegister}
                 className="text-blue-600 hover:text-blue-700 font-medium"
+                disabled={userLoading}
               >
                 Зарегистрироваться
               </button>
@@ -382,11 +443,19 @@ const Header = () => {
       </Modal>
 
       {/* Register Modal */}
+
       <Modal isOpen={isRegisterFormOpen} onClose={closeModals}>
         <div className="px-6 pb-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
             Регистрация
           </h2>
+
+          {/* Показываем ошибку, если есть */}
+          {userError && (
+            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+              {userError}
+            </div>
+          )}
 
           <form onSubmit={handleRegisterSubmit} className="space-y-4">
             <div>
@@ -394,7 +463,7 @@ const Header = () => {
                 htmlFor="register-name"
                 className="block text-sm font-medium text-gray-700 mb-1"
               >
-                Полное имя
+                Имя
               </label>
               <input
                 id="register-name"
@@ -404,8 +473,9 @@ const Header = () => {
                   setRegisterData({ ...registerData, name: e.target.value })
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Иван Иванов"
+                placeholder="Ваше имя"
                 required
+                disabled={userLoading}
               />
             </div>
 
@@ -426,6 +496,7 @@ const Header = () => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="example@email.com"
                 required
+                disabled={userLoading}
               />
             </div>
 
@@ -446,6 +517,8 @@ const Header = () => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="••••••••"
                 required
+                disabled={userLoading}
+                minLength={6}
               />
             </div>
 
@@ -469,14 +542,24 @@ const Header = () => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="••••••••"
                 required
+                disabled={userLoading}
+                minLength={6}
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200"
+              disabled={userLoading}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
             >
-              Зарегистрироваться
+              {userLoading ? (
+                <>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                  Регистрируемся...
+                </>
+              ) : (
+                "Зарегистрироваться"
+              )}
             </button>
           </form>
 
@@ -486,6 +569,7 @@ const Header = () => {
               <button
                 onClick={switchToLogin}
                 className="text-blue-600 hover:text-blue-700 font-medium"
+                disabled={userLoading}
               >
                 Войти
               </button>
