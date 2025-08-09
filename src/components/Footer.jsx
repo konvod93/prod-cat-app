@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
 const Footer = () => (
-  <footer className="fixed bottom-0 left-0 w-full bg-blue-900 dark:bg-gray-800 text-white py-6 mt-8 transition-colors duration-300">
-    <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+  <footer className="fixed bottom-0 left-0 w-full bg-blue-900 dark:bg-gray-800 text-white text-sm lg:text-lg py-6 mt-8 transition-colors duration-300">
+    <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-between gap-4">
       <div className="text-sm">
         © {new Date().getFullYear()} ProductCat. Все права защищены.
       </div>
