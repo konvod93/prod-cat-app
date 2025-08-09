@@ -25,7 +25,7 @@ const ThemeToggle = ({ className = "" }) => {
     <button
       onClick={handleToggle}
       className={`
-        relative p-2 rounded-lg transition-all duration-300 group
+        relative p-1 sm:p-2 rounded-lg transition-all duration-300 group
         ${isDark 
           ? 'bg-gray-700 hover:bg-gray-600 text-yellow-400' 
           : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
@@ -37,7 +37,7 @@ const ThemeToggle = ({ className = "" }) => {
     >
       <div className="relative w-6 h-6">
         {isDark ? (
-          <MoonIcon className="w-6 h-6 text-blue-400" />
+          <MoonIcon className="w-3 h-3 sm:w-6 sm:h-6 text-blue-400" />
         ) : (
           <SunIcon className="w-6 h-6 text-yellow-500" />
         )}
