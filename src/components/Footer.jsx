@@ -6,7 +6,7 @@ const Footer = () => (
       <div className="text-sm">
         © {new Date().getFullYear()} ProductCat. Все права защищены.
       </div>
-      <div className="flex space-x-6">
+      <div className="flex flex-wrap justify-center space-x-6 text-center">
         <Link to="/about" className="hover:underline transition-colors duration-200">О нас</Link>
         <Link to="/contacts" className="hover:underline transition-colors duration-200">Контакты</Link>
         <Link to="/policy" className="hover:underline transition-colors duration-200">Политика конфиденциальности</Link>
