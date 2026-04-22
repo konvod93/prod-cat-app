@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useUser } from '../../hooks/useUser';
+import { useUser } from '../hooks/useUser';
 import { useNavigate } from 'react-router-dom';
 
 // Моковые данные для демо

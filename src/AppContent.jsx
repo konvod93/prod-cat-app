@@ -1,19 +1,19 @@
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Home from "./components/pages/Home";
-import ProductList from "./components/pages/ProductList";
-import Categories from "./components/pages/Categories";
-import About from "./components/pages/About";
-import Contacts from "./components/pages/Contacts.";
-import NotFound from "./components/pages/NotFound";
-import Cart from "./components/pages/Cart";
-import PageInProgress from "./components/pages/PageInProgress";
-import UserProfile from "./components/pages/UserProfile";
+import Home from "./pages/Home";
+import ProductList from "./pages/ProductList";
+import Categories from "./pages/Categories";
+import About from "./pages/About";
+import Contacts from "./pages/Contacts.";
+import NotFound from "./pages/NotFound";
+import Cart from "./pages/Cart";
+import PageInProgress from "./pages/PageInProgress";
+import UserProfile from "./pages/UserProfile";
 import './App.css';
 import { useTheme } from "./components/context/ThemeContext";
-import CheckoutForm from "./components/pages/CheckoutForm";
-import ThankYou from "./components/pages/ThankYoy";
+import CheckoutForm from "./pages/CheckoutForm";
+import ThankYou from "./pages/ThankYoy";
 
 
 const AppContent = () => {
