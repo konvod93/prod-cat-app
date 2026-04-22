@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { products, categoriesMap } from '../../data/mockProducts';
+import { products, categoriesMap } from '../data/mockProducts';
 
 const Categories = () => {
   const uniqueCategories = [...new Set(products.map(p => p.category))];

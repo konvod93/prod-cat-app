@@ -5,7 +5,7 @@ import { categories } from '../data/mockProducts';
 import { useCart } from './context/CartContext';
 import { Link } from 'react-router-dom';
 
-const ProductCard = ({ product, onViewDetails, onToggleWishlist }) => {
+const ProductCard = ({ product, onToggleWishlist }) => {
   const [isInWishlist, setIsInWishlist] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
