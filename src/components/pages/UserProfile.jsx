@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useUser } from '../../hooks/useUser';
+import { useNavigate } from 'react-router-dom';
 
 // Моковые данные для демо
 const mockOrders = [
@@ -37,6 +38,13 @@ export default function UserProfile() {
     phone: user?.phone || '',
   });
 
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  }
+
   const handleSaveProfile = async () => {
     const result = await updateProfile(formData);
     if (result.success) {
@@ -67,7 +75,7 @@ export default function UserProfile() {
             <p className="text-gray-500">{user?.email}</p>
           </div>
           <button
-            onClick={logout}
+            onClick={handleLogout}
             className="text-sm text-red-500 hover:text-red-700 border border-red-300 hover:border-red-500 px-4 py-2 rounded-lg transition"
           >
             Выйти
