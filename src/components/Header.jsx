@@ -6,7 +6,7 @@ import { ShoppingCartIcon, UserIcon, MagnifyingGlassIcon, ArrowRightEndOnRectang
 import Modal from './Modal';
 import { products } from '../data/mockProducts';
 import { useCart } from './context/CartContext';
-import { useUser } from './context/UserContext'; // Добавляем импорт
+import { useUser } from '../hooks/useUser'; // Добавляем импорт
 
 const Header = () => {
   const navigate = useNavigate();

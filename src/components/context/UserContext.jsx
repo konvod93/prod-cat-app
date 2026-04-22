@@ -1,5 +1,5 @@
 // src/components/context/UserContext.jsx
-import { createContext, useContext, useReducer, useEffect } from 'react';
+import { createContext, useReducer, useEffect } from 'react';
 
 // Начальное состояние пользователя
 const initialState = {
@@ -257,17 +257,6 @@ export const UserProvider = ({ children }) => {
       {children}
     </UserContext.Provider>
   );
-};
-
-// Хук для использования контекста пользователя
-export const useUser = () => {
-  const context = useContext(UserContext);
-  
-  if (!context) {
-    throw new Error('useUser должен использоваться внутри UserProvider');
-  }
-  
-  return context;
 };
 
 // Симуляция API вызовов
