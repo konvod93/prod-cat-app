@@ -10,6 +10,7 @@ import NotFound from "./pages/NotFound";
 import Cart from "./pages/Cart";
 import PageInProgress from "./pages/PageInProgress";
 import UserProfile from "./pages/UserProfile";
+import Admin from "./pages/Admin";
 import './App.css';
 import { useTheme } from "./components/context/ThemeContext";
 import CheckoutForm from "./pages/CheckoutForm";
@@ -37,6 +38,7 @@ const AppContent = () => {
           <Route path="/checkout" element={<CheckoutForm />} />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/profile" element={<UserProfile />} />
+          <Route path="/admin" element={<Admin />} />
           {/* <Route path="/products/:id" element={<Products />} /> */}
           {/* Redirect any unknown paths to NotFound */}
           <Route path="*" element={<Navigate to="/not-found" replace />} />
