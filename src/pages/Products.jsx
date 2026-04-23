@@ -1,10 +1,11 @@
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { products, searchProducts } from '../data/mockProducts';
+import { useProducts } from '../hooks/useProducts';
 import ProductCard from '../components/ProductCard';
 import { ChevronDownIcon, FunnelIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const Products = ({ showSearchBar = true, mode = 'all' }) => {
+  const { products } = useProducts();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [filteredProducts, setFilteredProducts] = useState(products);
@@ -66,8 +67,16 @@ const Products = ({ showSearchBar = true, mode = 'all' }) => {
     } else {
       // Применяем поиск
       if (searchFromUrl) {
-        filtered = searchProducts(searchFromUrl);
-        setSearchQuery(searchFromUrl);
+        filtered = products.filter(
+          (p) =>
+            p.name.toLowerCase().includes(searchFromUrl.toLowerCase()) ||
+            p.description
+              ?.toLowerCase()
+              .includes(searchFromUrl.toLowerCase()) ||
+            p.tags?.some((tag) =>
+              tag.toLowerCase().includes(searchFromUrl.toLowerCase()),
+            ),
+        );
       }
       
       // Применяем фильтр по категории
@@ -123,7 +132,7 @@ const Products = ({ showSearchBar = true, mode = 'all' }) => {
     }
     
     setFilteredProducts(filtered);
-  }, [searchParams, mode]);
+  }, [searchParams, mode, products]);
 
   // Функция для обработки поиска
   const handleSearch = (e) => {
