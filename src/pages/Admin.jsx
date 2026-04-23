@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // В реальном проекте это будет в .env
-const ADMIN_LOGIN = 'admin';
-const ADMIN_PASSWORD = 'admin123';
+const ADMIN_LOGIN = import.meta.env.VITE_ADMIN_LOGIN;
+const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
 
 const initialForm = {
   name: '',
