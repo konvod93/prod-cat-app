@@ -4,7 +4,7 @@ import { CartProvider } from "./components/context/CartContext";
 import { ThemeProvider } from "./components/context/ThemeContext";
 import AppContent from "./AppContent";
 import { UserProvider } from "./components/context/UserContext";
-import { ProductsProvider } from './components/context/ProductContext';
+import { ProductsProvider } from './components/context/ProductsContext';
 
 
 
