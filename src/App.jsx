@@ -4,16 +4,19 @@ import { CartProvider } from "./components/context/CartContext";
 import { ThemeProvider } from "./components/context/ThemeContext";
 import AppContent from "./AppContent";
 import { UserProvider } from "./components/context/UserContext";
+import { ProductsProvider } from './components/context/ProductContext';
 
 
 
 function App() {
-    return (
+  return (
     <ThemeProvider>
       <UserProvider>
-      <CartProvider>
-        <AppContent />
-      </CartProvider>
+        <ProductsProvider>
+          <CartProvider>
+            <AppContent />
+          </CartProvider>
+        </ProductsProvider>
       </UserProvider>
     </ThemeProvider>
   );
