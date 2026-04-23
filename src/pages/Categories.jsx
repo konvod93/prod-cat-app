@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-import { products, categoriesMap } from '../data/mockProducts';
+import { categoriesMap } from '../data/mockProducts';
+import { useProducts } from '../hooks/useProducts'; 
 
 const Categories = () => {
+  const { products } = useProducts();
   const uniqueCategories = [...new Set(products.map(p => p.category))];
       
   const getCategoryCount = (category) => {
