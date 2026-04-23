@@ -1,6 +1,7 @@
 // src/pages/Admin.jsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useProducts } from '../hooks/useProducts';
 
 // В реальном проекте это будет в .env
 const ADMIN_LOGIN = import.meta.env.VITE_ADMIN_LOGIN;
@@ -16,7 +17,8 @@ const initialForm = {
   inStock: true,
 };
 
-export default function Admin({ products, onAddProduct, onDeleteProduct }) {
+export default function Admin() {
+  const { products, addProduct, deleteProduct } = useProducts();
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [credentials, setCredentials] = useState({ login: '', password: '' });
@@ -55,7 +57,7 @@ export default function Admin({ products, onAddProduct, onDeleteProduct }) {
       inStock: form.inStock,
     };
 
-    onAddProduct(newProduct);
+    addProduct(newProduct);
     setForm(initialForm);
     setFormError('');
     setSuccessMessage(`Товар "${newProduct.name}" добавлен`);
@@ -203,7 +205,7 @@ export default function Admin({ products, onAddProduct, onDeleteProduct }) {
                     <p className="text-xs text-gray-400">{product.category} · {product.price.toLocaleString()} ₴</p>
                   </div>
                   <button
-                    onClick={() => onDeleteProduct(product.id)}
+                    onClick={() => deleteProduct(product.id)}
                     className="text-red-400 hover:text-red-600 text-xs border border-red-200 hover:border-red-400 px-2 py-1 rounded-lg transition flex-shrink-0"
                   >
                     Удалить
