@@ -49,8 +49,7 @@ export const ThemeProvider = ({ children }) => {
   }, [isDark]);
 
   // Функция переключения темы
-  const toggleTheme = () => {
-    console.log('toggleTheme called, current isDark:', isDark);
+  const toggleTheme = () => {    
     setIsDark(prev => {
       const newValue = !prev;
       console.log('Setting isDark to:', newValue);
@@ -59,8 +58,7 @@ export const ThemeProvider = ({ children }) => {
   };
 
   // Функция установки конкретной темы
-  const setTheme = (theme) => {
-    console.log('setTheme called with:', theme);
+  const setTheme = (theme) => {    
     setIsDark(theme === 'dark');
   };
 
@@ -70,9 +68,7 @@ export const ThemeProvider = ({ children }) => {
     toggleTheme,
     setTheme
   };
-
-  console.log('ThemeProvider context value:', value);
-
+  
   return (
     <ThemeContext.Provider value={value}>
       {children}
