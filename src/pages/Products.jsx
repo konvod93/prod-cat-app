@@ -5,7 +5,7 @@ import ProductCard from '../components/ProductCard';
 import { ChevronDownIcon, FunnelIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const Products = ({ showSearchBar = true, mode = 'all' }) => {
-  const { products } = useProducts();
+  const { products, isLoading } = useProducts();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [filteredProducts, setFilteredProducts] = useState(products);
@@ -191,6 +191,12 @@ const Products = ({ showSearchBar = true, mode = 'all' }) => {
   const activeFiltersCount = Object.entries(currentFilters).filter(([key, value]) => 
     value && value !== 'default' && key !== 'productId'
   ).length;
+  
+if (isLoading) return (
+  <div className="flex justify-center items-center h-64">
+    <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
+  </div>
+);
 
   return (
     <div className="container mx-auto px-4 py-8">
