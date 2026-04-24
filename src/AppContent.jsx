@@ -12,7 +12,7 @@ import PageInProgress from "./pages/PageInProgress";
 import UserProfile from "./pages/UserProfile";
 import Admin from "./pages/Admin";
 import './App.css';
-import { useTheme } from "./components/context/ThemeContext";
+import { useTheme } from "./hooks/useTheme";
 import CheckoutForm from "./pages/CheckoutForm";
 import ThankYou from "./pages/ThankYoy";
 

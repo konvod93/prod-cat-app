@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 
 // Создаем контекст темы
 const ThemeContext = createContext();
@@ -90,20 +90,6 @@ export const ThemeProvider = ({ children }) => {
       {children}
     </ThemeContext.Provider>
   );
-};
-
-// Хук для использования контекста темы
-export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  
-  console.log('useTheme called, context:', context);
-  
-  if (!context) {
-    console.error('useTheme должен использоваться внутри ThemeProvider');
-    throw new Error('useTheme должен использоваться внутри ThemeProvider');
-  }
-  
-  return context;
 };
 
 export default ThemeContext;
