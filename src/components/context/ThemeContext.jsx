@@ -16,8 +16,7 @@ export const ThemeProvider = ({ children }) => {
             
       if (savedTheme) {
         const isDarkTheme = savedTheme === 'dark';
-        setIsDark(isDarkTheme);
-        console.log('Set theme from localStorage:', isDarkTheme);
+        setIsDark(isDarkTheme);        
       } else {
         // Используем системные настройки по умолчанию
         setIsDark(systemPrefersDark);        
@@ -51,8 +50,7 @@ export const ThemeProvider = ({ children }) => {
   // Функция переключения темы
   const toggleTheme = () => {    
     setIsDark(prev => {
-      const newValue = !prev;
-      console.log('Setting isDark to:', newValue);
+      const newValue = !prev;      
       return newValue;
     });
   };
