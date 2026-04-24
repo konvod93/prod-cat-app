@@ -5,9 +5,8 @@ const ThemeToggle = ({ className = "" }) => {
   const { isDark, toggleTheme } = useTheme();
 
   const handleToggle = () => {
-    console.log('ThemeToggle clicked, current theme:', isDark ? 'dark' : 'light');
-    toggleTheme();
-    console.log('Theme toggled to:', !isDark ? 'dark' : 'light');
+    
+    toggleTheme();    
     
     // Принудительно добавляем/удаляем класс dark
     if (isDark) {
@@ -15,12 +14,10 @@ const ThemeToggle = ({ className = "" }) => {
       console.log('Removed dark class from html');
     } else {
       document.documentElement.classList.add('dark');
-      console.log('Added dark class to html');
+      
     }
   };
-
-  console.log('ThemeToggle render, isDark:', isDark);
-
+  
   return (
     <button
       onClick={handleToggle}

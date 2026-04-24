@@ -5,8 +5,6 @@ import ThemeContext from "../components/context/ThemeContext";
 export const useTheme = () => {
   const context = useContext(ThemeContext);
 
-  console.log("useTheme called, context:", context);
-
   if (!context) {
     console.error("useTheme должен использоваться внутри ThemeProvider");
     throw new Error("useTheme должен использоваться внутри ThemeProvider");
