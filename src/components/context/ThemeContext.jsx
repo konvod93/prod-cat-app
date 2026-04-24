@@ -6,27 +6,21 @@ const ThemeContext = createContext();
 // Провайдер темы
 export const ThemeProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(false);
-
-  console.log('ThemeProvider initialized');
-
+  
   // Загружаем тему из localStorage при инициализации
   useEffect(() => {
-    console.log('ThemeProvider useEffect - loading theme');
+    
     try {
       const savedTheme = localStorage.getItem('theme');
       const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      
-      console.log('Saved theme:', savedTheme);
-      console.log('System prefers dark:', systemPrefersDark);
-      
+            
       if (savedTheme) {
         const isDarkTheme = savedTheme === 'dark';
         setIsDark(isDarkTheme);
         console.log('Set theme from localStorage:', isDarkTheme);
       } else {
         // Используем системные настройки по умолчанию
-        setIsDark(systemPrefersDark);
-        console.log('Set theme from system preference:', systemPrefersDark);
+        setIsDark(systemPrefersDark);        
       }
     } catch (error) {
       console.error('Ошибка загрузки темы:', error);
@@ -35,29 +29,23 @@ export const ThemeProvider = ({ children }) => {
 
   // Применяем тему к документу
   useEffect(() => {
-    console.log('Applying theme to document, isDark:', isDark);
-    
+        
     const htmlElement = document.documentElement;
     
     if (isDark) {
-      htmlElement.classList.add('dark');
-      console.log('Added dark class to html element');
+      htmlElement.classList.add('dark');      
     } else {
       htmlElement.classList.remove('dark');
-      console.log('Removed dark class from html element');
     }
     
     // Сохраняем в localStorage
     try {
       const themeValue = isDark ? 'dark' : 'light';
       localStorage.setItem('theme', themeValue);
-      console.log('Saved theme to localStorage:', themeValue);
     } catch (error) {
       console.error('Ошибка сохранения темы:', error);
-    }
+    }    
     
-    // Проверяем, что класс действительно применился
-    console.log('HTML classes after theme change:', htmlElement.className);
   }, [isDark]);
 
   // Функция переключения темы
