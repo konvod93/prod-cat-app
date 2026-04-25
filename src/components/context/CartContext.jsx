@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import React, { createContext, useReducer, useEffect } from 'react';
 
 // Начальное состояние корзины
 const initialState = {
@@ -232,17 +232,6 @@ export const CartProvider = ({ children }) => {
       {children}
     </CartContext.Provider>
   );
-};
-
-// Хук для использования контекста корзины
-export const useCart = () => {
-  const context = useContext(CartContext);
-  
-  if (!context) {
-    throw new Error('useCart должен использоваться внутри CartProvider');
-  }
-  
-  return context;
 };
 
 export default CartContext;
