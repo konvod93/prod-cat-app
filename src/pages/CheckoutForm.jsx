@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useCart } from "../components/context/CartContext";
+import { useCart } from "../hooks/useCart";
 import { useNavigate } from "react-router-dom";
 
 function CheckoutForm() {

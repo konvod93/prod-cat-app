@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { ShoppingCartIcon, UserIcon, MagnifyingGlassIcon, ArrowRightEndOnRectangleIcon, ArrowLeftEndOnRectangleIcon, UserPlusIcon  } from '@heroicons/react/24/outline';
 import Modal from './Modal';
 import { products } from '../data/mockProducts';
-import { useCart } from './context/CartContext';
+import { useCart } from '../hooks/useCart'; // Импортируем хук useCart для получения данных о корзине  
 import { useUser } from '../hooks/useUser'; // Добавляем импорт
 
 const Header = () => {

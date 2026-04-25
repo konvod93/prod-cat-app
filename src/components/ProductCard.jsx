@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { HeartIcon, ShoppingCartIcon, EyeIcon, CheckIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 import { categories } from '../data/mockProducts';
-import { useCart } from './context/CartContext';
+import { useCart } from '../hooks/useCart';
 import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product, onToggleWishlist }) => {
