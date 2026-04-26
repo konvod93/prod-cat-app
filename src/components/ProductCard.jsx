@@ -1,9 +1,14 @@
-import { useState } from 'react';
-import { HeartIcon, ShoppingCartIcon, EyeIcon, CheckIcon } from '@heroicons/react/24/outline';
-import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
-import { categories } from '../data/mockProducts';
-import { useCart } from '../hooks/useCart';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import {
+  HeartIcon,
+  ShoppingCartIcon,
+  EyeIcon,
+  CheckIcon,
+} from "@heroicons/react/24/outline";
+import { HeartIcon as HeartSolidIcon } from "@heroicons/react/24/solid";
+import { categories } from "../data/mockProducts";
+import { useCart } from "../hooks/useCart";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ product, onToggleWishlist }) => {
   const [isInWishlist, setIsInWishlist] = useState(false);
@@ -44,7 +49,7 @@ const ProductCard = ({ product, onToggleWishlist }) => {
   const calculateDiscount = () => {
     if (product.originalPrice && product.originalPrice > product.price) {
       return Math.round(
-        ((product.originalPrice - product.price) / product.originalPrice) * 100
+        ((product.originalPrice - product.price) / product.originalPrice) * 100,
       );
     }
     return 0;
@@ -59,7 +64,7 @@ const ProductCard = ({ product, onToggleWishlist }) => {
       stars.push(
         <span key={i} className="text-yellow-400">
           ★
-        </span>
+        </span>,
       );
     }
 
@@ -67,7 +72,7 @@ const ProductCard = ({ product, onToggleWishlist }) => {
       stars.push(
         <span key="half" className="text-yellow-400">
           ☆
-        </span>
+        </span>,
       );
     }
 
@@ -76,7 +81,7 @@ const ProductCard = ({ product, onToggleWishlist }) => {
       stars.push(
         <span key={`empty-${i}`} className="text-gray-300 dark:text-gray-500">
           ★
-        </span>
+        </span>,
       );
     }
 
@@ -90,7 +95,7 @@ const ProductCard = ({ product, onToggleWishlist }) => {
   return (
     <div
       // onClick={handleViewDetails}
-      className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group overflow-hidden border border-gray-200 dark:border-gray-700"
+      className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col"
     >
       {/* Image Container */}
       <div className="relative aspect-square overflow-hidden bg-gray-100 dark:bg-gray-700">
@@ -165,7 +170,7 @@ const ProductCard = ({ product, onToggleWishlist }) => {
       </div>
 
       {/* Product Info */}
-      <div className="p-4">
+      <div className="p-4 flex flex-col flex-1">
         {/* Category */}
         <div className="mb-2">
           <span className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">
@@ -178,64 +183,69 @@ const ProductCard = ({ product, onToggleWishlist }) => {
         <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-2 line-clamp-2 min-h-[3rem]">
           {product.name}
         </h3>
-        <p className="text-gray-600 dark:text-gray-400 mb-3 text-sm">
+
+        {/* Описание — ограничено 2 строками */}
+        <p className="text-gray-600 dark:text-gray-400 mb-3 text-sm line-clamp-2">
           {product.description}
         </p>
 
-        {/* Rating */}
-        <div className="flex items-center gap-2 mb-3">
-          <div className="flex">{renderStars(product.rating)}</div>
-          <span className="text-sm text-gray-600 dark:text-gray-400">
-            {product.rating} ({product.reviewsCount})
-          </span>
-        </div>
-
-        {/* Price */}
-        <div className="flex items-center gap-2 mb-4">
-          <span className="text-xl font-bold text-gray-900 dark:text-gray-100">
-            {formatPrice(product.price)}
-          </span>
-          {product.originalPrice && product.originalPrice > product.price && (
-            <span className="text-sm text-gray-500 dark:text-gray-400 line-through">
-              {formatPrice(product.originalPrice)}
+        {/* Этот div прижимает всё нижнее к низу */}
+        <div className="mt-auto">
+          {/* Rating */}
+          <div className="flex items-center gap-2 mb-3">
+            <div className="flex">{renderStars(product.rating)}</div>
+            <span className="text-sm text-gray-600 dark:text-gray-400">
+              {product.rating} ({product.reviewsCount})
             </span>
-          )}
-        </div>
+          </div>
 
-        {/* Add to Cart Button */}
-        <button
-          onClick={handleAddToCart}
-          disabled={!product.inStock || isAddingToCart || isLoading}
-          className={`w-full py-2 px-4 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
-            !product.inStock
-              ? "bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed"
-              : productInCart && !isAddingToCart
-              ? "bg-green-600 hover:bg-green-700 text-white"
-              : isAddingToCart
-              ? "bg-blue-400 text-white cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700 text-white"
-          }`}
-        >
-          {isAddingToCart ? (
-            <>
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-              Добавляем...
-            </>
-          ) : !product.inStock ? (
-            <>
-              <ShoppingCartIcon className="h-4 w-4" />
-              Нет в наличии
-            </>
-          ) : productInCart ? (
-            <>
-              <CheckIcon className="h-4 w-4" />В корзине ({itemQuantity})
-            </>
-          ) : (
-            <>
-              <ShoppingCartIcon className="h-4 w-4" />В корзину
-            </>
-          )}
-        </button>
+          {/* Price */}
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-xl font-bold text-gray-900 dark:text-gray-100">
+              {formatPrice(product.price)}
+            </span>
+            {product.originalPrice && product.originalPrice > product.price && (
+              <span className="text-sm text-gray-500 dark:text-gray-400 line-through">
+                {formatPrice(product.originalPrice)}
+              </span>
+            )}
+          </div>
+
+          {/* Add to Cart Button */}
+          <button
+            onClick={handleAddToCart}
+            disabled={!product.inStock || isAddingToCart || isLoading}
+            className={`w-full py-2 px-4 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
+              !product.inStock
+                ? "bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed"
+                : productInCart && !isAddingToCart
+                  ? "bg-green-600 hover:bg-green-700 text-white"
+                  : isAddingToCart
+                    ? "bg-blue-400 text-white cursor-not-allowed"
+                    : "bg-blue-600 hover:bg-blue-700 text-white"
+            }`}
+          >
+            {isAddingToCart ? (
+              <>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                Добавляем...
+              </>
+            ) : !product.inStock ? (
+              <>
+                <ShoppingCartIcon className="h-4 w-4" />
+                Нет в наличии
+              </>
+            ) : productInCart ? (
+              <>
+                <CheckIcon className="h-4 w-4" />В корзине ({itemQuantity})
+              </>
+            ) : (
+              <>
+                <ShoppingCartIcon className="h-4 w-4" />В корзину
+              </>
+            )}
+          </button>
+        </div>
       </div>
     </div>
   );
