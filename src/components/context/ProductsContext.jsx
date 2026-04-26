@@ -39,6 +39,7 @@ export const ProductsProvider = ({ children }) => {
           id: p.id,
           name: p.name,
           description: p.description,
+          detailedDescription: p.detailed_description,
           price: p.price,
           originalPrice: p.original_price,
           category: p.category,
@@ -49,6 +50,7 @@ export const ProductsProvider = ({ children }) => {
           isNew: p.is_new,
           isSale: p.is_sale,
           tags: p.tags || [],
+          specifications: p.specifications || null,
         }));
 
         dispatch({ type: 'SET_PRODUCTS', payload: normalized });
@@ -70,12 +72,14 @@ export const ProductsProvider = ({ children }) => {
         .insert([{
           name: product.name,
           description: product.description,
+          detailed_description: product.detailedDescription || null,
           price: product.price,
           original_price: product.originalPrice || null,
           category: product.category,
           image: product.image,
           in_stock: product.inStock,
           tags: product.tags || [],
+          specifications: product.specifications || null,
         }])
         .select()
         .single();
@@ -86,6 +90,7 @@ export const ProductsProvider = ({ children }) => {
         id: data.id,
         name: data.name,
         description: data.description,
+        detailedDescription: data.detailed_description,
         price: data.price,
         originalPrice: data.original_price,
         category: data.category,
@@ -96,6 +101,7 @@ export const ProductsProvider = ({ children }) => {
         isNew: data.is_new,
         isSale: data.is_sale,
         tags: data.tags || [],
+        specifications: data.specifications || null,
       };
 
       dispatch({ type: 'ADD_PRODUCT', payload: normalized });
