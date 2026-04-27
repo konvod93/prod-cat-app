@@ -7,8 +7,6 @@ import { UserProvider } from "./components/context/UserContext";
 import { ProductsProvider } from './components/context/ProductsContext';
 import { CategoriesProvider } from './components/context/CategoriesContext';
 
-
-
 function App() {
   return (
     <ThemeProvider>
