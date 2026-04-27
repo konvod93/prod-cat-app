@@ -154,7 +154,7 @@ const ProductCard = ({ product, onToggleWishlist }) => {
 
         {/* Quick Actions Overlay */}
         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-          <Link to="/in-progress" className="text-white text-sm font-semibold">
+          <Link to={`/products/${product.id}`} className="text-white text-sm font-semibold">
             <button
               // onClick={(e) => {
               //   e.stopPropagation();

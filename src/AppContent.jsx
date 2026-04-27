@@ -3,6 +3,7 @@ import Footer from "./components/Footer"
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from "./pages/Home";
 import ProductList from "./pages/ProductList";
+import ProductPage from "./pages/ProductPage";
 import Categories from "./pages/Categories";
 import About from "./pages/About";
 import Contacts from "./pages/Contacts.";
@@ -39,7 +40,7 @@ const AppContent = () => {
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/admin" element={<Admin />} />
-          {/* <Route path="/products/:id" element={<Products />} /> */}
+          <Route path="/products/:id" element={<ProductPage />} />
           {/* Redirect any unknown paths to NotFound */}
           <Route path="*" element={<Navigate to="/not-found" replace />} />
         </Routes>
