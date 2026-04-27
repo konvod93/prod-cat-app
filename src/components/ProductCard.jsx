@@ -6,7 +6,7 @@ import {
   CheckIcon,
 } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartSolidIcon } from "@heroicons/react/24/solid";
-import { categories } from "../data/mockProducts";
+import { useCategories } from "../hooks/useCategories";
 import { useCart } from "../hooks/useCart";
 import { Link } from "react-router-dom";
 
@@ -16,6 +16,7 @@ const ProductCard = ({ product, onToggleWishlist }) => {
   const [isAddingToCart, setIsAddingToCart] = useState(false);
 
   const { addToCart, isInCart, getItemQuantity, isLoading } = useCart();
+  const { categories } = useCategories();
 
   const handleAddToCart = async (e) => {
     e.stopPropagation();
