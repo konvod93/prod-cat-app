@@ -27,6 +27,8 @@ const CATEGORY_ICONS = [
   "🏕️",
   "🎸",
   "📦",
+  "🐟",
+  "🚵",  
 ];
 
 const CATEGORY_COLORS = [
@@ -42,6 +44,13 @@ const CATEGORY_COLORS = [
   { label: "Бирюзовый", value: "from-teal-500 to-teal-600" },
   { label: "Фуксия", value: "from-fuchsia-500 to-fuchsia-600" },
   { label: "Фиолетово-синий", value: "from-violet-500 to-violet-600" },
+  { label: "Лаймовый", value: "from-lime-500 to-lime-600" },
+  { label: "Коралловый", value: "from-rose-500 to-rose-600" },
+  { label: "Синий-фиолетовый", value: "from-blue-500 to-purple-600" },
+  { label: "Зелёно-жёлтый", value: "from-green-500 to-yellow-600" },
+  { label: "Оранжево-красный", value: "from-orange-500 to-red-600" },
+  { label: "Розово-фиолетовый", value: "from-pink-500 to-purple-600" },
+  { label: "Жёлто-зелёный", value: "from-yellow-500 to-green-600" },
 ];
 
 const initialForm = {
