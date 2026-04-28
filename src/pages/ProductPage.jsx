@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/24/outline";
 import CartButton from "../components/CartButton";
 import ProductPageInfo from "../components/ProductPageInfo";
+import ProductTags from "../components/ProductTags";
 
 const renderStars = (rating) => {
   if (!rating) return null;
@@ -120,18 +121,7 @@ export default function ProductPage() {
           />
 
           {/* Теги */}
-          {product.tags?.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-6">
-              {product.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full"
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          )}
+          <ProductTags product={product} />
         </div>
       </div>
 
