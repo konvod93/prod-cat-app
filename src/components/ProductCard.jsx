@@ -2,11 +2,13 @@ import { useState } from "react";
 import { useCart } from "../hooks/useCart";
 import ProductImage from "./product/ProductImage";
 import ProductInfo from "./product/ProductInfo";
+import { useWishlist } from "../hooks/useWhishlist";
 
-const ProductCard = ({ product, onToggleWishlist }) => {
-  const [isInWishlist, setIsInWishlist] = useState(false);
+const ProductCard = ({ product }) => {
+  
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const { addToCart, isInCart, getItemQuantity, isLoading } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist(); 
 
   const handleAddToCart = async (e) => {
     e.stopPropagation();
@@ -19,8 +21,7 @@ const ProductCard = ({ product, onToggleWishlist }) => {
 
   const handleToggleWishlist = (e) => {
     e.stopPropagation();
-    setIsInWishlist(!isInWishlist);
-    onToggleWishlist?.(product, !isInWishlist);
+    toggleWishlist(product);
   };
 
   const discount = product.originalPrice && product.originalPrice > product.price
@@ -34,7 +35,7 @@ const ProductCard = ({ product, onToggleWishlist }) => {
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col">
       <ProductImage
         product={product}
-        isInWishlist={isInWishlist}
+        isInWishlist={isInWishlist(product.id)}
         onToggleWishlist={handleToggleWishlist}
         itemQuantity={itemQuantity}
         productInCart={productInCart}
