@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useCart } from "../hooks/useCart";
 import ProductImage from "./product/ProductImage";
 import ProductInfo from "./product/ProductInfo";
-import { useWishlist } from "../hooks/useWhishlist";
+import { useWishlist } from "../hooks/useWishlist";
 
 const ProductCard = ({ product }) => {
   
