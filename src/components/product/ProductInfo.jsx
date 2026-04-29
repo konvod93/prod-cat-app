@@ -2,10 +2,7 @@ import { ShoppingCartIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { useCategories } from "../../hooks/useCategories";
 import ProductCardButton from "./ProductCardButton";
 import ProductRating from "./ProductRating";
-
-const formatPrice = (price) => {
-  return new Intl.NumberFormat("ru-RU", { style: "currency", currency: "UAH" }).format(price);
-};
+import ProductPrice from "./ProductPrice";
 
 const ProductInfo = ({ product, productInCart, itemQuantity, isAddingToCart, isLoading, onAddToCart }) => {
   const { categories } = useCategories();
@@ -34,17 +31,7 @@ const ProductInfo = ({ product, productInCart, itemQuantity, isAddingToCart, isL
         <ProductRating product={product} />
 
         {/* Price */}
-        <div className="flex items-center gap-2 mb-4">
-          <span className="text-xl font-bold text-gray-900 dark:text-gray-100">
-            {formatPrice(product.price)}
-          </span>
-          {product.originalPrice && product.originalPrice > product.price && (
-            <span className="text-sm text-gray-500 dark:text-gray-400 line-through">
-              {formatPrice(product.originalPrice)}
-            </span>
-          )}
-        </div>
-
+        <ProductPrice product={product} />
         {/* Button */}
         <ProductCardButton
           product={product}
