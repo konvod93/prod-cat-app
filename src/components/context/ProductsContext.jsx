@@ -112,6 +112,58 @@ export const ProductsProvider = ({ children }) => {
     }
   };
 
+  // Редактирование товара
+
+  const updateProduct = async (id, product) => {
+  try {
+    const { data, error } = await supabase
+      .from('products')
+      .update({
+        name: product.name,
+        description: product.description,
+        detailed_description: product.detailedDescription || null,
+        price: product.price,
+        original_price: product.originalPrice || null,
+        category: product.category,
+        image: product.image,
+        in_stock: product.inStock,
+        is_new: product.isNew || false,
+        is_sale: product.isSale || false,
+        tags: product.tags || [],
+        specifications: product.specifications || null,
+      })
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    const normalized = {
+      id: data.id,
+      name: data.name,
+      description: data.description,
+      detailedDescription: data.detailed_description,
+      price: data.price,
+      originalPrice: data.original_price,
+      category: data.category,
+      image: data.image,
+      rating: data.rating,
+      reviewsCount: data.reviews_count,
+      inStock: data.in_stock,
+      isNew: data.is_new,
+      isSale: data.is_sale,
+      tags: data.tags || [],
+      specifications: data.specifications || {},
+    };
+
+    dispatch({ type: 'UPDATE_PRODUCT', payload: normalized });
+    return { success: true };
+  } catch (error) {
+    console.error('Ошибка обновления товара:', error);
+    return { success: false, error: error.message };
+  }
+};
+
   // Удаление товара
   const deleteProduct = async (id) => {
     try {
@@ -136,6 +188,7 @@ export const ProductsProvider = ({ children }) => {
       isLoading: state.isLoading,
       error: state.error,
       addProduct,
+      updateProduct,
       deleteProduct,
     }}>
       {children}
