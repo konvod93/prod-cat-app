@@ -1,23 +1,13 @@
-import { useState } from "react";
+
 import { useCart } from "../hooks/useCart";
 import ProductImage from "./product/ProductImage";
 import ProductInfo from "./product/ProductInfo";
 import { useWishlist } from "../hooks/useWishlist";
 
 const ProductCard = ({ product }) => {
-  
-  const [isAddingToCart, setIsAddingToCart] = useState(false);
-  const { addToCart, isInCart, getItemQuantity, isLoading } = useCart();
-  const { toggleWishlist, isInWishlist } = useWishlist(); 
-
-  const handleAddToCart = async (e) => {
-    e.stopPropagation();
-    if (product.inStock && !isAddingToCart) {
-      setIsAddingToCart(true);
-      await addToCart(product);
-      setTimeout(() => setIsAddingToCart(false), 1000);
-    }
-  };
+    
+  const { isInCart, getItemQuantity } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();  
 
   const handleToggleWishlist = (e) => {
     e.stopPropagation();
@@ -44,10 +34,7 @@ const ProductCard = ({ product }) => {
       <ProductInfo
         product={product}
         productInCart={productInCart}
-        itemQuantity={itemQuantity}
-        isAddingToCart={isAddingToCart}
-        isLoading={isLoading}
-        onAddToCart={handleAddToCart}
+        itemQuantity={itemQuantity}             
       />
     </div>
   );

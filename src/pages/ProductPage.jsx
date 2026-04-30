@@ -44,14 +44,7 @@ export default function ProductPage() {
   const { addToCart, isInCart, getItemQuantity } = useCart();
   const [isAddingToCart, setIsAddingToCart] = useState(false);
 
-  const product = products.find((p) => p.id === parseInt(id));
-
-  const handleAddToCart = async () => {
-    if (!product.inStock || isAddingToCart) return;
-    setIsAddingToCart(true);
-    await addToCart(product);
-    setTimeout(() => setIsAddingToCart(false), 1000);
-  };
+  const product = products.find((p) => p.id === parseInt(id));  
 
   if (isLoading)
     return (
@@ -113,11 +106,12 @@ export default function ProductPage() {
           {/* Кнопка корзины */}
           
           <CartButton
-            product={product}
-            handleAddToCart={handleAddToCart}
+            product={product}            
             isAddingToCart={isAddingToCart}
             productInCart={productInCart}
             itemQuantity={itemQuantity}
+            addToCart={addToCart}
+            setIsAddingToCart={setIsAddingToCart}
           />
 
           {/* Теги */}
