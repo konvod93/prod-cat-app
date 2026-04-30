@@ -11,32 +11,6 @@ import CartButton from "../components/CartButton";
 import ProductPageInfo from "../components/ProductPageInfo";
 import ProductTags from "../components/ProductTags";
 
-const renderStars = (rating) => {
-  if (!rating) return null;
-  const stars = [];
-  const full = Math.floor(rating);
-  const half = rating % 1 !== 0;
-  for (let i = 0; i < full; i++)
-    stars.push(
-      <span key={i} className="text-yellow-400">
-        ★
-      </span>,
-    );
-  if (half)
-    stars.push(
-      <span key="half" className="text-yellow-400">
-        ☆
-      </span>,
-    );
-  for (let i = 0; i < 5 - Math.ceil(rating); i++)
-    stars.push(
-      <span key={`e${i}`} className="text-gray-300">
-        ★
-      </span>,
-    );
-  return stars;
-};
-
 export default function ProductPage() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -102,7 +76,7 @@ export default function ProductPage() {
 
         {/* Инфо */}
         <div className="flex flex-col">
-          <ProductPageInfo product={product} discount={discount} renderStars={renderStars} />
+          <ProductPageInfo product={product} discount={discount} />
           {/* Кнопка корзины */}
           
           <CartButton

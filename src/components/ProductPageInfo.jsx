@@ -1,6 +1,6 @@
+import ProductRating from "./product/ProductRating";
 
-
-const ProductPageInfo = ({ product, discount, renderStars }) => {
+const ProductPageInfo = ({ product, discount }) => {
     return (
         <>
           {/* Категория */}          
@@ -22,12 +22,7 @@ const ProductPageInfo = ({ product, discount, renderStars }) => {
 
           {/* Рейтинг */}
           {product.rating > 0 && (
-            <div className="flex items-center gap-2 mb-4">
-              <div className="flex">{renderStars(product.rating)}</div>
-              <span className="text-sm text-gray-500">
-                {product.rating} ({product.reviewsCount} отзывов)
-              </span>
-            </div>
+            <ProductRating product={product} />
           )}
 
           {/* Цена */}
