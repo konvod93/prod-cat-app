@@ -1,6 +1,7 @@
 import { ShoppingCartIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { useCart } from "../../hooks/useCart";
 import { useState } from "react";
+import { handleAddToCart } from "../../functions";
 
 const ProductCardButton = ({
   product,    
@@ -10,21 +11,14 @@ const ProductCardButton = ({
 
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const { addToCart, isLoading } = useCart();
-
-  const handleAddToCart = async (e) => {
-    e.stopPropagation();
-    if (product.inStock && !isAddingToCart) {
-      setIsAddingToCart(true);
-      await addToCart(product);
-      setTimeout(() => setIsAddingToCart(false), 1000);
-    }
-  };
-
+  
   return (
     <>
       {/* Button */}
       <button
-        onClick={handleAddToCart}
+        onClick={() =>
+          handleAddToCart(product, isAddingToCart, setIsAddingToCart, addToCart)
+        }
         disabled={!product.inStock || isAddingToCart || isLoading}
         className={`w-full py-2 px-4 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
           !product.inStock
