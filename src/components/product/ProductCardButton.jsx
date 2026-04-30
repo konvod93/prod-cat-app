@@ -3,15 +3,10 @@ import { useCart } from "../../hooks/useCart";
 import { useState } from "react";
 import { handleAddToCart } from "../../functions";
 
-const ProductCardButton = ({
-  product,    
-  productInCart,  
-  itemQuantity,
-}) => {
-
+const ProductCardButton = ({ product, productInCart, itemQuantity }) => {
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const { addToCart, isLoading } = useCart();
-  
+
   return (
     <>
       {/* Button */}
