@@ -20,12 +20,13 @@ export default function ProductPage() {
 
   const product = products.find((p) => p.id === parseInt(id));  
 
-  if (isLoading)
+  if (isLoading) {    
     return (
       <div className="flex justify-center items-center h-64">
         <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
       </div>
     );
+  }
 
   if (!product)
     return (
