@@ -8,10 +8,7 @@ import ProductDetails from "./ProductDetails";
 const ProductInfo = ({
   product,
   productInCart,
-  itemQuantity,
-  isAddingToCart,
-  isLoading,
-  onAddToCart,
+  itemQuantity,      
 }) => {
   const { categories } = useCategories();
 
@@ -25,11 +22,8 @@ const ProductInfo = ({
         <ProductPrice product={product} />
         {/* Button */}
         <ProductCardButton
-          product={product}
-          onAddToCart={onAddToCart}
-          isLoading={isLoading}
-          productInCart={productInCart}
-          isAddingToCart={isAddingToCart}
+          product={product}          
+          productInCart={productInCart}          
           itemQuantity={itemQuantity}
         />
       </div>
