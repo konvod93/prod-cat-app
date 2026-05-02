@@ -3,14 +3,14 @@ import { useAddToCartHandler } from "../../hooks/useAddToCartHandler";
 
 const ProductCardButton = ({ product, productInCart, itemQuantity }) => {
   
-  const { isAddingToCart, isLoading, onAddToCart } = useAddToCartHandler(product);
+  const { isAddingToCart, isCartLoading, onAddToCart } = useAddToCartHandler(product);
 
   return (
     <>
       {/* Button */}
       <button
         onClick={onAddToCart}
-        disabled={!product.inStock || isAddingToCart || isLoading}
+        disabled={!product.inStock || isAddingToCart || isCartLoading}
         className={`w-full py-2 px-4 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
           !product.inStock
             ? "bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed"

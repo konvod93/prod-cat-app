@@ -4,11 +4,11 @@ import { handleAddToCart } from "../functions";
 
 export const useAddToCartHandler = (product) => {
   const [isAddingToCart, setIsAddingToCart] = useState(false);
-  const { addToCart, isLoading } = useCart();
+  const { addToCart, isLoading: isCartLoading } = useCart();
 
   const onAddToCart = () => {
     handleAddToCart(product, isAddingToCart, setIsAddingToCart, addToCart);
   };
 
-  return { isAddingToCart, isLoading, onAddToCart };
+  return { isAddingToCart, isCartLoading, onAddToCart };
 };
