@@ -1,7 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useProducts } from "../hooks/useProducts";
 import { useCart } from "../hooks/useCart";
-import { useState } from "react";
 import {
   ShoppingCartIcon,
   CheckIcon,
@@ -14,13 +13,12 @@ import ProductTags from "../components/ProductTags";
 export default function ProductPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { products, isLoading } = useProducts();
-  const { addToCart, isInCart, getItemQuantity } = useCart();
-  const [isAddingToCart, setIsAddingToCart] = useState(false);
-
+  const { products, isLoading: isProductsLoading } = useProducts();
+  const { isInCart, getItemQuantity } = useCart();
+  
   const product = products.find((p) => p.id === parseInt(id));  
 
-  if (isLoading) {    
+  if (isProductsLoading) {    
     return (
       <div className="flex justify-center items-center h-64">
         <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
@@ -82,11 +80,8 @@ export default function ProductPage() {
           
           <CartButton
             product={product}            
-            isAddingToCart={isAddingToCart}
             productInCart={productInCart}
-            itemQuantity={itemQuantity}
-            addToCart={addToCart}
-            setIsAddingToCart={setIsAddingToCart}
+            itemQuantity={itemQuantity}            
           />
 
           {/* Теги */}
