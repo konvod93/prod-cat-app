@@ -6,6 +6,7 @@ import Overlay from "./Overlay";
 import Badges from "./Badges";
 import WhishlistButton from "./WhishlistButton";
 import ProductImage from "./ProductImage";
+import LoadingPlaceholder from "./LoadingPlaceholder";
 
 const ProductCardImage = ({
   product,
@@ -41,12 +42,8 @@ const ProductCardImage = ({
         setImageLoaded={setImageLoaded}
       />
 
-      {/* Loading placeholder */}      
-      {!imageLoaded && (
-        <div className="absolute inset-0 bg-gray-200 dark:bg-gray-600 animate-pulse flex items-center justify-center">
-          <span className="text-gray-400 dark:text-gray-500">📷</span>
-        </div>
-      )}
+      {/* Loading placeholder */}
+      <LoadingPlaceholder imageLoaded={imageLoaded} />    
 
       {/* Overlay */}
       <Overlay product={product} />
