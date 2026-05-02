@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { HeartIcon, EyeIcon } from "@heroicons/react/24/outline";
+import { HeartIcon } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartSolidIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import Overlay from "./Overlay";
 
-const ProductImage = ({ product, isInWishlist, onToggleWishlist, itemQuantity, productInCart, discount }) => {
+const ProductCardImage = ({ product, isInWishlist, onToggleWishlist, itemQuantity, productInCart, discount }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
@@ -62,4 +62,4 @@ const ProductImage = ({ product, isInWishlist, onToggleWishlist, itemQuantity, p
   );
 };
 
-export default ProductImage;
+export default ProductCardImage;

@@ -1,6 +1,6 @@
 
 import { useCart } from "../hooks/useCart";
-import ProductImage from "./product/ProductImage";
+import ProductCardImage from "./product/ProductCardImage";
 import ProductInfo from "./product/ProductInfo";
 import { useWishlist } from "../hooks/useWishlist";
 
@@ -23,7 +23,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col">
-      <ProductImage
+      <ProductCardImage
         product={product}
         isInWishlist={isInWishlist(product.id)}
         onToggleWishlist={handleToggleWishlist}
