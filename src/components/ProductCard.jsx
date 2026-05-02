@@ -1,22 +1,17 @@
-
 import { useCart } from "../hooks/useCart";
 import ProductCardImage from "./product/ProductCardImage";
 import ProductInfo from "./product/ProductInfo";
-import { useWishlist } from "../hooks/useWishlist";
 
 const ProductCard = ({ product }) => {
-    
   const { isInCart, getItemQuantity } = useCart();
-  const { toggleWishlist, isInWishlist } = useWishlist();  
 
-  const handleToggleWishlist = (e) => {
-    e.stopPropagation();
-    toggleWishlist(product);
-  };
-
-  const discount = product.originalPrice && product.originalPrice > product.price
-    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
-    : 0;
+  const discount =
+    product.originalPrice && product.originalPrice > product.price
+      ? Math.round(
+          ((product.originalPrice - product.price) / product.originalPrice) *
+            100,
+        )
+      : 0;
 
   const itemQuantity = getItemQuantity(product.id);
   const productInCart = isInCart(product.id);
@@ -25,8 +20,6 @@ const ProductCard = ({ product }) => {
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col">
       <ProductCardImage
         product={product}
-        isInWishlist={isInWishlist(product.id)}
-        onToggleWishlist={handleToggleWishlist}
         itemQuantity={itemQuantity}
         productInCart={productInCart}
         discount={discount}
@@ -34,7 +27,7 @@ const ProductCard = ({ product }) => {
       <ProductInfo
         product={product}
         productInCart={productInCart}
-        itemQuantity={itemQuantity}             
+        itemQuantity={itemQuantity}
       />
     </div>
   );

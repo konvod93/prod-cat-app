@@ -7,16 +7,21 @@ import Badges from "./Badges";
 import WhishlistButton from "./WhishlistButton";
 import ProductImage from "./ProductImage";
 import LoadingPlaceholder from "./LoadingPlaceholder";
+import { useWishlist } from "../../hooks/useWishlist";
 
 const ProductCardImage = ({
-  product,
-  isInWishlist,
-  onToggleWishlist,
+  product,    
   itemQuantity,
   productInCart,
-  discount,
+  discount
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const { toggleWishlist, isInWishlist } = useWishlist();  
+
+  const handleToggleWishlist = (e) => {
+    e.stopPropagation();
+    toggleWishlist(product);
+  };
 
   return (
     <div className="relative aspect-square overflow-hidden bg-gray-100 dark:bg-gray-700">
@@ -30,8 +35,8 @@ const ProductCardImage = ({
 
       {/* Wishlist Button */}
       <WhishlistButton
-        isInWishlist={isInWishlist}
-        onToggleWishlist={onToggleWishlist}
+        isInWishlist={isInWishlist(product.id)}
+        onToggleWishlist={handleToggleWishlist}        
       />      
 
       {/* Product Image */}
