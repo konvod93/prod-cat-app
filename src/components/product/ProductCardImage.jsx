@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Overlay from "./Overlay";
 import Badges from "./Badges";
 import WhishlistButton from "./WhishlistButton";
+import ProductImage from "./ProductImage";
 
 const ProductCardImage = ({
   product,
@@ -33,16 +34,14 @@ const ProductCardImage = ({
       />      
 
       {/* Product Image */}
-      <img
-        src={product.image}
-        alt={product.name}
-        onLoad={() => setImageLoaded(true)}
-        className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ${
-          imageLoaded ? "opacity-100" : "opacity-0"
-        }`}
+      
+      <ProductImage
+        product={product}
+        imageLoaded={imageLoaded}
+        setImageLoaded={setImageLoaded}
       />
 
-      {/* Loading placeholder */}
+      {/* Loading placeholder */}      
       {!imageLoaded && (
         <div className="absolute inset-0 bg-gray-200 dark:bg-gray-600 animate-pulse flex items-center justify-center">
           <span className="text-gray-400 dark:text-gray-500">📷</span>
