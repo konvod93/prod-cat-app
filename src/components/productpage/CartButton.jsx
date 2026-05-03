@@ -1,5 +1,5 @@
 import { ShoppingCartIcon, CheckIcon } from "@heroicons/react/24/outline";
-import { useAddToCartHandler } from "../hooks/useAddToCartHandler";
+import { useAddToCartHandler } from "../../hooks/useAddToCartHandler";
 
 const CartButton = ({
   product,

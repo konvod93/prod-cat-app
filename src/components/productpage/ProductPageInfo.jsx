@@ -1,4 +1,4 @@
-import ProductRating from "./product/ProductRating";
+import ProductRating from "../product/ProductRating";
 
 const ProductPageInfo = ({ product, discount }) => {
     return (

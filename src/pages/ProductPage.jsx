@@ -6,11 +6,12 @@ import {
   CheckIcon,
   ArrowLeftIcon,
 } from "@heroicons/react/24/outline";
-import CartButton from "../components/CartButton";
-import ProductPageInfo from "../components/ProductPageInfo";
-import ProductTags from "../components/ProductTags";
+import CartButton from "../components/productpage/CartButton";
+import ProductPageInfo from "../components/productpage/ProductPageInfo";
+import ProductTags from "../components/productpage/ProductTags";
 import ProductPageButton from "../components/productpage/ProductPageButton";
 import Badges from "../components/product/Badges";
+import WhishlistButton from "../components/product/WhishlistButton";
 
 export default function ProductPage() {
   const { id } = useParams();
@@ -68,6 +69,7 @@ export default function ProductPage() {
             itemQuantity={itemQuantity}
             productInCart={productInCart}            
           />
+          <WhishlistButton product={product} />
           <img
             src={product.image || "https://placehold.co/600x600"}
             alt={product.name}
