@@ -13,6 +13,7 @@ import ProductPageButton from "../components/productpage/ProductPageButton";
 import Badges from "../components/product/Badges";
 import WhishlistButton from "../components/product/WhishlistButton";
 import { productDiscount } from "../functions";
+import ProductPageImage from "../components/productpage/ProductPageImage";
 
 export default function ProductPage() {
   const { id } = useParams();
@@ -22,7 +23,6 @@ export default function ProductPage() {
 
   const product = products.find((p) => p.id === parseInt(id));
   const discount = productDiscount(product);
-  
 
   if (isProductsLoading) {
     return (
@@ -49,7 +49,7 @@ export default function ProductPage() {
 
   const productInCart = isInCart(product.id);
   const itemQuantity = getItemQuantity(product.id);
-  
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Назад */}
@@ -58,20 +58,12 @@ export default function ProductPage() {
       {/* Верхняя часть — фото слева, инфо справа */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
         {/* Фото */}
-        <div className="relative rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800 aspect-square">
-          <Badges
-            product={product}            
-            itemQuantity={itemQuantity}
-            productInCart={productInCart}            
-          />
-          <WhishlistButton product={product} />
-          <img
-            src={product.image || "https://placehold.co/600x600"}
-            alt={product.name}
-            className="w-full h-full object-cover"
-          />
-        </div>
-
+        <ProductPageImage
+          product={product}
+          discount={discount}
+          productInCart={productInCart}
+          itemQuantity={itemQuantity}
+        />
         {/* Инфо */}
         <div className="flex flex-col">
           <ProductPageInfo product={product} discount={discount} />
