@@ -14,6 +14,7 @@ import Badges from "../components/product/Badges";
 import WhishlistButton from "../components/product/WhishlistButton";
 import { productDiscount } from "../functions";
 import ProductPageImage from "../components/productpage/ProductPageImage";
+import DetailedDescription from "../components/productpage/DetailedDescription";
 
 export default function ProductPage() {
   const { id } = useParams();
@@ -67,8 +68,8 @@ export default function ProductPage() {
         {/* Инфо */}
         <div className="flex flex-col">
           <ProductPageInfo product={product} discount={discount} />
-          {/* Кнопка корзины */}
 
+          {/* Кнопка корзины */}
           <CartButton
             product={product}
             productInCart={productInCart}
@@ -86,17 +87,8 @@ export default function ProductPage() {
           Object.keys(product.specifications).length > 0)) && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Подробное описание */}
-          {product.detailedDescription && (
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow p-6">
-              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-                Описание
-              </h2>
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed whitespace-pre-line">
-                {product.detailedDescription}
-              </p>
-            </div>
-          )}
-
+          <DetailedDescription product={product} />
+          
           {/* Характеристики */}
           {product.specifications &&
             Object.keys(product.specifications).length > 0 && (
