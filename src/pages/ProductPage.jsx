@@ -10,16 +10,17 @@ import CartButton from "../components/CartButton";
 import ProductPageInfo from "../components/ProductPageInfo";
 import ProductTags from "../components/ProductTags";
 import ProductPageButton from "../components/productpage/ProductPageButton";
+import Badges from "../components/product/Badges";
 
 export default function ProductPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { products, isLoading: isProductsLoading } = useProducts();
   const { isInCart, getItemQuantity } = useCart();
-  
-  const product = products.find((p) => p.id === parseInt(id));  
 
-  if (isProductsLoading) {    
+  const product = products.find((p) => p.id === parseInt(id));
+
+  if (isProductsLoading) {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
@@ -60,7 +61,13 @@ export default function ProductPage() {
       {/* Верхняя часть — фото слева, инфо справа */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
         {/* Фото */}
-        <div className="rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800 aspect-square">
+        <div className="relative rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800 aspect-square">
+          <Badges
+            product={product}
+            discount={discount}
+            itemQuantity={itemQuantity}
+            productInCart={productInCart}            
+          />
           <img
             src={product.image || "https://placehold.co/600x600"}
             alt={product.name}
@@ -72,11 +79,11 @@ export default function ProductPage() {
         <div className="flex flex-col">
           <ProductPageInfo product={product} discount={discount} />
           {/* Кнопка корзины */}
-          
+
           <CartButton
-            product={product}            
+            product={product}
             productInCart={productInCart}
-            itemQuantity={itemQuantity}            
+            itemQuantity={itemQuantity}
           />
 
           {/* Теги */}
