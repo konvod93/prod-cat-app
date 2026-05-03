@@ -1,8 +1,7 @@
+import { formatProductPrice } from "../../functions";
+
 const formatPrice = (price) => {
-  return new Intl.NumberFormat("ru-RU", {
-    style: "currency",
-    currency: "UAH",
-  }).format(price);
+  return formatProductPrice(price);
 };
 
 const ProductPrice = ({ product }) => {

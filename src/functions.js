@@ -22,3 +22,11 @@ export const productDiscount = (product) => {
       )
     : 0;
 };
+
+// Вынесем функцию форматирования цены в отдельный файл, чтобы не дублировать код в разных компонентах
+export const formatProductPrice = (price) => {
+  return new Intl.NumberFormat("ru-RU", {
+    style: "currency",
+    currency: "UAH",
+  }).format(price);
+};
