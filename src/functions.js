@@ -11,3 +11,14 @@ export const handleAddToCart = async (
   await addToCart(product);
   setTimeout(() => setIsAddingToCart(false), 1000);
 };
+
+// Вынесем функцию расчета скидки в отдельный файл, чтобы не загромождать компоненты и страницы, где она используется
+
+export const productDiscount = (product) => {
+  if (!product) return 0;
+  return product.originalPrice && product.originalPrice > product.price
+    ? Math.round(
+        ((product.originalPrice - product.price) / product.originalPrice) * 100,
+      )
+    : 0;
+};

@@ -12,6 +12,7 @@ import ProductTags from "../components/productpage/ProductTags";
 import ProductPageButton from "../components/productpage/ProductPageButton";
 import Badges from "../components/product/Badges";
 import WhishlistButton from "../components/product/WhishlistButton";
+import { productDiscount } from "../functions";
 
 export default function ProductPage() {
   const { id } = useParams();
@@ -20,6 +21,8 @@ export default function ProductPage() {
   const { isInCart, getItemQuantity } = useCart();
 
   const product = products.find((p) => p.id === parseInt(id));
+  const discount = productDiscount(product);
+  
 
   if (isProductsLoading) {
     return (
@@ -46,14 +49,7 @@ export default function ProductPage() {
 
   const productInCart = isInCart(product.id);
   const itemQuantity = getItemQuantity(product.id);
-  const discount =
-    product.originalPrice && product.originalPrice > product.price
-      ? Math.round(
-          ((product.originalPrice - product.price) / product.originalPrice) *
-            100,
-        )
-      : 0;
-
+  
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Назад */}
