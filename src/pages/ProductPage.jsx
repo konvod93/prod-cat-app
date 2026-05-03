@@ -60,8 +60,7 @@ export default function ProductPage() {
         {/* Фото */}
         <div className="relative rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-800 aspect-square">
           <Badges
-            product={product}
-            discount={discount}
+            product={product}            
             itemQuantity={itemQuantity}
             productInCart={productInCart}            
           />
