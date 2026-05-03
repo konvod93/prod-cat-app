@@ -1,4 +1,9 @@
 import ProductRating from "../product/ProductRating";
+import { formatProductPrice } from "../../functions";
+
+const formatPrice = (price) => {
+  return formatProductPrice(price);
+};
 
 const ProductPageInfo = ({ product, discount }) => {
     return (
@@ -28,12 +33,12 @@ const ProductPageInfo = ({ product, discount }) => {
           {/* Цена */}
           <div className="flex items-center gap-3 mb-6">
             <span className="text-4xl font-bold text-gray-900 dark:text-gray-100">
-              ${product.price}
+              {formatPrice(product.price)}
             </span>
             {product.originalPrice && product.originalPrice > product.price && (
               <>
                 <span className="text-xl text-gray-400 line-through">
-                  ${product.originalPrice}
+                  {formatPrice(product.originalPrice)}
                 </span>
                 <span className="bg-red-100 text-red-600 text-sm px-2 py-1 rounded-full font-medium">
                   -{discount}%
