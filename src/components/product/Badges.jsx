@@ -1,4 +1,9 @@
-const Badges = ({ product, discount, productInCart, itemQuantity }) => {
+import { productDiscount } from "../../functions";
+
+const Badges = ({ product, productInCart, itemQuantity }) => {
+
+  const discount = productDiscount(product);
+  
   return (
     <div className="absolute top-2 left-2 z-10 flex flex-col gap-1">
       {product.isNew && (

@@ -11,8 +11,7 @@ import LoadingPlaceholder from "./LoadingPlaceholder";
 const ProductCardImage = ({
   product,    
   itemQuantity,
-  productInCart,
-  discount
+  productInCart,  
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   
@@ -21,8 +20,7 @@ const ProductCardImage = ({
     <div className="relative aspect-square overflow-hidden bg-gray-100 dark:bg-gray-700">
       {/* Badges */}
       <Badges
-        product={product}
-        discount={discount}
+        product={product}        
         itemQuantity={itemQuantity}
         productInCart={productInCart}
       />

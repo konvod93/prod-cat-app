@@ -1,13 +1,9 @@
 import { useCart } from "../../hooks/useCart";
 import ProductCardImage from "./ProductCardImage";
 import ProductInfo from "./ProductInfo";
-import { productDiscount } from "../../functions";
 
 const ProductCard = ({ product }) => {
-  const { isInCart, getItemQuantity } = useCart();
-
-  const discount = productDiscount(product);
-   
+  const { isInCart, getItemQuantity } = useCart();     
   const itemQuantity = getItemQuantity(product.id);
   const productInCart = isInCart(product.id);
 
@@ -16,8 +12,7 @@ const ProductCard = ({ product }) => {
       <ProductCardImage
         product={product}
         itemQuantity={itemQuantity}
-        productInCart={productInCart}
-        discount={discount}
+        productInCart={productInCart}        
       />
       <ProductInfo
         product={product}
