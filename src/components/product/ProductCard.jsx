@@ -1,18 +1,13 @@
 import { useCart } from "../../hooks/useCart";
 import ProductCardImage from "./ProductCardImage";
 import ProductInfo from "./ProductInfo";
+import { productDiscount } from "../../functions";
 
 const ProductCard = ({ product }) => {
   const { isInCart, getItemQuantity } = useCart();
 
-  const discount =
-    product.originalPrice && product.originalPrice > product.price
-      ? Math.round(
-          ((product.originalPrice - product.price) / product.originalPrice) *
-            100,
-        )
-      : 0;
-
+  const discount = productDiscount(product);
+   
   const itemQuantity = getItemQuantity(product.id);
   const productInCart = isInCart(product.id);
 
