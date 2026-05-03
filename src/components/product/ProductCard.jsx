@@ -1,6 +1,6 @@
-import { useCart } from "../hooks/useCart";
-import ProductCardImage from "./product/ProductCardImage";
-import ProductInfo from "./product/ProductInfo";
+import { useCart } from "../../hooks/useCart";
+import ProductCardImage from "./ProductCardImage";
+import ProductInfo from "./ProductInfo";
 
 const ProductCard = ({ product }) => {
   const { isInCart, getItemQuantity } = useCart();

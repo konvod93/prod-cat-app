@@ -1,7 +1,7 @@
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useProducts } from '../hooks/useProducts';
-import ProductCard from '../components/ProductCard';
+import ProductCard from '../components/product/ProductCard';
 import { ChevronDownIcon, FunnelIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const Products = ({ showSearchBar = true, mode = 'all' }) => {
