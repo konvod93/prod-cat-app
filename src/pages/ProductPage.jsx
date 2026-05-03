@@ -1,6 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useProducts } from "../hooks/useProducts";
-import { useCart } from "../hooks/useCart";
 import {
   ShoppingCartIcon,
   CheckIcon,
@@ -16,12 +15,13 @@ import ProductTags from "../components/productpage/ProductTags";
 import ProductPageButton from "../components/productpage/ProductPageButton";
 import Badges from "../components/product/Badges";
 import WhishlistButton from "../components/product/WhishlistButton";
+import { useProductCart } from "../hooks/useProductCart";
 
 export default function ProductPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { products, isLoading: isProductsLoading } = useProducts();
-  const { isInCart, getItemQuantity } = useCart();
+  const { productInCart, itemQuantity } = useProductCart(product.id);
 
   const product = products.find((p) => p.id === parseInt(id));
   const discount = productDiscount(product);
@@ -34,7 +34,7 @@ export default function ProductPage() {
     );
   }
 
-  if (!product)
+  if (!product) {
     return (
       <div className="text-center py-20">
         <h2 className="text-2xl font-bold text-gray-700 mb-4">
@@ -48,9 +48,7 @@ export default function ProductPage() {
         </button>
       </div>
     );
-
-  const productInCart = isInCart(product.id);
-  const itemQuantity = getItemQuantity(product.id);
+  }
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
@@ -89,7 +87,7 @@ export default function ProductPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Подробное описание */}
           <DetailedDescription product={product} />
-          
+
           {/* Характеристики */}
           <Specifications product={product} />
         </div>
