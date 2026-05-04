@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
-import { products, categoriesMap } from "../../data/mockProducts";
 import { useState, useEffect } from "react";
+import { useProducts } from "../../hooks/useProducts";
+import { useCategories } from "../../hooks/useCategories";
 
 const CategoriesSection = () => {
+  const { products = [] } = useProducts();
+  const { categoriesMap = {} } = useCategories();
   const [randomCategories, setRandomCategories] = useState([]);
 
   useEffect(() => {
@@ -36,7 +39,7 @@ const CategoriesSection = () => {
     });
 
     setRandomCategories(categoriesData);
-  }, []); // Пустой массив зависимостей - выполнится только при монтировании
+  }, [products, categoriesMap]); // Пустой массив зависимостей - выполнится только при монтировании
 
   // Функция для обновления категорий (опционально)
   const refreshCategories = () => {
