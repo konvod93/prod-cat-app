@@ -1,6 +1,7 @@
 import { products, categoriesMap } from '../data/mockProducts';
 import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
+import Hero from '../components/homepagecomponents/Hero';
 
 const Home = () => {
   const [randomCategories, setRandomCategories] = useState([]);
@@ -61,21 +62,7 @@ const Home = () => {
   return (
     <div className="bg-gray-50 text-gray-800">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-16 px-6 text-center">
-        <h1 className="text-5xl font-extrabold mb-4">
-          Добро пожаловать в наш магазин!
-        </h1>
-        <p className="text-xl mb-6">
-          Товары, которые вдохновляют. Цены, которые радуют.
-        </p>
-        <Link 
-          to="/Products"
-          className="inline-block bg-white text-blue-600 font-semibold px-6 py-3 rounded-full hover:bg-gray-100 transition"
-        >
-          Перейти к покупкам
-        </Link>
-      </section>
-
+      <Hero />
       {/* About Section */}
       <section className="py-12 px-6 max-w-4xl mx-auto text-center">
         <h2 className="text-3xl font-bold mb-4">🛒 Кто мы?</h2>
