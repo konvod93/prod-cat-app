@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import Hero from '../components/homepagecomponents/Hero';
 import AboutSection from '../components/homepagecomponents/AboutSection';
+import BenefitsSection from '../components/homepagecomponents/BenefitsSection';
+import ContactSection from '../components/homepagecomponents/ContactSection';
 
 const Home = () => {
   const [randomCategories, setRandomCategories] = useState([]);
@@ -132,32 +134,10 @@ const Home = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-12 px-6 bg-gray-100">
-        <h2 className="text-3xl font-bold text-center mb-8">
-          🎯 Почему выбирают нас?
-        </h2>
-        <ul className="max-w-3xl mx-auto space-y-4 text-lg text-gray-700">
-          <li>✅ Быстрая доставка по всей стране</li>
-          <li>✅ Надёжная поддержка клиентов</li>
-          <li>✅ Постоянные акции и скидки</li>
-          <li>✅ Удобная и безопасная оплата</li>
-        </ul>
-      </section>
+      <BenefitsSection />
 
       {/* Contact Section */}
-      <section className="py-12 px-6 text-center">
-        <h2 className="text-3xl font-bold mb-4">📞 Связаться с нами</h2>
-        <p className="text-lg text-gray-700 mb-6">
-          Есть вопросы? Мы всегда готовы помочь. Перейдите в раздел{" "}
-          <span className="text-blue-600 font-medium">"Контакты"</span>.
-        </p>
-        <Link
-          to="/Contacts"
-          className="inline-block bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition"
-        >
-          Связаться
-        </Link>
-      </section>      
+      <ContactSection />
     </div>
   );
 };
