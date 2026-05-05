@@ -30,3 +30,12 @@ export const formatProductPrice = (price) => {
     currency: "UAH",
   }).format(price);
 };
+
+// Вынесем функцию определения статуса заказа в отдельный файл, чтобы не загромождать компонент OrderCard и другие компоненты, где может понадобиться эта логика
+
+export const getOrderStatus = (createdAt) => {
+  const hours = (Date.now() - new Date(createdAt)) / 1000 / 60 / 60;
+  if (hours < 24) return "Обрабатывается";
+  if (hours < 72) return "В пути";
+  return "Доставлен";
+};
