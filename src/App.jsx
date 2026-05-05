@@ -15,7 +15,7 @@ function App() {
         <CategoriesProvider>
           <ProductsProvider>
             <CartProvider>
-              <WishlistProvider>
+              <WishlistProvider>                
                 <AppContent />
               </WishlistProvider>
             </CartProvider>

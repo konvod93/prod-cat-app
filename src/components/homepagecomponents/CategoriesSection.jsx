@@ -1,58 +1,50 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useProducts } from "../../hooks/useProducts";
 import { useCategories } from "../../hooks/useCategories";
 
 const CategoriesSection = () => {
   const { products = [] } = useProducts();
-  const { categoriesMap = {} } = useCategories();
+  const { categories = [] } = useCategories();
   const [randomCategories, setRandomCategories] = useState([]);
+  const initialized = useRef(false);
 
   useEffect(() => {
-    // Получаем уникальные категории из продуктов
-    const uniqueCategories = [...new Set(products.map((p) => p.category))];
+    if (!products.length || !categories.length) return;
+    if (initialized.current) return;
 
-    // Функция для получения случайных элементов из массива
-    const getRandomCategories = (categories, count = 3) => {
-      const shuffled = [...categories].sort(() => 0.5 - Math.random());
-      return shuffled.slice(0, count);
-    };
+    const uniqueCategoryNames = [...new Set(products.map((p) => p.category))];
+    const shuffled = [...uniqueCategoryNames].sort(() => 0.5 - Math.random());
+    const selected = shuffled.slice(0, 3);
 
-    // Получаем 3 случайные категории
-    const selected = getRandomCategories(uniqueCategories, 3);
-
-    // Формируем данные для отображения
     const categoriesData = selected.map((categoryName) => {
-      const categoryInfo = categoriesMap[categoryName];
+      const categoryInfo = categories.find((c) => c.name === categoryName);
       const productsInCategory = products.filter(
         (p) => p.category === categoryName,
       );
-
       return {
         name: categoryName,
         icon: categoryInfo?.icon || "📦",
         color: categoryInfo?.color || "from-gray-500 to-gray-600",
         productsCount: productsInCategory.length,
-        // Можно добавить дополнительную логику для описания
         description: `Откройте для себя ${productsInCategory.length} товаров в этой категории.`,
       };
     });
 
     setRandomCategories(categoriesData);
-  }, [products, categoriesMap]); // Пустой массив зависимостей - выполнится только при монтировании
+    initialized.current = true;
+  }, [products, categories]);
 
-  // Функция для обновления категорий (опционально)
   const refreshCategories = () => {
-    const uniqueCategories = [...new Set(products.map((p) => p.category))];
-    const shuffled = [...uniqueCategories].sort(() => 0.5 - Math.random());
+    const uniqueCategoryNames = [...new Set(products.map((p) => p.category))];
+    const shuffled = [...uniqueCategoryNames].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, 3);
 
     const categoriesData = selected.map((categoryName) => {
-      const categoryInfo = categoriesMap[categoryName];
+      const categoryInfo = categories.find((c) => c.name === categoryName);
       const productsInCategory = products.filter(
         (p) => p.category === categoryName,
       );
-
       return {
         name: categoryName,
         icon: categoryInfo?.icon || "📦",
