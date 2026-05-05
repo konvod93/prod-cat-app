@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useCart } from "../hooks/useCart";
 import { useNavigate } from "react-router-dom";
+import { useOrders } from "../hooks/useOrders";
 
 function CheckoutForm() {
   const { items, totalPrice, clearCart } = useCart();
+  const { createOrder } = useOrders();
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -17,18 +20,19 @@ function CheckoutForm() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
-    // Здесь можно отправить данные на сервер
-    console.log("Заказ отправлен:", {
-      ...formData,
-      items,
-      total: totalPrice,
-    });
+    const result = await createOrder(items, totalPrice);
 
-    clearCart();
-    navigate("/thank-you"); // или показать сообщение об успешном заказе
+    if (result.success) {
+      clearCart();
+      navigate("/thank-you");
+    } else {
+      console.error("Ошибка создания заказа:", result.error);
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -73,9 +77,10 @@ function CheckoutForm() {
         />
         <button
           type="submit"
-          className="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600 transition"
+          disabled={isSubmitting}
+          className="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600 transition disabled:opacity-50"
         >
-          Подтвердить заказ на {totalPrice.toFixed(2)} $
+          {isSubmitting ? "Оформляем..." : `Подтвердить заказ на ${totalPrice.toFixed(2)} $`}
         </button>
       </form>
     </div>
