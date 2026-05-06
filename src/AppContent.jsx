@@ -16,6 +16,7 @@ import './App.css';
 import { useTheme } from "./hooks/useTheme";
 import CheckoutForm from "./pages/CheckoutForm";
 import ThankYou from "./pages/ThankYoy";
+import PaymentForm from "./pages/PaymentForm";
 
 
 const AppContent = () => {
@@ -43,6 +44,7 @@ const AppContent = () => {
           <Route path="/products/:id" element={<ProductPage />} />
           {/* Redirect any unknown paths to NotFound */}
           <Route path="*" element={<Navigate to="/not-found" replace />} />
+          <Route path="/payment" element={<PaymentForm />} />
         </Routes>
       </main>
       <Footer />      
