@@ -1,20 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUser } from "../hooks/useUser";
 import { useNavigate } from "react-router-dom";
 import { useWishlist } from "../hooks/useWishlist";
 import { useCart } from "../hooks/useCart";
-
-// Моковые данные для демо
-const mockOrders = [
-  { id: "001", date: "15.04.2025", total: 4500, status: "Доставлен", items: 3 },
-  { id: "002", date: "02.03.2025", total: 1200, status: "В пути", items: 1 },
-  { id: "003", date: "18.02.2025", total: 8900, status: "Доставлен", items: 5 },
-];
-
-const mockAddresses = [
-  { id: 1, label: "Дом", address: "г. Харьков, ул. Сумская, 1, кв. 10" },
-  { id: 2, label: "Работа", address: "г. Харьков, пр. Науки, 14" },
-];
+import { useOrders } from "../hooks/useOrders";
+import { getOrderStatus, formatProductPrice } from "../functions";
 
 // Статусы заказов
 const statusColors = {
@@ -35,6 +25,20 @@ export default function UserProfile() {
     email: user?.email || "",
     phone: user?.phone || "",
   });
+  const { getOrders } = useOrders();
+  const [orders, setOrders] = useState([]);
+  const [ordersLoading, setOrdersLoading] = useState(false);
+
+  useEffect(() => {
+    if (activeTab === "orders") {
+      setOrdersLoading(true);
+      getOrders().then((data) => {
+        setOrders(data);
+        setOrdersLoading(false);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab]);
 
   const navigate = useNavigate();
 
@@ -202,35 +206,43 @@ export default function UserProfile() {
             <h2 className="text-lg font-semibold text-gray-800 mb-6">
               История заказов
             </h2>
-            {mockOrders.length === 0 ? (
+            {ordersLoading ? (
+              <p className="text-gray-400 text-sm">Загрузка...</p>
+            ) : orders.length === 0 ? (
               <p className="text-gray-400 text-sm">Заказов пока нет</p>
             ) : (
               <div className="space-y-4">
-                {mockOrders.map((order) => (
-                  <div
-                    key={order.id}
-                    className="border rounded-xl p-4 flex items-center justify-between"
-                  >
-                    <div>
-                      <p className="font-medium text-gray-800">
-                        Заказ №{order.id}
-                      </p>
-                      <p className="text-sm text-gray-500">
-                        {order.date} · {order.items} товара
-                      </p>
+                {orders.map((order) => {
+                  const status = getOrderStatus(order.created_at);
+                  return (
+                    <div
+                      key={order.id}
+                      className="border rounded-xl p-4 flex items-center justify-between"
+                    >
+                      <div>
+                        <p className="font-medium text-gray-800">
+                          Заказ №{order.id.slice(0, 8).toUpperCase()}
+                        </p>
+                        <p className="text-sm text-gray-500">
+                          {new Date(order.created_at).toLocaleDateString(
+                            "ru-RU",
+                          )}{" "}
+                          · {order.items.length} товара
+                        </p>
+                      </div>
+                      <div className="text-right flex flex-col items-end gap-2">
+                        <span className="font-semibold text-gray-800">
+                          {formatProductPrice(order.total)}
+                        </span>
+                        <span
+                          className={`text-xs px-2 py-1 rounded-full font-medium ${statusColors[status]}`}
+                        >
+                          {status}
+                        </span>
+                      </div>
                     </div>
-                    <div className="text-right flex flex-col items-end gap-2">
-                      <span className="font-semibold text-gray-800">
-                        {order.total.toLocaleString()} ₴
-                      </span>
-                      <span
-                        className={`text-xs px-2 py-1 rounded-full font-medium ${statusColors[order.status]}`}
-                      >
-                        {order.status}
-                      </span>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>
@@ -282,7 +294,7 @@ export default function UserProfile() {
         )}
 
         {/* Адреса */}
-        {activeTab === "addresses" && (
+        {/* {activeTab === "addresses" && (
           <div className="bg-white rounded-2xl shadow p-6">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-lg font-semibold text-gray-800">
@@ -313,7 +325,7 @@ export default function UserProfile() {
               </div>
             )}
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
