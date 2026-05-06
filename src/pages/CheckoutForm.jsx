@@ -28,7 +28,7 @@ function CheckoutForm() {
 
     if (result.success) {
       clearCart();
-      navigate("/thank-you");
+      navigate("/payment");
     } else {
       console.error("Ошибка создания заказа:", result.error);
       setIsSubmitting(false);
