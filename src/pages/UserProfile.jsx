@@ -5,6 +5,7 @@ import { useWishlist } from "../hooks/useWishlist";
 import { useCart } from "../hooks/useCart";
 import { useOrders } from "../hooks/useOrders";
 import { getOrderStatus, formatProductPrice } from "../functions";
+import { useAddresses } from "../hooks/useAddresses";
 
 // Статусы заказов
 const statusColors = {
@@ -28,6 +29,23 @@ export default function UserProfile() {
   const { getOrders } = useOrders();
   const [orders, setOrders] = useState([]);
   const [ordersLoading, setOrdersLoading] = useState(false);
+  const {
+    addresses,
+    isLoading: addressesLoading,
+    addAddress,
+    deleteAddress,
+  } = useAddresses();
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [newAddress, setNewAddress] = useState({ label: "", address: "" });
+
+  const handleAddAddress = async () => {
+    if (!newAddress.label || !newAddress.address) return;
+    const result = await addAddress(newAddress.label, newAddress.address);
+    if (result.success) {
+      setNewAddress({ label: "", address: "" });
+      setShowAddForm(false);
+    }
+  };
 
   useEffect(() => {
     if (activeTab === "orders") {
@@ -294,21 +312,56 @@ export default function UserProfile() {
         )}
 
         {/* Адреса */}
-        {/* {activeTab === "addresses" && (
+        {activeTab === "addresses" && (
           <div className="bg-white rounded-2xl shadow p-6">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-lg font-semibold text-gray-800">
                 Адреса доставки
               </h2>
-              <button className="text-sm text-blue-600 hover:underline">
-                + Добавить
+              <button
+                onClick={() => setShowAddForm(!showAddForm)}
+                className="text-sm text-blue-600 hover:underline"
+              >
+                {showAddForm ? "Отмена" : "+ Добавить"}
               </button>
             </div>
-            {mockAddresses.length === 0 ? (
+
+            {showAddForm && (
+              <div className="mb-4 space-y-2 border rounded-xl p-4">
+                <input
+                  type="text"
+                  placeholder="Название (например: Дом)"
+                  value={newAddress.label}
+                  onChange={(e) =>
+                    setNewAddress({ ...newAddress, label: e.target.value })
+                  }
+                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+                <input
+                  type="text"
+                  placeholder="Адрес доставки"
+                  value={newAddress.address}
+                  onChange={(e) =>
+                    setNewAddress({ ...newAddress, address: e.target.value })
+                  }
+                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+                <button
+                  onClick={handleAddAddress}
+                  className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition"
+                >
+                  Сохранить
+                </button>
+              </div>
+            )}
+
+            {addressesLoading ? (
+              <p className="text-gray-400 text-sm">Загрузка...</p>
+            ) : addresses.length === 0 ? (
               <p className="text-gray-400 text-sm">Адресов пока нет</p>
             ) : (
               <div className="space-y-3">
-                {mockAddresses.map((addr) => (
+                {addresses.map((addr) => (
                   <div
                     key={addr.id}
                     className="border rounded-xl p-4 flex justify-between items-center"
@@ -317,7 +370,10 @@ export default function UserProfile() {
                       <p className="font-medium text-gray-800">{addr.label}</p>
                       <p className="text-sm text-gray-500">{addr.address}</p>
                     </div>
-                    <button className="text-sm text-red-400 hover:text-red-600 transition">
+                    <button
+                      onClick={() => deleteAddress(addr.id)}
+                      className="text-sm text-red-400 hover:text-red-600 transition"
+                    >
                       Удалить
                     </button>
                   </div>
@@ -325,7 +381,7 @@ export default function UserProfile() {
               </div>
             )}
           </div>
-        )} */}
+        )}
       </div>
     </div>
   );
