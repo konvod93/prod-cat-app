@@ -4,30 +4,7 @@ import { useProducts } from "../hooks/useProducts";
 import { useCategories } from "../hooks/useCategories";
 import { supabase } from "../lib/supabase";
 import { handleLoginAdmin } from "../functions";
-
-const CATEGORY_ICONS = [
-  "📱",
-  "👕",
-  "📚",
-  "🏠",
-  "⚽",
-  "💄",
-  "🍎",
-  "🧸",
-  "🚗",
-  "💍",
-  "🎮",
-  "🔧",
-  "🎨",
-  "🐾",
-  "🌿",
-  "🍳",
-  "🏕️",
-  "🎸",
-  "📦",
-  "🐟",
-  "🚵",
-];
+import { CATEGORY_ICONS } from "../constants";
 
 const CATEGORY_COLORS = [
   { label: "Синий", value: "from-blue-500 to-blue-600" },
