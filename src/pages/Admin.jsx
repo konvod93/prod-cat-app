@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useProducts } from "../hooks/useProducts";
 import { useCategories } from "../hooks/useCategories";
 import { supabase } from "../lib/supabase";
+import { handleLoginAdmin } from "../functions";
 
 const CATEGORY_ICONS = [
   "📱",
@@ -99,28 +100,7 @@ export default function Admin() {
   if (isCheckingAuth) return null;
 
   // ─── Авторизация ───────────────────────────────────────────────
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: credentials.email,
-      password: credentials.password,
-    });
-
-    if (error) {
-      setAuthError("Неверный email или пароль");
-      return;
-    }
-
-    const role = data.user?.user_metadata?.role;
-    if (role !== "admin") {
-      setAuthError("У вас нет прав администратора");
-      await supabase.auth.signOut();
-      return;
-    }
-
-    setIsAuthenticated(true);
-    setAuthError("");
-  };
+  const handleLogin = (e) => handleLoginAdmin(e, credentials, setAuthError, setIsAuthenticated, supabase);
 
   // ─── Характеристики ────────────────────────────────────────────
   const addSpecRow = () => {

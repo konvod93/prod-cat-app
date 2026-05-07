@@ -39,3 +39,33 @@ export const getOrderStatus = (createdAt) => {
   if (hours < 72) return "В пути";
   return "Доставлен";
 };
+
+// Вынесем функцию обработки логина администратора в отдельный файл, чтобы не загромождать компонент AdminLogin и другие компоненты, где может понадобиться эта логика
+export const handleLoginAdmin = async (
+  e,
+  credentials,
+  setAuthError,
+  setIsAuthenticated,
+  supabase,
+) => {
+  e.preventDefault();
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: credentials.email,
+    password: credentials.password,
+  });
+
+  if (error) {
+    setAuthError("Неверный email или пароль");
+    return;
+  }
+
+  const role = data.user?.user_metadata?.role;
+  if (role !== "admin") {
+    setAuthError("У вас нет прав администратора");
+    await supabase.auth.signOut();
+    return;
+  }
+
+  setIsAuthenticated(true);
+  setAuthError("");
+};
