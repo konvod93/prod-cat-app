@@ -6,7 +6,7 @@ import { useCart } from "../hooks/useCart";
 import { useOrders } from "../hooks/useOrders";
 import { getOrderStatus, formatProductPrice } from "../functions";
 import { useAddresses } from "../hooks/useAddresses";
-import { statusColors } from "../constants";
+import { statusColors, tabs } from "../constants";
 
 export default function UserProfile() {
   const { user, logout, updateProfile, isLoading } = useUser();
@@ -64,13 +64,6 @@ export default function UserProfile() {
       setIsEditing(false);
     }
   };
-
-  const tabs = [
-    { id: "profile", label: "Профиль" },
-    { id: "orders", label: "Заказы" },
-    { id: "favorites", label: "Избранное" },
-    { id: "addresses", label: "Адреса" },
-  ];
 
   return (
     <div className="min-h-screen bg-gray-100 py-8 px-4">

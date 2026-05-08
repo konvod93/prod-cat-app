@@ -76,3 +76,11 @@ export const statusColors = {
   Отменён: "bg-red-100 text-red-700",
   Обрабатывается: "bg-yellow-100 text-yellow-700",
 };
+
+// Вынесем константы для табов в отдельный файл, чтобы не дублировать код в разных компонентах, где может понадобиться эта логика
+export const tabs = [
+  { id: "profile", label: "Профиль" },
+  { id: "orders", label: "Заказы" },
+  { id: "favorites", label: "Избранное" },
+  { id: "addresses", label: "Адреса" },
+];
