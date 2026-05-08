@@ -6,14 +6,7 @@ import { useCart } from "../hooks/useCart";
 import { useOrders } from "../hooks/useOrders";
 import { getOrderStatus, formatProductPrice } from "../functions";
 import { useAddresses } from "../hooks/useAddresses";
-
-// Статусы заказов
-const statusColors = {
-  Доставлен: "bg-green-100 text-green-700",
-  "В пути": "bg-blue-100 text-blue-700",
-  Отменён: "bg-red-100 text-red-700",
-  Обрабатывается: "bg-yellow-100 text-yellow-700",
-};
+import { statusColors } from "../constants";
 
 export default function UserProfile() {
   const { user, logout, updateProfile, isLoading } = useUser();

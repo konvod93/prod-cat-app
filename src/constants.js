@@ -68,3 +68,11 @@ export const initialCategoryForm = {
   icon: "📦",
   color: "from-gray-500 to-gray-600",
 };
+
+// Вынесем константы для статусов заказов в отдельный файл, чтобы не дублировать код в разных компонентах, где может понадобиться эта логика
+export const statusColors = {
+  Доставлен: "bg-green-100 text-green-700",
+  "В пути": "bg-blue-100 text-blue-700",
+  Отменён: "bg-red-100 text-red-700",
+  Обрабатывается: "bg-yellow-100 text-yellow-700",
+};
