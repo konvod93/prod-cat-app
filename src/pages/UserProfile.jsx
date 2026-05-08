@@ -7,6 +7,7 @@ import { useOrders } from "../hooks/useOrders";
 import { getOrderStatus, formatProductPrice } from "../functions";
 import { useAddresses } from "../hooks/useAddresses";
 import { statusColors, tabs } from "../constants";
+import { handleLogout } from "../functions";
 
 export default function UserProfile() {
   const { user, logout, updateProfile, isLoading } = useUser();
@@ -52,12 +53,7 @@ export default function UserProfile() {
   }, [activeTab]);
 
   const navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  };
-
+  
   const handleSaveProfile = async () => {
     const result = await updateProfile(formData);
     if (result.success) {
@@ -83,7 +79,7 @@ export default function UserProfile() {
             <p className="text-gray-500">{user?.email}</p>
           </div>
           <button
-            onClick={handleLogout}
+            onClick={() => handleLogout({ logout, navigate })}
             className="text-sm text-red-500 hover:text-red-700 border border-red-300 hover:border-red-500 px-4 py-2 rounded-lg transition"
           >
             Выйти

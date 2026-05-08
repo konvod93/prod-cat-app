@@ -69,3 +69,9 @@ export const handleLoginAdmin = async (
   setIsAuthenticated(true);
   setAuthError("");
 };
+
+// Вынесем функцию обработки выхода из аккаунта в отдельный файл, чтобы не загромождать компонент UserProfile и другие компоненты, где может понадобиться эта логика
+export const handleLogout = ({ logout, navigate }) => {
+  logout();
+  navigate("/");
+};
