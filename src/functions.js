@@ -90,3 +90,14 @@ export const handleAddAddress = async ({
     setShowAddForm(false);
   }
 };
+
+export const handleSaveProfile = async ({
+  formData,
+  updateProfile,
+  setIsEditing,
+}) => {
+  const result = await updateProfile(formData);
+  if (result.success) {
+    setIsEditing(false);
+  }
+};

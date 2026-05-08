@@ -7,7 +7,7 @@ import { useOrders } from "../hooks/useOrders";
 import { getOrderStatus, formatProductPrice } from "../functions";
 import { useAddresses } from "../hooks/useAddresses";
 import { statusColors, tabs } from "../constants";
-import { handleLogout, handleAddAddress } from "../functions";
+import { handleLogout, handleAddAddress, handleSaveProfile } from "../functions";
 
 export default function UserProfile() {
   const { user, logout, updateProfile, isLoading } = useUser();
@@ -43,14 +43,7 @@ export default function UserProfile() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
-  const navigate = useNavigate();
-  
-  const handleSaveProfile = async () => {
-    const result = await updateProfile(formData);
-    if (result.success) {
-      setIsEditing(false);
-    }
-  };
+  const navigate = useNavigate();  
 
   return (
     <div className="min-h-screen bg-gray-100 py-8 px-4">
@@ -155,7 +148,7 @@ export default function UserProfile() {
                 </div>
                 <div className="flex gap-3 pt-2">
                   <button
-                    onClick={handleSaveProfile}
+                    onClick={() => handleSaveProfile({ formData, updateProfile, setIsEditing })}
                     disabled={isLoading}
                     className="bg-blue-600 text-white px-5 py-2 rounded-lg text-sm hover:bg-blue-700 disabled:opacity-50 transition"
                   >
