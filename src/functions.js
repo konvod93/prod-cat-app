@@ -75,3 +75,18 @@ export const handleLogout = ({ logout, navigate }) => {
   logout();
   navigate("/");
 };
+
+// Вынесем функцию обработки добавления адреса в отдельный файл, чтобы не загромождать компонент UserProfile и другие компоненты, где может понадобиться эта логика
+export const handleAddAddress = async ({
+  newAddress,
+  addAddress,
+  setNewAddress,
+  setShowAddForm,
+}) => {
+  if (!newAddress.label || !newAddress.address) return;
+  const result = await addAddress(newAddress.label, newAddress.address);
+  if (result.success) {
+    setNewAddress({ label: "", address: "" });
+    setShowAddForm(false);
+  }
+};

@@ -7,7 +7,7 @@ import { useOrders } from "../hooks/useOrders";
 import { getOrderStatus, formatProductPrice } from "../functions";
 import { useAddresses } from "../hooks/useAddresses";
 import { statusColors, tabs } from "../constants";
-import { handleLogout } from "../functions";
+import { handleLogout, handleAddAddress } from "../functions";
 
 export default function UserProfile() {
   const { user, logout, updateProfile, isLoading } = useUser();
@@ -30,16 +30,7 @@ export default function UserProfile() {
     deleteAddress,
   } = useAddresses();
   const [showAddForm, setShowAddForm] = useState(false);
-  const [newAddress, setNewAddress] = useState({ label: "", address: "" });
-
-  const handleAddAddress = async () => {
-    if (!newAddress.label || !newAddress.address) return;
-    const result = await addAddress(newAddress.label, newAddress.address);
-    if (result.success) {
-      setNewAddress({ label: "", address: "" });
-      setShowAddForm(false);
-    }
-  };
+  const [newAddress, setNewAddress] = useState({ label: "", address: "" });  
 
   useEffect(() => {
     if (activeTab === "orders") {
@@ -329,7 +320,7 @@ export default function UserProfile() {
                   className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
                 <button
-                  onClick={handleAddAddress}
+                  onClick={() => handleAddAddress({ newAddress, addAddress, setNewAddress, setShowAddForm })}
                   className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition"
                 >
                   Сохранить
