@@ -43,6 +43,7 @@ export default function Admin() {
   const [editingProduct, setEditingProduct] = useState(null);
 
   const [categoryForm, setCategoryForm] = useState(initialCategoryForm);
+  const [categoryError, setCategoryError] = useState("");
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -55,7 +56,14 @@ export default function Admin() {
   if (isCheckingAuth) return null;
 
   // ─── Авторизация ───────────────────────────────────────────────
-  const handleLogin = (e) => handleLoginAdmin(e, credentials, setAuthError, setIsAuthenticated, supabase);
+  const handleLogin = (e) =>
+    handleLoginAdmin(
+      e,
+      credentials,
+      setAuthError,
+      setIsAuthenticated,
+      supabase,
+    );
 
   // ─── Характеристики ────────────────────────────────────────────
   const addSpecRow = () => {
@@ -171,7 +179,12 @@ export default function Admin() {
   const handleAddCategory = async () => {
     if (!categoryForm.name.trim()) return;
     const result = await addCategory(categoryForm);
-    if (result.success) setCategoryForm(initialCategoryForm);
+    if (result.success) {
+      setCategoryForm(initialCategoryForm);
+      setCategoryError("");
+    } else {
+      setCategoryError(result.error);
+    }
   };
 
   // ─── Форма входа ───────────────────────────────────────────────
@@ -576,6 +589,11 @@ export default function Admin() {
                       {categoryForm.name || "Название категории"}
                     </span>
                   </div>
+                  {categoryError && (
+                    <div className="p-3 bg-red-100 text-red-700 rounded-lg text-sm">
+                      {categoryError}
+                    </div>
+                  )}
                   <button
                     type="button"
                     onClick={handleAddCategory}
