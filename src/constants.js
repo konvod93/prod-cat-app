@@ -1,3 +1,5 @@
+// src/constants.js
+// Вынесем константы для категорий в отдельный файл, чтобы не дублировать код в разных компонентах, где может понадобиться эта логика
 export const CATEGORY_ICONS = [
   "📱",
   "👕",
@@ -22,6 +24,7 @@ export const CATEGORY_ICONS = [
   "🚵",
 ];
 
+// Вынесем константы для категорий в отдельный файл, чтобы не дублировать код в разных компонентах, где может понадобиться эта логика
 export const CATEGORY_COLORS = [
   { label: "Синий", value: "from-blue-500 to-blue-600" },
   { label: "Фиолетовый", value: "from-purple-500 to-purple-600" },
@@ -43,3 +46,25 @@ export const CATEGORY_COLORS = [
   { label: "Розово-фиолетовый", value: "from-pink-500 to-purple-600" },
   { label: "Жёлто-зелёный", value: "from-yellow-500 to-green-600" },
 ];
+// Вынесем начальное состояние формы продукта в отдельный файл, чтобы не дублировать код в разных компонентах, где может понадобиться эта логика
+export const initialForm = {
+  name: "",
+  price: "",
+  originalPrice: "",
+  category: "",
+  description: "",
+  detailedDescription: "",
+  image: "",
+  tags: "",
+  inStock: true,
+  isNew: false,
+  isSale: false,
+  specifications: [],
+};
+
+// Вынесем начальное состояние формы категории в отдельный файл, чтобы не дублировать код в разных компонентах, где может понадобиться эта логика
+export const initialCategoryForm = {
+  name: "",
+  icon: "📦",
+  color: "from-gray-500 to-gray-600",
+};

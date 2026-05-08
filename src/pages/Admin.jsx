@@ -4,28 +4,7 @@ import { useProducts } from "../hooks/useProducts";
 import { useCategories } from "../hooks/useCategories";
 import { supabase } from "../lib/supabase";
 import { handleLoginAdmin } from "../functions";
-import { CATEGORY_ICONS, CATEGORY_COLORS } from "../constants";
-
-const initialForm = {
-  name: "",
-  price: "",
-  originalPrice: "",
-  category: "",
-  description: "",
-  detailedDescription: "",
-  image: "",
-  tags: "",
-  inStock: true,
-  isNew: false,
-  isSale: false,
-  specifications: [],
-};
-
-const initialCategoryForm = {
-  name: "",
-  icon: "📦",
-  color: "from-gray-500 to-gray-600",
-};
+import { CATEGORY_ICONS, CATEGORY_COLORS, initialForm, initialCategoryForm } from "../constants";
 
 export default function Admin() {
   const { products, addProduct, updateProduct, deleteProduct } = useProducts();
