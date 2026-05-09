@@ -1,3 +1,5 @@
+// Profile info section with editable fields for name, email, and phone
+
 import { handleSaveProfile } from "../../functions";
 import { useUser } from "../../hooks/useUser";
 import { useState } from "react";
