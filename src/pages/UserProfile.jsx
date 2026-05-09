@@ -5,14 +5,15 @@ import { useCart } from "../hooks/useCart";
 import { useOrders } from "../hooks/useOrders";
 import { getOrderStatus, formatProductPrice } from "../functions";
 import { useAddresses } from "../hooks/useAddresses";
-import { statusColors, tabs } from "../constants";
+import { statusColors } from "../constants";
 import { handleAddAddress, handleSaveProfile } from "../functions";
 import ProfileHeader from "../components/user-profile/ProfileHeader";
+import ProfileTabs from "../components/user-profile/ProfileTabs";
 
 export default function UserProfile() {
   const { user, updateProfile, isLoading } = useUser();
   const { items: wishlistItems, removeFromWishlist } = useWishlist();
-  const { addToCart } = useCart();
+  const { addToCart } = useCart();  
   const [activeTab, setActiveTab] = useState("profile");
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
@@ -50,21 +51,7 @@ export default function UserProfile() {
         <ProfileHeader user={user} />
 
         {/* Табы */}
-        <div className="flex gap-2 mb-6">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
-                activeTab === tab.id
-                  ? "bg-blue-600 text-white"
-                  : "bg-white text-gray-600 hover:bg-gray-50"
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
+        <ProfileTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 
         {/* Профиль */}
         {activeTab === "profile" && (
