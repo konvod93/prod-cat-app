@@ -1,24 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useUser } from "../hooks/useUser";
 import { useWishlist } from "../hooks/useWishlist";
 import { useCart } from "../hooks/useCart";
-import { useOrders } from "../hooks/useOrders";
-import { getOrderStatus, formatProductPrice } from "../functions";
 import { useAddresses } from "../hooks/useAddresses";
-import { statusColors } from "../constants";
 import { handleAddAddress } from "../functions";
 import ProfileHeader from "../components/user-profile/ProfileHeader";
 import ProfileTabs from "../components/user-profile/ProfileTabs";
 import ProfileInfo from "../components/user-profile/ProfileInfo";
+import OrdersTab from "../components/user-profile/OrdersTab";
 
 export default function UserProfile() {
   const { user } = useUser();
   const { items: wishlistItems, removeFromWishlist } = useWishlist();
   const { addToCart } = useCart();  
   const [activeTab, setActiveTab] = useState("profile");    
-  const { getOrders } = useOrders();
-  const [orders, setOrders] = useState([]);
-  const [ordersLoading, setOrdersLoading] = useState(false);
+  
+  
   const {
     addresses,
     isLoading: addressesLoading,
@@ -28,16 +25,6 @@ export default function UserProfile() {
   const [showAddForm, setShowAddForm] = useState(false);
   const [newAddress, setNewAddress] = useState({ label: "", address: "" });  
 
-  useEffect(() => {
-    if (activeTab === "orders") {
-      setOrdersLoading(true);
-      getOrders().then((data) => {
-        setOrders(data);
-        setOrdersLoading(false);
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTab]);
   
   return (
     <div className="min-h-screen bg-gray-100 py-8 px-4">
@@ -55,50 +42,7 @@ export default function UserProfile() {
 
         {/* Заказы */}
         {activeTab === "orders" && (
-          <div className="bg-white rounded-2xl shadow p-6">
-            <h2 className="text-lg font-semibold text-gray-800 mb-6">
-              История заказов
-            </h2>
-            {ordersLoading ? (
-              <p className="text-gray-400 text-sm">Загрузка...</p>
-            ) : orders.length === 0 ? (
-              <p className="text-gray-400 text-sm">Заказов пока нет</p>
-            ) : (
-              <div className="space-y-4">
-                {orders.map((order) => {
-                  const status = getOrderStatus(order.created_at);
-                  return (
-                    <div
-                      key={order.id}
-                      className="border rounded-xl p-4 flex items-center justify-between"
-                    >
-                      <div>
-                        <p className="font-medium text-gray-800">
-                          Заказ №{order.id.slice(0, 8).toUpperCase()}
-                        </p>
-                        <p className="text-sm text-gray-500">
-                          {new Date(order.created_at).toLocaleDateString(
-                            "ru-RU",
-                          )}{" "}
-                          · {order.items.length} товара
-                        </p>
-                      </div>
-                      <div className="text-right flex flex-col items-end gap-2">
-                        <span className="font-semibold text-gray-800">
-                          {formatProductPrice(order.total)}
-                        </span>
-                        <span
-                          className={`text-xs px-2 py-1 rounded-full font-medium ${statusColors[status]}`}
-                        >
-                          {status}
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </div>
+          <OrdersTab activeTab={activeTab} />
         )}
 
         {/* Избранное */}
