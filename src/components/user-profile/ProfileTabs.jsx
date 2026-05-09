@@ -1,3 +1,5 @@
+// Profile tabs for switching between different sections (e.g., Orders, Settings)
+
 import { tabs } from "../../constants";
 
 export const ProfileTabs = ({ activeTab, setActiveTab }) => {
