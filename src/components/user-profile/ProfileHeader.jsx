@@ -1,3 +1,5 @@
+// Profile avatar, name, email, and logout button
+
 import { useUser } from "../../hooks/useUser";
 import { useNavigate } from "react-router-dom";
 import { handleLogout } from "../../functions";
