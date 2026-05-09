@@ -1,17 +1,16 @@
 import { useState, useEffect } from "react";
 import { useUser } from "../hooks/useUser";
-import { useNavigate } from "react-router-dom";
 import { useWishlist } from "../hooks/useWishlist";
 import { useCart } from "../hooks/useCart";
 import { useOrders } from "../hooks/useOrders";
 import { getOrderStatus, formatProductPrice } from "../functions";
 import { useAddresses } from "../hooks/useAddresses";
 import { statusColors, tabs } from "../constants";
-import { handleLogout, handleAddAddress, handleSaveProfile } from "../functions";
+import { handleAddAddress, handleSaveProfile } from "../functions";
 import ProfileHeader from "../components/user-profile/ProfileHeader";
 
 export default function UserProfile() {
-  const { user, logout, updateProfile, isLoading } = useUser();
+  const { user, updateProfile, isLoading } = useUser();
   const { items: wishlistItems, removeFromWishlist } = useWishlist();
   const { addToCart } = useCart();
   const [activeTab, setActiveTab] = useState("profile");
@@ -43,14 +42,12 @@ export default function UserProfile() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
-
-  const navigate = useNavigate();  
-
+  
   return (
     <div className="min-h-screen bg-gray-100 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Шапка профиля */}
-        <ProfileHeader user={user} handleLogout={handleLogout} logout={logout} navigate={navigate} />
+        <ProfileHeader user={user} />
 
         {/* Табы */}
         <div className="flex gap-2 mb-6">

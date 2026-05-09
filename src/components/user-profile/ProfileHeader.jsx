@@ -1,4 +1,11 @@
-const ProfileHeader = ({ user, handleLogout, logout, navigate }) => {
+import { useUser } from "../../hooks/useUser";
+import { useNavigate } from "react-router-dom";
+import { handleLogout } from "../../functions";
+
+const ProfileHeader = ({ user }) => {
+  const { logout } = useUser();
+  const navigate = useNavigate();
+
   return (
     <div className="bg-white rounded-2xl shadow p-6 flex items-center gap-6 mb-6">
       <img
