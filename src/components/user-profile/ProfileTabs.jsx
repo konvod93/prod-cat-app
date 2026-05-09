@@ -1,9 +1,6 @@
-import { tabs } from "../../constants"
+import { tabs } from "../../constants";
 
-
-
-export const ProfileTabs = ({ activeTab, setActiveTab }) => {    
-
+export const ProfileTabs = ({ activeTab, setActiveTab }) => {
   return (
     <div className="flex gap-2 mb-6">
       {tabs.map((tab) => (
