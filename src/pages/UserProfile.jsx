@@ -49,7 +49,9 @@ export default function UserProfile() {
         <ProfileTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 
         {/* Профиль */}
-        <ProfileInfo user={user} activeTab={activeTab} />
+        {activeTab === "profile" && (
+          <ProfileInfo />
+        )}        
 
         {/* Заказы */}
         {activeTab === "orders" && (
