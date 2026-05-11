@@ -1,7 +1,7 @@
 import { useCart } from "../../hooks/useCart";
 import { useWishlist } from "../../hooks/useWishlist";
 
-const WhishlistTab = () => {
+const WishlistTab = () => {
   const { addToCart } = useCart();
   const { items: wishlistItems, removeFromWishlist } = useWishlist();
 
@@ -47,4 +47,4 @@ const WhishlistTab = () => {
     </div>
   );
 };
-export default WhishlistTab;
+export default WishlistTab;

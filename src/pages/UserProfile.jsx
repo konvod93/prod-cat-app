@@ -6,7 +6,7 @@ import ProfileHeader from "../components/user-profile/ProfileHeader";
 import ProfileTabs from "../components/user-profile/ProfileTabs";
 import ProfileInfo from "../components/user-profile/ProfileInfo";
 import OrdersTab from "../components/user-profile/OrdersTab";
-import WhishlistTab from "../components/user-profile/WhishlistTab";
+import WishlistTab from "../components/user-profile/WishlistTab";
 
 export default function UserProfile() {
   const { user } = useUser();  
@@ -44,7 +44,7 @@ export default function UserProfile() {
 
         {/* Избранное */}
         {activeTab === "favorites" && (
-          <WhishlistTab />
+          <WishlistTab />
         )}
 
         {/* Адреса */}
