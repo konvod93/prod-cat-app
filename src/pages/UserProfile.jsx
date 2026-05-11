@@ -42,7 +42,7 @@ export default function UserProfile() {
 
         {/* Заказы */}
         {activeTab === "orders" && (
-          <OrdersTab activeTab={activeTab} />
+          <OrdersTab />
         )}
 
         {/* Избранное */}

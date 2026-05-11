@@ -5,21 +5,19 @@ import { getOrderStatus, formatProductPrice } from "../../functions";
 import { statusColors } from "../../constants";
 import { useState, useEffect } from "react";
 
-const OrdersTab = ({ activeTab }) => {
+const OrdersTab = () => {
   const { getOrders } = useOrders();
   const [orders, setOrders] = useState([]);
   const [ordersLoading, setOrdersLoading] = useState(false);
 
   useEffect(() => {
-    if (activeTab === "orders") {
-      setOrdersLoading(true);
-      getOrders().then((data) => {
-        setOrders(data);
-        setOrdersLoading(false);
-      });
-    }
+    setOrdersLoading(true);
+    getOrders().then((data) => {
+      setOrders(data);
+      setOrdersLoading(false);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTab]);
+  }, []);
 
   return (
     <div className="bg-white rounded-2xl shadow p-6">
