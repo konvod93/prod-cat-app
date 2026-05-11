@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import Hero from '../components/homepagecomponents/Hero';
-import AboutSection from '../components/homepagecomponents/AboutSection';
-import BenefitsSection from '../components/homepagecomponents/BenefitsSection';
-import ContactSection from '../components/homepagecomponents/ContactSection';
-import CategoriesSection from '../components/homepagecomponents/CategoriesSection';
+import Hero from '../components/home-page-components/Hero';
+import AboutSection from '../components/home-page-components/AboutSection';
+import BenefitsSection from '../components/home-page-components/BenefitsSection';
+import ContactSection from '../components/home-page-components/ContactSection';
+import CategoriesSection from '../components/home-page-components/CategoriesSection';
 
 const Home = () => {
   
