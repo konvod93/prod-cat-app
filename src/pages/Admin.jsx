@@ -1,19 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useProducts } from "../hooks/useProducts";
 import { useCategories } from "../hooks/useCategories";
 import { supabase } from "../lib/supabase";
-import { handleLoginAdmin } from "../functions";
-import { CATEGORY_ICONS, CATEGORY_COLORS, initialForm, initialCategoryForm } from "../constants";
+import {
+  CATEGORY_ICONS,
+  CATEGORY_COLORS,
+  initialForm,
+  initialCategoryForm,
+} from "../constants";
 import AdminLogin from "../components/admin-page/AdminLogin";
 
 export default function Admin() {
   const { products, addProduct, updateProduct, deleteProduct } = useProducts();
   const { categories, addCategory, deleteCategory } = useCategories();
-  
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [credentials, setCredentials] = useState({ email: "", password: "" });
-  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
-  const [authError, setAuthError] = useState("");
 
   const [form, setForm] = useState(initialForm);
   const [formError, setFormError] = useState("");
@@ -22,26 +22,6 @@ export default function Admin() {
 
   const [categoryForm, setCategoryForm] = useState(initialCategoryForm);
   const [categoryError, setCategoryError] = useState("");
-
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      const role = session?.user?.user_metadata?.role;
-      if (role === "admin") setIsAuthenticated(true);
-      setIsCheckingAuth(false);
-    });
-  }, []);
-
-  if (isCheckingAuth) return null;
-
-  // ─── Авторизация ───────────────────────────────────────────────
-  const handleLogin = (e) =>
-    handleLoginAdmin(
-      e,
-      credentials,
-      setAuthError,
-      setIsAuthenticated,
-      supabase,
-    );
 
   // ─── Характеристики ────────────────────────────────────────────
   const addSpecRow = () => {
@@ -167,12 +147,12 @@ export default function Admin() {
 
   // ─── Форма входа ───────────────────────────────────────────────
   if (!isAuthenticated) {
-    <AdminLogin
-      authError={authError}
-      credentials={credentials}
-      setCredentials={setCredentials}
-      handleLogin={handleLogin}
-    />
+    return (
+      <AdminLogin
+        isAuthentificated={isAuthenticated}
+        setIsAuthenticated={setIsAuthenticated}
+      />
+    );
   }
 
   // ─── Панель управления ─────────────────────────────────────────
