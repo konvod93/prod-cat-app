@@ -147,12 +147,7 @@ export default function Admin() {
 
   // ─── Форма входа ───────────────────────────────────────────────
   if (!isAuthenticated) {
-    return (
-      <AdminLogin
-        isAuthentificated={isAuthenticated}
-        setIsAuthenticated={setIsAuthenticated}
-      />
-    );
+    return <AdminLogin setIsAuthenticated={setIsAuthenticated} />;
   }
 
   // ─── Панель управления ─────────────────────────────────────────

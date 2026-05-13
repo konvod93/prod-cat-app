@@ -28,7 +28,7 @@ const AdminLogin = ({ setIsAuthenticated }) => {
         <h1 className="text-2xl font-bold text-gray-800 mb-2 text-center">
           Админ панель
         </h1>
-        <p className="text-gray-400 text-sm text-center mb-6"></p>
+        <p className="text-gray-400 text-sm text-center mb-6">Доступ только для администраторов</p>
         {authError && (
           <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg text-sm">
             {authError}
