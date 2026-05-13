@@ -1,3 +1,5 @@
+// Moved to AdminLogin.jsx for better organization and separation of concerns. This way, the login logic is encapsulated in its own component, making it easier to maintain and reuse if needed in other parts of the application.
+
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { handleLoginAdmin } from "../../functions";
@@ -9,15 +11,6 @@ const AdminLogin = ({ setIsAuthenticated }) => {
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
   const navigate = useNavigate();
-
-  const handleLogin = (e) =>
-    handleLoginAdmin(
-      e,
-      credentials,
-      setAuthError,
-      setIsAuthenticated,
-      supabase,
-    );
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -41,7 +34,7 @@ const AdminLogin = ({ setIsAuthenticated }) => {
             {authError}
           </div>
         )}
-        <form onSubmit={handleLogin} className="space-y-4">
+        <form onSubmit={(e) => handleLoginAdmin(e, credentials, setAuthError, setIsAuthenticated, supabase)} className="space-y-4">
           <div>
             <label className="block text-sm text-gray-600 mb-1">Email</label>
             <input
