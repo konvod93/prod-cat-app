@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useProducts } from "../hooks/useProducts";
 import { useCategories } from "../hooks/useCategories";
-import { supabase } from "../lib/supabase";
 import {
   CATEGORY_ICONS,
   CATEGORY_COLORS,
@@ -156,7 +155,7 @@ export default function Admin() {
     <div className="min-h-screen bg-gray-100 py-8 px-4">
       <div className="max-w-5xl mx-auto">
         {/* Шапка */}
-        <AdminHeader supabase={supabase} setIsAuthenticated={setIsAuthenticated} />
+        <AdminHeader setIsAuthenticated={setIsAuthenticated} />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* ── Форма добавления / редактирования товара ── */}
