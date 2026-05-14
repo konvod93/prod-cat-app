@@ -84,3 +84,39 @@ export const tabs = [
   { id: "favorites", label: "Избранное" },
   { id: "addresses", label: "Адреса" },
 ];
+
+// Вынесем константы для полей формы продукта в отдельный файл, чтобы не дублировать код в разных компонентах, где может понадобиться эта логика
+export const textFields = [
+  {
+    label: "Название *",
+    key: "name",
+    placeholder: "Название товара",
+  },
+  {
+    label: "Цена *",
+    key: "price",
+    placeholder: "1990",
+    type: "number",
+  },
+  {
+    label: "Цена до скидки",
+    key: "originalPrice",
+    placeholder: "2490",
+    type: "number",
+  },
+  {
+    label: "Категория *",
+    key: "category",
+    placeholder: "Электроника",
+  },
+  {
+    label: "Ссылка на фото",
+    key: "image",
+    placeholder: "https://...",
+  },
+  {
+    label: "Теги (через запятую)",
+    key: "tags",
+    placeholder: "новинка, хит, скидка",
+  },
+];

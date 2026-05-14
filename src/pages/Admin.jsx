@@ -9,6 +9,8 @@ import {
 } from "../constants";
 import AdminLogin from "../components/admin-page/AdminLogin";
 import AdminHeader from "../components/admin-page/AdminHeader";
+import ProductForm from "../components/admin-page/ProductForm";
+import { textFields } from "../constants";
 
 export default function Admin() {
   const { products, addProduct, updateProduct, deleteProduct } = useProducts();
@@ -192,40 +194,7 @@ export default function Admin() {
               className="space-y-3"
             >
               {/* Текстовые поля */}
-              {[
-                {
-                  label: "Название *",
-                  key: "name",
-                  placeholder: "Название товара",
-                },
-                {
-                  label: "Цена *",
-                  key: "price",
-                  placeholder: "1990",
-                  type: "number",
-                },
-                {
-                  label: "Цена до скидки",
-                  key: "originalPrice",
-                  placeholder: "2490",
-                  type: "number",
-                },
-                {
-                  label: "Категория *",
-                  key: "category",
-                  placeholder: "Электроника",
-                },
-                {
-                  label: "Ссылка на фото",
-                  key: "image",
-                  placeholder: "https://...",
-                },
-                {
-                  label: "Теги (через запятую)",
-                  key: "tags",
-                  placeholder: "новинка, хит, скидка",
-                },
-              ].map(({ label, key, placeholder, type = "text" }) => (
+              {textFields.map(({ label, key, placeholder, type = "text" }) => (
                 <div key={key}>
                   <label className="block text-sm text-gray-500 mb-1">
                     {label}
