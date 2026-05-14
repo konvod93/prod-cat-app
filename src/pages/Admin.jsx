@@ -9,6 +9,7 @@ import {
   initialCategoryForm,
 } from "../constants";
 import AdminLogin from "../components/admin-page/AdminLogin";
+import AdminHeader from "../components/admin-page/AdminHeader";
 
 export default function Admin() {
   const { products, addProduct, updateProduct, deleteProduct } = useProducts();
@@ -155,20 +156,7 @@ export default function Admin() {
     <div className="min-h-screen bg-gray-100 py-8 px-4">
       <div className="max-w-5xl mx-auto">
         {/* Шапка */}
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold text-gray-800">
-            Панель администратора
-          </h1>
-          <button
-            onClick={async () => {
-              await supabase.auth.signOut();
-              setIsAuthenticated(false);
-            }}
-            className="text-sm text-red-500 border border-red-300 px-4 py-2 rounded-lg hover:bg-red-50 transition"
-          >
-            Выйти
-          </button>
-        </div>
+        <AdminHeader supabase={supabase} setIsAuthenticated={setIsAuthenticated} />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* ── Форма добавления / редактирования товара ── */}
