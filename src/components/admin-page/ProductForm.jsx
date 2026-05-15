@@ -1,4 +1,4 @@
-import { textFields, initialForm } from "../../constants";
+import { textFields, initialForm, checkboxFields } from "../../constants";
 import { useState } from "react";
 import { useProducts } from "../../hooks/useProducts";
 
@@ -250,11 +250,7 @@ const ProductForm = () => {
 
           {/* Чекбоксы */}
           <div className="flex gap-4 flex-wrap">
-            {[
-              { id: "inStock", key: "inStock", label: "В наличии" },
-              { id: "isNew", key: "isNew", label: "Новинка" },
-              { id: "isSale", key: "isSale", label: "Скидка" },
-            ].map(({ id, key, label }) => (
+            {checkboxFields.map(({ id, key, label }) => (
               <div key={id} className="flex items-center gap-2">
                 <input
                   type="checkbox"

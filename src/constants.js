@@ -120,3 +120,9 @@ export const textFields = [
     placeholder: "новинка, хит, скидка",
   },
 ];
+
+export const checkboxFields = [
+  { id: "inStock", key: "inStock", label: "В наличии" },
+  { id: "isNew", key: "isNew", label: "Новинка" },
+  { id: "isSale", key: "isSale", label: "Скидка" },
+];
