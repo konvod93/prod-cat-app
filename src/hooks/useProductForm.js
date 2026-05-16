@@ -31,6 +31,23 @@ export const useProductForm = () => {
     setForm({ ...form, specifications: updated });
   };
 
+  const resetForm = () => {
+    setForm(initialForm);
+    setEditingProduct(null);
+    setFormError("");
+  };
+
+  // Обработка результата API для добавления и обновления
+  const handleResult = ({ result, successText }) => {
+    if (result.success) {
+      resetForm();
+      setSuccessMessage(successText);
+      setTimeout(() => setSuccessMessage(""), 3000);
+    } else {
+      setFormError(result.error);
+    }
+  };
+
   const handleAddProduct = async (e) => {
     e.preventDefault();
     if (!form.name || !form.price || !form.category) {
@@ -38,13 +55,7 @@ export const useProductForm = () => {
       return;
     }
     const result = await addProduct(buildProductPayload(form));
-    if (result.success) {
-      setForm(initialForm);
-      setSuccessMessage(`Товар "${form.name}" добавлен`);
-      setTimeout(() => setSuccessMessage(""), 3000);
-    } else {
-      setFormError(result.error);
-    }
+    handleResult({ result, successText: `Товар "${form.name}" добавлен` });
   };
 
   const handleEditProduct = (product) => {
@@ -79,20 +90,7 @@ export const useProductForm = () => {
       editingProduct.id,
       buildProductPayload(form),
     );
-    if (result.success) {
-      setEditingProduct(null);
-      setForm(initialForm);
-      setSuccessMessage(`Товар "${form.name}" обновлён`);
-      setTimeout(() => setSuccessMessage(""), 3000);
-    } else {
-      setFormError(result.error);
-    }
-  };
-
-  const cancelEditing = () => {
-    setEditingProduct(null);
-    setForm(initialForm);
-    setFormError("");
+    handleResult({ result, successText: `Товар "${form.name}" обновлен` });
   };
 
   return {
@@ -106,7 +104,7 @@ export const useProductForm = () => {
     handleAddProduct,
     handleEditProduct,
     handleUpdateProduct,
-    cancelEditing,
+    cancelEditing: resetForm,
     addSpecRow,
     removeSpecRow,
     updateSpecRow,
