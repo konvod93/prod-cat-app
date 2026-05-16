@@ -1,11 +1,34 @@
 import { useProducts } from "./useProducts";
 import { useState } from "react";
+import { initialForm } from "../constants";
 
-export const useProductForm = ({ initialForm, form, setForm }) => {
-  const { addProduct, updateProduct } = useProducts();
+export const useProductForm = () => {
+  const [form, setForm] = useState(initialForm);
+  const { products, addProduct, updateProduct, deleteProduct } = useProducts();
   const [formError, setFormError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [editingProduct, setEditingProduct] = useState(null);
+
+  const addSpecRow = () => {
+    setForm({
+      ...form,
+      specifications: [...form.specifications, { key: "", value: "" }],
+    });
+  };
+
+  const removeSpecRow = (index) => {
+    setForm({
+      ...form,
+      specifications: form.specifications.filter((_, i) => i !== index),
+    });
+  };
+
+  const updateSpecRow = (index, field, value) => {
+    const updated = form.specifications.map((spec, i) =>
+      i === index ? { ...spec, [field]: value } : spec,
+    );
+    setForm({ ...form, specifications: updated });
+  };
 
   const buildSpecificationsObj = () =>
     form.specifications
@@ -95,6 +118,10 @@ export const useProductForm = ({ initialForm, form, setForm }) => {
   };
 
   return {
+    products,
+    deleteProduct,
+    form,
+    setForm,
     formError,
     successMessage,
     editingProduct,
@@ -102,5 +129,8 @@ export const useProductForm = ({ initialForm, form, setForm }) => {
     handleEditProduct,
     handleUpdateProduct,
     cancelEditing,
+    addSpecRow,
+    removeSpecRow,
+    updateSpecRow,
   };
 };

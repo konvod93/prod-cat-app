@@ -1,35 +1,12 @@
-import { textFields, initialForm, checkboxFields } from "../../constants";
-import { useState } from "react";
-import { useProducts } from "../../hooks/useProducts";
+import { textFields, checkboxFields } from "../../constants";
 import { useProductForm } from "../../hooks/useProductForm";
 
 const ProductForm = () => {
-  const { products, deleteProduct } = useProducts();
-  const [form, setForm] = useState(initialForm);
-
-  // ─── Характеристики ────────────────────────────────────────────
-  const addSpecRow = () => {
-    setForm({
-      ...form,
-      specifications: [...form.specifications, { key: "", value: "" }],
-    });
-  };
-
-  const removeSpecRow = (index) => {
-    setForm({
-      ...form,
-      specifications: form.specifications.filter((_, i) => i !== index),
-    });
-  };
-
-  const updateSpecRow = (index, field, value) => {
-    const updated = form.specifications.map((spec, i) =>
-      i === index ? { ...spec, [field]: value } : spec,
-    );
-    setForm({ ...form, specifications: updated });
-  };
-
   const {
+    products,
+    deleteProduct,
+    form,
+    setForm,
     formError,
     successMessage,
     editingProduct,
@@ -37,7 +14,10 @@ const ProductForm = () => {
     handleEditProduct,
     handleUpdateProduct,
     cancelEditing,
-  } = useProductForm({ initialForm, form, setForm });
+    addSpecRow,
+    removeSpecRow,
+    updateSpecRow,
+  } = useProductForm();
 
   return (
     <>
