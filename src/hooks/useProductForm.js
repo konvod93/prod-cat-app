@@ -1,6 +1,7 @@
 import { useProducts } from "./useProducts";
 import { useState } from "react";
 import { initialForm } from "../constants";
+import { buildProductPayload } from "../components/admin-page/admin-page-utils/productForm";
 
 export const useProductForm = () => {
   const [form, setForm] = useState(initialForm);
@@ -30,36 +31,13 @@ export const useProductForm = () => {
     setForm({ ...form, specifications: updated });
   };
 
-  const buildSpecificationsObj = () =>
-    form.specifications
-      .filter((s) => s.key.trim() && s.value.trim())
-      .reduce((acc, s) => ({ ...acc, [s.key.trim()]: s.value.trim() }), {});
-
-  const buildProductPayload = () => ({
-    name: form.name,
-    price: Number(form.price),
-    originalPrice: form.originalPrice ? Number(form.originalPrice) : null,
-    category: form.category,
-    description: form.description,
-    detailedDescription: form.detailedDescription,
-    image: form.image || "https://placehold.co/300x300",
-    tags: form.tags
-      .split(",")
-      .map((t) => t.trim())
-      .filter(Boolean),
-    inStock: form.inStock,
-    isNew: form.isNew,
-    isSale: form.isSale,
-    specifications: buildSpecificationsObj(),
-  });
-
   const handleAddProduct = async (e) => {
     e.preventDefault();
     if (!form.name || !form.price || !form.category) {
       setFormError("Заполните обязательные поля");
       return;
     }
-    const result = await addProduct(buildProductPayload());
+    const result = await addProduct(buildProductPayload(form));
     if (result.success) {
       setForm(initialForm);
       setSuccessMessage(`Товар "${form.name}" добавлен`);
@@ -99,7 +77,7 @@ export const useProductForm = () => {
     }
     const result = await updateProduct(
       editingProduct.id,
-      buildProductPayload(),
+      buildProductPayload(form),
     );
     if (result.success) {
       setEditingProduct(null);
