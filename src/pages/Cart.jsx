@@ -1,6 +1,7 @@
 // Cart.jsx
 import { useCart } from "../hooks/useCart";
 import { Link } from "react-router-dom";
+import { formatProductPrice } from "../functions";
 
 function Cart() {
   const {
@@ -25,9 +26,7 @@ function Cart() {
     return (
       <div className="text-center py-10">
         <h2 className="text-2xl font-bold text-gray-700">Корзина пуста</h2>
-        <Link to="/products">
-          <p className="text-gray-500 mt-2">Добавьте товары в корзину</p>
-        </Link>
+        <p className="text-gray-500 mt-2">Добавьте товары в корзину</p>
         <Link
           to="/products"
           className="mt-4 inline-block px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
@@ -84,7 +83,7 @@ function Cart() {
               <h3 className="text-lg font-semibold text-gray-700">
                 {item.name}
               </h3>
-              <p className="text-gray-600">Цена: {item.price} $</p>
+              <p className="text-gray-600">Цена: {formatProductPrice(item.price)} </p>
 
               <div className="flex items-center gap-2 mt-2">
                 <button
@@ -105,7 +104,7 @@ function Cart() {
               </div>
 
               <p className="mt-2 text-gray-700">
-                Сумма: {(item.price * item.quantity).toFixed(2)} $
+                Сумма: {formatProductPrice(item.price * item.quantity)}
               </p>
 
               <button
@@ -123,7 +122,7 @@ function Cart() {
       <div className="mt-6 border-t pt-4 flex flex-col md:flex-row justify-between items-center">
         <div className="text-gray-800">
           <h3 className="text-xl font-bold">
-            Общая сумма: {totalPrice.toFixed(2)} $
+            Общая сумма: {formatProductPrice(totalPrice)}
           </h3>
           <p className="text-sm text-gray-600">Всего товаров: {totalItems}</p>
         </div>
@@ -132,9 +131,7 @@ function Cart() {
           to="/checkout"
           className="mt-4 md:mt-0 px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition"
         >
-          <button className="mt-4 md:mt-0 px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition">
-            Оформить заказ
-          </button>
+          Оформить заказ
         </Link>
       </div>
     </div>
