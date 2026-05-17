@@ -1,10 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useProducts } from "../hooks/useProducts";
-import {
-  ShoppingCartIcon,
-  CheckIcon,
-  ArrowLeftIcon,
-} from "@heroicons/react/24/outline";
 import { productDiscount } from "../functions";
 import ProductPageImage from "../components/productpage/ProductPageImage";
 import DetailedDescription from "../components/productpage/DetailedDescription";
