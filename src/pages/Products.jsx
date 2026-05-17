@@ -6,6 +6,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { useProductFilters } from "../hooks/useProductFilters";
+import SearchBar from "../components/product/SearchBar";
 
 const Products = ({ showSearchBar = true, mode = "all" }) => {
   const { products, isLoading: isProductsLoading } = useProducts();
@@ -38,24 +39,12 @@ const Products = ({ showSearchBar = true, mode = "all" }) => {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Панель поиска - показываем только если showSearchBar = true */}
-      {showSearchBar && (
-        <div className="mb-6">
-          <form onSubmit={handleSearch} className="flex gap-2 max-w-md">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Поиск товаров..."
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <button
-              type="submit"
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Найти
-            </button>
-          </form>
-        </div>
+      {showSearchBar && (        
+        <SearchBar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          handleSearch={handleSearch}
+        />
       )}
 
       {/* Панель фильтров */}
