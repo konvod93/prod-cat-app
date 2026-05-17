@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useCart } from "../hooks/useCart";
 import { useNavigate } from "react-router-dom";
 import { useOrders } from "../hooks/useOrders";
+import { formatProductPrice } from "../functions";
 
 export default function PaymentForm() {
   const { items, totalPrice, clearCart } = useCart();
@@ -47,7 +48,7 @@ export default function PaymentForm() {
       <div className="bg-gray-50 rounded-lg p-4 mb-6 flex justify-between items-center">
         <span className="text-gray-600 text-sm">Сумма к оплате</span>
         <span className="text-xl font-bold text-gray-800">
-          {totalPrice.toFixed(2)} $
+          {formatProductPrice(totalPrice)}
         </span>
       </div>
 
@@ -117,7 +118,7 @@ export default function PaymentForm() {
           disabled={isProcessing}
           className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition disabled:opacity-50"
         >
-          {isProcessing ? "Обработка платежа..." : `Оплатить ${totalPrice.toFixed(2)} $`}
+          {isProcessing ? "Обработка платежа..." : `Оплатить ${formatProductPrice(totalPrice)}`}
         </button>
       </form>
     </div>
