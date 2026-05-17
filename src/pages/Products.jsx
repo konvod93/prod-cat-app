@@ -5,6 +5,7 @@ import SearchBar from "../components/product/SearchBar";
 import Spinner from "../components/product/Spinner";
 import FiltersPanel from "../components/product/FiltersPanel";
 import ActiveFilters from "../components/product/ActiveFilterrs";
+import SearchResults from "../components/product/SearchResults";
 
 const Products = ({ showSearchBar = true, mode = "all" }) => {
   const { products, isLoading: isProductsLoading } = useProducts();
@@ -60,22 +61,9 @@ const Products = ({ showSearchBar = true, mode = "all" }) => {
         />
       )}
 
-      {/* Результаты поиска */}
-      <div className="mb-4">
-        <h2 className="text-2xl font-bold">
-          {currentFilters.productId
-            ? "Выбранный товар"
-            : currentFilters.search
-              ? `Результаты поиска "${currentFilters.search}"`
-              : currentFilters.category
-                ? `Товары в категории "${currentFilters.category}"`
-                : "Все товары"}
-        </h2>
-        <p className="text-gray-600">
-          Найдено товаров: {filteredProducts.length}
-        </p>
-      </div>
-
+      {/* Результаты поиска */}            
+      <SearchResults currentFilters={currentFilters} filteredProducts={filteredProducts} />
+      
       {/* Сетка товаров */}
       {filteredProducts.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
