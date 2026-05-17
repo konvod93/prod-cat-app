@@ -1,26 +1,18 @@
 // Компонент для управления категориями: добавление, удаление, отображение списка
 
 import { CATEGORY_COLORS, CATEGORY_ICONS } from "../../constants";
-import { useCategories } from "../../hooks/useCategories";
-import { useState } from "react";
-import { initialCategoryForm } from "../../constants";
+import { useCategoryManager } from "../../hooks/useCategoryManager";
 
 const CategoryManager = () => {
-  const { categories, addCategory, deleteCategory } = useCategories();
-
-  const [categoryForm, setCategoryForm] = useState(initialCategoryForm);
-  const [categoryError, setCategoryError] = useState("");
-
-  const handleAddCategory = async () => {
-    if (!categoryForm.name.trim()) return;
-    const result = await addCategory(categoryForm);
-    if (result.success) {
-      setCategoryForm(initialCategoryForm);
-      setCategoryError("");
-    } else {
-      setCategoryError(result.error);
-    }
-  };
+      
+  const {
+    categories,
+    categoryForm,
+    categoryError,
+    setCategoryForm,
+    handleAddCategory,
+    deleteCategory,
+  } = useCategoryManager();
 
   return (
     <div className="bg-white rounded-2xl shadow p-6 lg:col-span-2">
