@@ -1,10 +1,5 @@
 import { useProducts } from "../hooks/useProducts";
 import ProductCard from "../components/product/ProductCard";
-import {
-  ChevronDownIcon,
-  FunnelIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
 import { useProductFilters } from "../hooks/useProductFilters";
 import SearchBar from "../components/product/SearchBar";
 import Spinner from "../components/product/Spinner";
