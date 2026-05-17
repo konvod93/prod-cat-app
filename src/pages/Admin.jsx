@@ -1,10 +1,4 @@
 import { useState } from "react";
-import { useCategories } from "../hooks/useCategories";
-import {
-  CATEGORY_ICONS,
-  CATEGORY_COLORS,  
-  initialCategoryForm,
-} from "../constants";
 import AdminLogin from "../components/admin-page/AdminLogin";
 import AdminHeader from "../components/admin-page/AdminHeader";
 import ProductForm from "../components/admin-page/ProductForm";
@@ -12,23 +6,8 @@ import CategoryManager from "../components/admin-page/CategoryManager";
 
 export default function Admin() {
   
-  const { categories, addCategory, deleteCategory } = useCategories();
+  
   const [isAuthenticated, setIsAuthenticated] = useState(false);   
-
-  const [categoryForm, setCategoryForm] = useState(initialCategoryForm);
-  const [categoryError, setCategoryError] = useState("");  
-
-  // ─── Категории ─────────────────────────────────────────────────
-  const handleAddCategory = async () => {
-    if (!categoryForm.name.trim()) return;
-    const result = await addCategory(categoryForm);
-    if (result.success) {
-      setCategoryForm(initialCategoryForm);
-      setCategoryError("");
-    } else {
-      setCategoryError(result.error);
-    }
-  };
 
   // ─── Форма входа ───────────────────────────────────────────────
   if (!isAuthenticated) {
@@ -47,14 +26,7 @@ export default function Admin() {
           <ProductForm />
 
           {/* ── Управление категориями ── */}
-          <CategoryManager
-            categories={categories}
-            categoryForm={categoryForm}
-            setCategoryForm={setCategoryForm}
-            categoryError={categoryError}
-            handleAddCategory={handleAddCategory}
-            deleteCategory={deleteCategory}
-          />
+          <CategoryManager />
         </div>
       </div>
     </div>
