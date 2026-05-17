@@ -15,7 +15,7 @@ export default function ProductPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { products, isLoading: isProductsLoading } = useProducts();
-  const product = products.find((p) => p.id === parseInt(id));
+  const product = products.find((p) => p.id === parseInt(id, 10));
   const { productInCart, itemQuantity } = useProductCart(product?.id);
   const discount = productDiscount(product);
 

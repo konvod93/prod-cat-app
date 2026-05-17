@@ -1,202 +1,39 @@
-import { useSearchParams, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { useProducts } from '../hooks/useProducts';
-import ProductCard from '../components/product/ProductCard';
-import { ChevronDownIcon, FunnelIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { useProducts } from "../hooks/useProducts";
+import ProductCard from "../components/product/ProductCard";
+import {
+  ChevronDownIcon,
+  FunnelIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
+import { useProductFilters } from "../hooks/useProductFilters";
 
-const Products = ({ showSearchBar = true, mode = 'all' }) => {
+const Products = ({ showSearchBar = true, mode = "all" }) => {
   const { products, isLoading: isProductsLoading } = useProducts();
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const [filteredProducts, setFilteredProducts] = useState(products);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [showFilters, setShowFilters] = useState(false);
-  const [currentFilters, setCurrentFilters] = useState({
-    category: '',
-    search: '',
-    productId: '',
-    minPrice: '',
-    maxPrice: '',
-    minRating: '',
-    sortBy: 'default'
-  });
-
-  // Получаем уникальные категории из товаров
-  const categories = [...new Set(products.map(product => product.category))];
-
-  useEffect(() => {
-    // Если mode = 'all' и нет параметров поиска, показываем все товары
-    if (mode === 'all' && !searchParams.toString()) {
-      setFilteredProducts(products);
-      setCurrentFilters({ 
-        category: '', 
-        search: '', 
-        productId: '',
-        minPrice: '',
-        maxPrice: '',
-        minRating: '',
-        sortBy: 'default'
-      });
-      return;
-    }
-
-    // Получаем параметры из URL
-    const categoryFromUrl = searchParams.get('category');
-    const searchFromUrl = searchParams.get('search') || searchParams.get('q');
-    const productIdFromUrl = searchParams.get('productId') || searchParams.get('id');
-    const minPriceFromUrl = searchParams.get('minPrice');
-    const maxPriceFromUrl = searchParams.get('maxPrice');
-    const minRatingFromUrl = searchParams.get('minRating');
-    const sortByFromUrl = searchParams.get('sortBy');
-    
-    let filtered = [...products];
-    
-    // Если передан конкретный товар - показываем только его
-    if (productIdFromUrl) {
-      filtered = products.filter(product => product.id === parseInt(productIdFromUrl));
-      setCurrentFilters(prev => ({ 
-        ...prev, 
-        productId: productIdFromUrl,
-        search: '',
-        category: '',
-        minPrice: '',
-        maxPrice: '',
-        minRating: '',
-        sortBy: 'default'
-      }));
-    } else {
-      // Применяем поиск
-      if (searchFromUrl) {
-        filtered = products.filter(
-          (p) =>
-            p.name.toLowerCase().includes(searchFromUrl.toLowerCase()) ||
-            p.description
-              ?.toLowerCase()
-              .includes(searchFromUrl.toLowerCase()) ||
-            p.tags?.some((tag) =>
-              tag.toLowerCase().includes(searchFromUrl.toLowerCase()),
-            ),
-        );
-      }
-      
-      // Применяем фильтр по категории
-      if (categoryFromUrl) {
-        filtered = filtered.filter(product => 
-          product.category.toLowerCase() === categoryFromUrl.toLowerCase()
-        );
-      }
-
-      // Применяем фильтр по цене
-      if (minPriceFromUrl) {
-        filtered = filtered.filter(product => product.price >= parseFloat(minPriceFromUrl));
-      }
-      if (maxPriceFromUrl) {
-        filtered = filtered.filter(product => product.price <= parseFloat(maxPriceFromUrl));
-      }
-
-      // Применяем фильтр по рейтингу
-      if (minRatingFromUrl) {
-        filtered = filtered.filter(product => product.rating >= parseFloat(minRatingFromUrl));
-      }
-
-      // Применяем сортировку
-      if (sortByFromUrl && sortByFromUrl !== 'default') {
-        switch (sortByFromUrl) {
-          case 'price-asc':
-            filtered.sort((a, b) => a.price - b.price);
-            break;
-          case 'price-desc':
-            filtered.sort((a, b) => b.price - a.price);
-            break;
-          case 'rating-desc':
-            filtered.sort((a, b) => b.rating - a.rating);
-            break;
-          case 'name-asc':
-            filtered.sort((a, b) => a.name.localeCompare(b.name));
-            break;
-          default:
-            break;
-        }
-      }
-
-      // Обновляем состояние фильтров
-      setCurrentFilters({
-        category: categoryFromUrl || '',
-        search: searchFromUrl || '',
-        productId: '',
-        minPrice: minPriceFromUrl || '',
-        maxPrice: maxPriceFromUrl || '',
-        minRating: minRatingFromUrl || '',
-        sortBy: sortByFromUrl || 'default'
-      });
-    }
-    
-    setFilteredProducts(filtered);
-  }, [searchParams, mode, products]);
-
-  // Функция для обработки поиска
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      const newSearchParams = new URLSearchParams(searchParams);
-      newSearchParams.set('search', searchQuery.trim());
-      navigate(`/products?${newSearchParams.toString()}`);
-    }
-  };
-
-  // Функция для применения фильтров
-  const applyFilters = (newFilters) => {
-    const searchParams = new URLSearchParams();
-    
-    Object.entries(newFilters).forEach(([key, value]) => {
-      if (value && value !== 'default' && key !== 'productId') {
-        searchParams.set(key, value);
-      }
-    });
-
-    navigate(`/products?${searchParams.toString()}`);
-  };
-
-  // Функция для обновления фильтра
-  const updateFilter = (filterName, value) => {
-    const newFilters = { ...currentFilters, [filterName]: value };
-    setCurrentFilters(newFilters);
-    applyFilters(newFilters);
-  };
-
-  // Функция для очистки конкретного фильтра
-  const clearFilter = (filterName) => {
-    const newFilters = { ...currentFilters, [filterName]: filterName === 'sortBy' ? 'default' : '' };
-    setCurrentFilters(newFilters);
-    applyFilters(newFilters);
-  };
-
-  // Функция для очистки всех фильтров
-  const clearAllFilters = () => {
-    const newFilters = { 
-      category: '', 
-      search: '', 
-      productId: '',
-      minPrice: '',
-      maxPrice: '',
-      minRating: '',
-      sortBy: 'default'
-    };
-    setCurrentFilters(newFilters);
-    setSearchQuery('');
-    navigate('/products');
-  };
-
-  // Подсчет активных фильтров
-  const activeFiltersCount = Object.entries(currentFilters).filter(([key, value]) => 
-    value && value !== 'default' && key !== 'productId'
-  ).length;
   
-if (isProductsLoading) return (
-  <div className="flex justify-center items-center h-64">
-    <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
-  </div>
-);
+  // Получаем уникальные категории из товаров
+  const categories = [...new Set(products.map((product) => product.category))];
+
+  // Используем хук для фильтрации товаров
+  const {
+    filteredProducts,
+    currentFilters,
+    showFilters,
+    setShowFilters,
+    searchQuery,
+    setSearchQuery,
+    updateFilter,
+    clearFilter,
+    clearAllFilters,
+    handleSearch,
+    activeFiltersCount,
+  } = useProductFilters(products, mode);
+
+  if (isProductsLoading)
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
+      </div>
+    );
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -235,7 +72,9 @@ if (isProductsLoading) return (
                 {activeFiltersCount}
               </span>
             )}
-            <ChevronDownIcon className={`h-4 w-4 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
+            <ChevronDownIcon
+              className={`h-4 w-4 transition-transform ${showFilters ? "rotate-180" : ""}`}
+            />
           </button>
 
           {activeFiltersCount > 0 && (
@@ -258,11 +97,11 @@ if (isProductsLoading) return (
               </label>
               <select
                 value={currentFilters.category}
-                onChange={(e) => updateFilter('category', e.target.value)}
+                onChange={(e) => updateFilter("category", e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="">Все категории</option>
-                {categories.map(category => (
+                {categories.map((category) => (
                   <option key={category} value={category}>
                     {category}
                   </option>
@@ -280,14 +119,14 @@ if (isProductsLoading) return (
                   type="number"
                   placeholder="От"
                   value={currentFilters.minPrice}
-                  onChange={(e) => updateFilter('minPrice', e.target.value)}
+                  onChange={(e) => updateFilter("minPrice", e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <input
                   type="number"
                   placeholder="До"
                   value={currentFilters.maxPrice}
-                  onChange={(e) => updateFilter('maxPrice', e.target.value)}
+                  onChange={(e) => updateFilter("maxPrice", e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
@@ -300,7 +139,7 @@ if (isProductsLoading) return (
               </label>
               <select
                 value={currentFilters.minRating}
-                onChange={(e) => updateFilter('minRating', e.target.value)}
+                onChange={(e) => updateFilter("minRating", e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="">Любой рейтинг</option>
@@ -317,7 +156,7 @@ if (isProductsLoading) return (
               </label>
               <select
                 value={currentFilters.sortBy}
-                onChange={(e) => updateFilter('sortBy', e.target.value)}
+                onChange={(e) => updateFilter("sortBy", e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="default">По умолчанию</option>
@@ -340,7 +179,7 @@ if (isProductsLoading) return (
               <div className="flex items-center bg-blue-100 text-blue-800 px-3 py-1 rounded-full">
                 <span>Поиск: "{currentFilters.search}"</span>
                 <button
-                  onClick={() => clearFilter('search')}
+                  onClick={() => clearFilter("search")}
                   className="ml-2 text-blue-600 hover:text-blue-800"
                 >
                   <XMarkIcon className="h-4 w-4" />
@@ -351,7 +190,7 @@ if (isProductsLoading) return (
               <div className="flex items-center bg-green-100 text-green-800 px-3 py-1 rounded-full">
                 <span>Категория: {currentFilters.category}</span>
                 <button
-                  onClick={() => clearFilter('category')}
+                  onClick={() => clearFilter("category")}
                   className="ml-2 text-green-600 hover:text-green-800"
                 >
                   <XMarkIcon className="h-4 w-4" />
@@ -361,14 +200,15 @@ if (isProductsLoading) return (
             {(currentFilters.minPrice || currentFilters.maxPrice) && (
               <div className="flex items-center bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full">
                 <span>
-                  Цена: {currentFilters.minPrice && `от ${currentFilters.minPrice}`}
-                  {currentFilters.minPrice && currentFilters.maxPrice && ' '}
+                  Цена:{" "}
+                  {currentFilters.minPrice && `от ${currentFilters.minPrice}`}
+                  {currentFilters.minPrice && currentFilters.maxPrice && " "}
                   {currentFilters.maxPrice && `до ${currentFilters.maxPrice}`}
                 </span>
                 <button
                   onClick={() => {
-                    clearFilter('minPrice');
-                    clearFilter('maxPrice');
+                    clearFilter("minPrice");
+                    clearFilter("maxPrice");
                   }}
                   className="ml-2 text-yellow-600 hover:text-yellow-800"
                 >
@@ -380,26 +220,29 @@ if (isProductsLoading) return (
               <div className="flex items-center bg-purple-100 text-purple-800 px-3 py-1 rounded-full">
                 <span>Рейтинг: от {currentFilters.minRating}</span>
                 <button
-                  onClick={() => clearFilter('minRating')}
+                  onClick={() => clearFilter("minRating")}
                   className="ml-2 text-purple-600 hover:text-purple-800"
                 >
                   <XMarkIcon className="h-4 w-4" />
                 </button>
               </div>
             )}
-            {currentFilters.sortBy && currentFilters.sortBy !== 'default' && (
+            {currentFilters.sortBy && currentFilters.sortBy !== "default" && (
               <div className="flex items-center bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full">
                 <span>
-                  Сортировка: {
-                    currentFilters.sortBy === 'price-asc' ? 'Цена ↑' :
-                    currentFilters.sortBy === 'price-desc' ? 'Цена ↓' :
-                    currentFilters.sortBy === 'rating-desc' ? 'Рейтинг ↓' :
-                    currentFilters.sortBy === 'name-asc' ? 'Название ↑' : 
-                    currentFilters.sortBy
-                  }
+                  Сортировка:{" "}
+                  {currentFilters.sortBy === "price-asc"
+                    ? "Цена ↑"
+                    : currentFilters.sortBy === "price-desc"
+                      ? "Цена ↓"
+                      : currentFilters.sortBy === "rating-desc"
+                        ? "Рейтинг ↓"
+                        : currentFilters.sortBy === "name-asc"
+                          ? "Название ↑"
+                          : currentFilters.sortBy}
                 </span>
                 <button
-                  onClick={() => clearFilter('sortBy')}
+                  onClick={() => clearFilter("sortBy")}
                   className="ml-2 text-indigo-600 hover:text-indigo-800"
                 >
                   <XMarkIcon className="h-4 w-4" />
@@ -424,14 +267,13 @@ if (isProductsLoading) return (
       {/* Результаты поиска */}
       <div className="mb-4">
         <h2 className="text-2xl font-bold">
-          {currentFilters.productId 
-            ? 'Выбранный товар'
-            : currentFilters.search 
-            ? `Результаты поиска "${currentFilters.search}"` 
-            : currentFilters.category 
-            ? `Товары в категории "${currentFilters.category}"`
-            : 'Все товары'
-          }
+          {currentFilters.productId
+            ? "Выбранный товар"
+            : currentFilters.search
+              ? `Результаты поиска "${currentFilters.search}"`
+              : currentFilters.category
+                ? `Товары в категории "${currentFilters.category}"`
+                : "Все товары"}
         </h2>
         <p className="text-gray-600">
           Найдено товаров: {filteredProducts.length}
@@ -441,7 +283,7 @@ if (isProductsLoading) return (
       {/* Сетка товаров */}
       {filteredProducts.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredProducts.map(product => (
+          {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
@@ -451,12 +293,11 @@ if (isProductsLoading) return (
             Ничего не найдено
           </h3>
           <p className="text-gray-500 mb-4">
-            {currentFilters.search 
+            {currentFilters.search
               ? `По запросу "${currentFilters.search}" товары не найдены`
               : activeFiltersCount > 0
-              ? 'По заданным фильтрам товары не найдены'
-              : 'Товары не найдены'
-            }
+                ? "По заданным фильтрам товары не найдены"
+                : "Товары не найдены"}
           </p>
           <button
             onClick={clearAllFilters}
