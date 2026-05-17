@@ -13,7 +13,6 @@ import CartButton from "../components/productpage/CartButton";
 import ProductPageInfo from "../components/productpage/ProductPageInfo";
 import ProductTags from "../components/productpage/ProductTags";
 import ProductPageButton from "../components/productpage/ProductPageButton";
-import Badges from "../components/product/Badges";
 import WhishlistButton from "../components/product/WhishlistButton";
 import { useProductCart } from "../hooks/useProductCart";
 
