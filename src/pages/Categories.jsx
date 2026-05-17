@@ -61,9 +61,7 @@ const Categories = () => {
                     <span>Посмотреть все</span>
                     <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">→</span>
                   </div>
-                </div>
-
-                <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>                
               </Link>
             );
           })}
