@@ -30,6 +30,7 @@ export const UserProvider = ({ children }) => {
         id: data.user.id,
         name: data.user.user_metadata?.name || data.user.email.split("@")[0],
         email: data.user.email,
+        phone: data.user.user_metadata?.phone || "", // 👈
         avatar: data.user.user_metadata?.avatar_url || null,
         preferences: data.user.user_metadata?.preferences || {},
       };
