@@ -11,12 +11,13 @@ import {
   UserPlusIcon,
 } from "@heroicons/react/24/outline";
 import Modal from "./Modal";
-import { products } from "../data/mockProducts";
+import { useProducts } from "../hooks/useProducts";
 import { useCart } from "../hooks/useCart"; // Импортируем хук useCart для получения данных о корзине
 import { useUser } from "../hooks/useUser"; // Добавляем импорт
 
 const Header = () => {
   const navigate = useNavigate();
+  const { products } = useProducts(); // Получаем список продуктов для поиска
   const { totalItems } = useCart(); // Получаем количество товаров из контекста
   // Используем UserContext вместо локального состояния
   const {
@@ -95,7 +96,6 @@ const Header = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      console.log("Поиск:", searchQuery);
       // Перенаправляем на страницу продуктов с поисковым запросом
       navigate(`/Products?search=${encodeURIComponent(searchQuery.trim())}`);
       setShowSuggestions(false);
@@ -153,18 +153,15 @@ const Header = () => {
     // Ошибки уже обрабатываются в UserContext
   };
 
-  const handleLogout = () => {
-    console.log("Выход из системы");
+  const handleLogout = () => {    
     logout();
   };
 
   const handleProfileClick = () => {
-    console.log("Переход в профиль");
     navigate("/Profile");
   };
 
-  const handleCartClick = () => {
-    console.log("Переход в корзину");
+  const handleCartClick = () => {    
     navigate("/Cart");
   };
 
