@@ -1,12 +1,19 @@
-import Navigation from './Navigation';
-import ThemeToggle from './ThemeToggle';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ShoppingCartIcon, UserIcon, MagnifyingGlassIcon, ArrowRightEndOnRectangleIcon, ArrowLeftEndOnRectangleIcon, UserPlusIcon  } from '@heroicons/react/24/outline';
-import Modal from './Modal';
-import { products } from '../data/mockProducts';
-import { useCart } from '../hooks/useCart'; // Импортируем хук useCart для получения данных о корзине  
-import { useUser } from '../hooks/useUser'; // Добавляем импорт
+import Navigation from "./Navigation";
+import ThemeToggle from "./ThemeToggle";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  ShoppingCartIcon,
+  UserIcon,
+  MagnifyingGlassIcon,
+  ArrowRightEndOnRectangleIcon,
+  ArrowLeftEndOnRectangleIcon,
+  UserPlusIcon,
+} from "@heroicons/react/24/outline";
+import Modal from "./Modal";
+import { products } from "../data/mockProducts";
+import { useCart } from "../hooks/useCart"; // Импортируем хук useCart для получения данных о корзине
+import { useUser } from "../hooks/useUser"; // Добавляем импорт
 
 const Header = () => {
   const navigate = useNavigate();
@@ -24,7 +31,7 @@ const Header = () => {
   } = useUser();
 
   const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
-  const [isRegisterFormOpen, setIsRegisterFormOpen] = useState(false);  
+  const [isRegisterFormOpen, setIsRegisterFormOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -54,9 +61,9 @@ const Header = () => {
           (product) =>
             product.name.toLowerCase().includes(query.toLowerCase()) ||
             product.tags.some((tag) =>
-              tag.toLowerCase().includes(query.toLowerCase())
+              tag.toLowerCase().includes(query.toLowerCase()),
             ) ||
-            product.category.toLowerCase().includes(query.toLowerCase())
+            product.category.toLowerCase().includes(query.toLowerCase()),
         )
         .slice(0, 5) // Показываем максимум 5 предложений
         .map((product) => ({
@@ -69,7 +76,7 @@ const Header = () => {
       // Добавляем категории в предложения
       const categoryMatches = [...new Set(products.map((p) => p.category))]
         .filter((category) =>
-          category.toLowerCase().includes(query.toLowerCase())
+          category.toLowerCase().includes(query.toLowerCase()),
         )
         .slice(0, 3)
         .map((category) => ({
