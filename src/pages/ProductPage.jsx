@@ -1,13 +1,13 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useProducts } from "../hooks/useProducts";
 import { productDiscount } from "../functions";
-import ProductPageImage from "../components/productpage/ProductPageImage";
-import DetailedDescription from "../components/productpage/DetailedDescription";
-import Specifications from "../components/productpage/Specifications";
-import CartButton from "../components/productpage/CartButton";
-import ProductPageInfo from "../components/productpage/ProductPageInfo";
-import ProductTags from "../components/productpage/ProductTags";
-import ProductPageButton from "../components/productpage/ProductPageButton";
+import ProductPageImage from "../components/product-page/ProductPageImage";
+import DetailedDescription from "../components/product-page/DetailedDescription";
+import Specifications from "../components/product-page/Specifications";
+import CartButton from "../components/product-page/CartButton";
+import ProductPageInfo from "../components/product-page/ProductPageInfo";
+import ProductTags from "../components/product-page/ProductTags";
+import ProductPageButton from "../components/product-page/ProductPageButton";
 import WhishlistButton from "../components/product/WishlistButton";
 import { useProductCart } from "../hooks/useProductCart";
 
