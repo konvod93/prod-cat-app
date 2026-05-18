@@ -1,6 +1,5 @@
 import { createContext, useReducer, useEffect } from "react";
 import { supabase } from "../../lib/supabase";
-import { products as mockProducts } from "../../data/mockProducts";
 
 const ProductsContext = createContext();
 
@@ -62,8 +61,7 @@ export const ProductsProvider = ({ children }) => {
         dispatch({ type: "SET_PRODUCTS", payload: normalized });
       } catch (error) {
         console.error("Ошибка загрузки товаров:", error);
-        // Fallback на mockProducts если Supabase недоступен
-        dispatch({ type: "SET_PRODUCTS", payload: mockProducts });
+        dispatch({ type: "SET_ERROR", payload: error.message });   
       }
     };
 
