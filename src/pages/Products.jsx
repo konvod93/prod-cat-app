@@ -6,6 +6,7 @@ import FiltersPanel from "../components/product/FiltersPanel";
 import ActiveFilters from "../components/product/ActiveFilterrs";
 import SearchResults from "../components/product/SearchResults";
 import ProductGrid from "../components/product/ProductGrid";
+import Pagination from "../components/product/Pagination";
 
 const Products = ({ showSearchBar = true, mode = "all" }) => {
   const { products, isLoading: isProductsLoading } = useProducts();
@@ -16,6 +17,10 @@ const Products = ({ showSearchBar = true, mode = "all" }) => {
   // Используем хук для фильтрации товаров
   const {
     filteredProducts,
+    paginatedProducts,
+    currentPage,
+    setCurrentPage,
+    totalPages,
     currentFilters,
     showFilters,
     setShowFilters,
@@ -69,10 +74,17 @@ const Products = ({ showSearchBar = true, mode = "all" }) => {
 
       {/* Сетка товаров */}
       <ProductGrid
-        filteredProducts={filteredProducts}
+        filteredProducts={paginatedProducts}
         currentFilters={currentFilters}
         activeFiltersCount={activeFiltersCount}
         clearAllFilters={clearAllFilters}
+      />
+
+      {/* Пагинация */}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
       />
     </div>
   );

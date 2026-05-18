@@ -198,6 +198,21 @@ export const useProductFilters = (products, mode) => {
     ([key, value]) => value && value !== "default" && key !== "productId",
   ).length;
 
+  const ITEMS_PER_PAGE = 12;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Сбрасываем страницу при изменении фильтров
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchParams, mode]);
+
+  const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
+
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE,
+  );
+
   return {
     activeFiltersCount,
     currentFilters,
@@ -211,5 +226,9 @@ export const useProductFilters = (products, mode) => {
     filteredProducts,
     showFilters,
     setShowFilters,
+    paginatedProducts, // вместо filteredProducts используем в сетке
+    currentPage,
+    setCurrentPage,
+    totalPages,
   };
 };
