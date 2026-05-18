@@ -1,7 +1,7 @@
 import { useProducts } from "./useProducts";
 import { useState } from "react";
 import { initialForm } from "../constants";
-import { buildProductPayload } from "../components/admin-page/admin-page-utils/productForm";
+import { buildProductPayload } from "../components/admin-page/admin-page-utils/productPayload";
 
 export const useProductForm = () => {
   const [form, setForm] = useState(initialForm);
