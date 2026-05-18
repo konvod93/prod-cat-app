@@ -1,5 +1,5 @@
 import Badges from "../product/Badges";
-import WhishlistButton from "../product/WhishlistButton";
+import WishlistButton from "../product/WishlistButton";
 
 const ProductPageImage = ({ product, itemQuantity, productInCart }) => {
     return (
@@ -9,7 +9,7 @@ const ProductPageImage = ({ product, itemQuantity, productInCart }) => {
             itemQuantity={itemQuantity}
             productInCart={productInCart}            
           />
-          <WhishlistButton product={product} />
+          <WishlistButton product={product} />
           <img
             src={product.image || "https://placehold.co/600x600"}
             alt={product.name}

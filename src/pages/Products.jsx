@@ -3,7 +3,7 @@ import { useProductFilters } from "../hooks/useProductFilters";
 import SearchBar from "../components/product/SearchBar";
 import Spinner from "../components/product/Spinner";
 import FiltersPanel from "../components/product/FiltersPanel";
-import ActiveFilters from "../components/product/ActiveFilterrs";
+import ActiveFilters from "../components/product/ActiveFilters";
 import SearchResults from "../components/product/SearchResults";
 import ProductGrid from "../components/product/ProductGrid";
 import Pagination from "../components/product/Pagination";

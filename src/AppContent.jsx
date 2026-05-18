@@ -6,7 +6,7 @@ import ProductList from "./pages/ProductList";
 import ProductPage from "./pages/ProductPage";
 import Categories from "./pages/Categories";
 import About from "./pages/About";
-import Contacts from "./pages/Contacts.";
+import Contacts from "./pages/Contacts";
 import NotFound from "./pages/NotFound";
 import Cart from "./pages/Cart";
 import PageInProgress from "./pages/PageInProgress";
@@ -15,7 +15,7 @@ import Admin from "./pages/Admin";
 import './App.css';
 import { useTheme } from "./hooks/useTheme";
 import CheckoutForm from "./pages/CheckoutForm";
-import ThankYou from "./pages/ThankYoy";
+import ThankYou from "./pages/ThankYou";
 import PaymentForm from "./pages/PaymentForm";
 
 

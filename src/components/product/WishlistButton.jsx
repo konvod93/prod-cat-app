@@ -2,7 +2,7 @@ import { HeartIcon } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartSolidIcon } from "@heroicons/react/24/solid";
 import { useWishlist } from "../../hooks/useWishlist";
 
-const WhishlistButton  = ({ product }) => {
+const WishlistButton  = ({ product }) => {
   const { toggleWishlist, isInWishlist } = useWishlist();  
 
   const handleToggleWishlist = (e) => {
@@ -24,4 +24,4 @@ const WhishlistButton  = ({ product }) => {
     )
 }
 
-export default WhishlistButton;
+export default WishlistButton;

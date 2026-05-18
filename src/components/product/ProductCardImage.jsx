@@ -4,7 +4,7 @@ import { HeartIcon as HeartSolidIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import Overlay from "./Overlay";
 import Badges from "./Badges";
-import WhishlistButton from "./WhishlistButton";
+import WishlistButton from "./WishlistButton";
 import ProductImage from "./ProductImage";
 import LoadingPlaceholder from "./LoadingPlaceholder";
 
@@ -26,7 +26,7 @@ const ProductCardImage = ({
       />
 
       {/* Wishlist Button */}
-      <WhishlistButton
+      <WishlistButton
         product={product}                
       />      
 

@@ -8,7 +8,7 @@ import CartButton from "../components/productpage/CartButton";
 import ProductPageInfo from "../components/productpage/ProductPageInfo";
 import ProductTags from "../components/productpage/ProductTags";
 import ProductPageButton from "../components/productpage/ProductPageButton";
-import WhishlistButton from "../components/product/WhishlistButton";
+import WhishlistButton from "../components/product/WishlistButton";
 import { useProductCart } from "../hooks/useProductCart";
 
 export default function ProductPage() {
