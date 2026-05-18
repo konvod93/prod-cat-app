@@ -8,6 +8,7 @@ import { ProductsProvider } from "./components/context/ProductsContext";
 import { CategoriesProvider } from "./components/context/CategoriesContext";
 import { WishlistProvider } from "./components/context/WishlistContext";
 import DemoDisclaimer from "./components/DemoDisclaimer";
+import PhoneBanner from "./components/PhoneBanner";
 
 function App() {
   return (
@@ -16,9 +17,10 @@ function App() {
         <CategoriesProvider>
           <ProductsProvider>
             <CartProvider>
-              <WishlistProvider> 
-                <DemoDisclaimer />               
+              <WishlistProvider>
+                <DemoDisclaimer />
                 <AppContent />
+                <PhoneBanner />
               </WishlistProvider>
             </CartProvider>
           </ProductsProvider>
