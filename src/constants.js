@@ -110,11 +110,6 @@ export const textFields = [
     placeholder: "Электроника",
   },
   {
-    label: "Ссылка на фото",
-    key: "image",
-    placeholder: "https://...",
-  },
-  {
     label: "Теги (через запятую)",
     key: "tags",
     placeholder: "новинка, хит, скидка",

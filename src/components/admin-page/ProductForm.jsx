@@ -17,6 +17,7 @@ const ProductForm = () => {
     addSpecRow,
     removeSpecRow,
     updateSpecRow,
+    handleImageUpload,
   } = useProductForm();
 
   return (
@@ -98,6 +99,36 @@ const ProductForm = () => {
               placeholder="Подробное описание, особенности, преимущества..."
               rows={4}
               className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"
+            />
+          </div>
+
+          {/* Фото товара */}
+          <div>
+            <label className="block text-sm text-gray-500 mb-1">
+              Фото товара
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+            {form.image && (
+              <img
+                src={form.image}
+                alt="Предпросмотр"
+                className="mt-2 w-24 h-24 object-cover rounded-lg border"
+              />
+            )}
+            <p className="text-xs text-gray-400 mt-1">
+              Или вставьте ссылку на изображение:
+            </p>
+            <input
+              type="text"
+              value={form.image}
+              onChange={(e) => setForm({ ...form, image: e.target.value })}
+              placeholder="https://..."
+              className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 mt-1"
             />
           </div>
 
