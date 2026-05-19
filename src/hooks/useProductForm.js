@@ -2,6 +2,7 @@ import { useProducts } from "./useProducts";
 import { useState } from "react";
 import { initialForm } from "../constants";
 import { buildProductPayload } from "../components/admin-page/admin-page-utils/productPayload";
+import { supabase } from "../lib/supabase";
 
 export const useProductForm = () => {
   const [form, setForm] = useState(initialForm);
@@ -58,6 +59,29 @@ export const useProductForm = () => {
     handleResult({ result, successText: `Товар "${form.name}" добавлен` });
   };
 
+  const uploadImage = async (file) => {
+    const fileName = `${Date.now()}-${file.name}`;
+    const { error } = await supabase.storage
+      .from("product-images")
+      .upload(fileName, file);
+
+    if (error) return null;
+
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from("product-images").getPublicUrl(fileName);
+
+    return publicUrl;
+  };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const url = await uploadImage(file);
+    if (url) setForm((prev) => ({ ...prev, image: url }));
+  };
+
   const handleEditProduct = (product) => {
     setEditingProduct(product);
     setFormError("");
@@ -108,5 +132,6 @@ export const useProductForm = () => {
     addSpecRow,
     removeSpecRow,
     updateSpecRow,
+    handleImageUpload,
   };
 };
