@@ -11,6 +11,7 @@ import {
   UserPlusIcon,
 } from "@heroicons/react/24/outline";
 import Modal from "./Modal";
+import ForgotPasswordForm from "./ForgotPasswordForm";
 import { useProducts } from "../hooks/useProducts";
 import { useCart } from "../hooks/useCart"; // Импортируем хук useCart для получения данных о корзине
 import { useUser } from "../hooks/useUser"; // Добавляем импорт
