@@ -36,6 +36,7 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false);
 
   // Состояние для форм
   const [loginData, setLoginData] = useState({
@@ -153,7 +154,7 @@ const Header = () => {
     // Ошибки уже обрабатываются в UserContext
   };
 
-  const handleLogout = () => {    
+  const handleLogout = () => {
     logout();
   };
 
@@ -161,13 +162,14 @@ const Header = () => {
     navigate("/Profile");
   };
 
-  const handleCartClick = () => {    
+  const handleCartClick = () => {
     navigate("/Cart");
   };
 
   const closeModals = () => {
     setIsLoginFormOpen(false);
     setIsRegisterFormOpen(false);
+    setIsForgotPasswordOpen(false);
   };
 
   // Переключение между формами
@@ -413,6 +415,18 @@ const Header = () => {
                 required
                 disabled={userLoading}
               />
+              <div className="text-right">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsLoginFormOpen(false);
+                    setIsForgotPasswordOpen(true);
+                  }}
+                  className="text-sm text-blue-600 hover:text-blue-700"
+                >
+                  Забыли пароль?
+                </button>
+              </div>
             </div>
 
             <button
@@ -579,6 +593,20 @@ const Header = () => {
               </button>
             </p>
           </div>
+        </div>
+      </Modal>
+      <Modal isOpen={isForgotPasswordOpen} onClose={closeModals}>
+        <div className="px-6 pb-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">
+            Восстановление пароля
+          </h2>
+          <p className="text-sm text-gray-500 text-center mb-6">
+            Введите email и мы отправим ссылку для сброса пароля
+          </p>
+          <ForgotPasswordForm
+            onClose={closeModals}
+            onSwitchToLogin={switchToLogin}
+          />
         </div>
       </Modal>
     </>
