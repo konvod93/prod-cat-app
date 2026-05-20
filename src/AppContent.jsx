@@ -17,6 +17,7 @@ import { useTheme } from "./hooks/useTheme";
 import CheckoutForm from "./pages/CheckoutForm";
 import ThankYou from "./pages/ThankYou";
 import PaymentForm from "./pages/PaymentForm";
+import ResetPassword from "./pages/ResetPassword";
 
 
 const AppContent = () => {
@@ -42,6 +43,7 @@ const AppContent = () => {
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/products/:id" element={<ProductPage />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           {/* Redirect any unknown paths to NotFound */}
           <Route path="*" element={<Navigate to="/not-found" replace />} />
           <Route path="/payment" element={<PaymentForm />} />
