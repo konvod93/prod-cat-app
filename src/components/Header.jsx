@@ -537,7 +537,7 @@ const Header = () => {
                 placeholder="••••••••"
                 required
                 disabled={userLoading}
-                minLength={6}
+                minLength={8}
               />
             </div>
 
@@ -562,7 +562,7 @@ const Header = () => {
                 placeholder="••••••••"
                 required
                 disabled={userLoading}
-                minLength={6}
+                minLength={8}
               />
             </div>
 
