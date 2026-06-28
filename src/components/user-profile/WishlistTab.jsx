@@ -7,9 +7,9 @@ const WishlistTab = () => {
 
   return (
     <div className="bg-white rounded-2xl shadow p-6">
-      <h2 className="text-lg font-semibold text-gray-800 mb-6">Избранное</h2>
+      <h2 className="text-lg font-semibold text-gray-800 mb-6">Обране</h2>
       {wishlistItems.length === 0 ? (
-        <p className="text-gray-400 text-sm">Избранных товаров нет</p>
+        <p className="text-gray-400 text-sm">Обраних товарів немає</p>
       ) : (
         <div className="space-y-4">
           {wishlistItems.map((item) => (
@@ -32,13 +32,13 @@ const WishlistTab = () => {
                 onClick={() => addToCart(item)}
                 className="text-sm text-blue-600 hover:underline"
               >
-                В корзину
+                В кошик
               </button>
               <button
                 onClick={() => removeFromWishlist(item.id)}
                 className="text-sm text-red-400 hover:text-red-600"
               >
-                Удалить
+                Видалити
               </button>
             </div>
           ))}

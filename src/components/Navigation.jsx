@@ -26,22 +26,22 @@ const Navigation = () => {
         <ul className="absolute top-14 left-0 w-1/2 bg-gray-800 dark:bg-gray-900 shadow-md opacity-90 flex flex-col items-center space-y-4 py-4 lg:hidden transition-colors duration-300">
           <li>
             <Link to="/" className="hover:text-blue-300 dark:hover:text-blue-400 transition-colors duration-200">
-              Home
+              Головна
             </Link>
           </li>
           <li>
             <Link to="/Products" className="hover:text-blue-300 dark:hover:text-blue-400 transition-colors duration-200">
-              Products
+              Товари
             </Link>
           </li>
           <li>
             <Link to="/Categories" className="hover:text-blue-300 dark:hover:text-blue-400 transition-colors duration-200">
-              Categories
+              Категорії
             </Link>
           </li>
           <li>
             <Link to="/About" className="hover:text-blue-300 dark:hover:text-blue-400 transition-colors duration-200">
-              About Us
+              Про нас
             </Link>
           </li>
         </ul>
@@ -50,22 +50,22 @@ const Navigation = () => {
       <ul className="hidden lg:flex pb-2 pt-1 space-x-4 gap-4">
         <li>
           <Link to="/" className="hover:text-blue-300 dark:hover:text-blue-400 transition-colors duration-200">
-            Home
+            Головна
           </Link>
         </li>
         <li>
           <Link to="/Products" className="hover:text-blue-300 dark:hover:text-blue-400 transition-colors duration-200">
-            Products
+            Товари
           </Link>
         </li>
         <li>
           <Link to="/Categories" className="hover:text-blue-300 dark:hover:text-blue-400 transition-colors duration-200">
-            Categories
+            Категорії
           </Link>
         </li>
         <li>
           <Link to="/About" className="hover:text-blue-300 dark:hover:text-blue-400 transition-colors duration-200">
-            About Us
+            Про нас
           </Link>
         </li>
       </ul>

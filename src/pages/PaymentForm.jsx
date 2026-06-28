@@ -42,11 +42,11 @@ export default function PaymentForm() {
     <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
       <h2 className="text-2xl font-bold text-gray-800 mb-2">Оплата</h2>
       <p className="text-sm text-gray-500 mb-6">
-        Это демо-форма. Настоящая оплата не производится.
+        Це демо-форма. Справжня оплата не виконується.
       </p>
 
       <div className="bg-gray-50 rounded-lg p-4 mb-6 flex justify-between items-center">
-        <span className="text-gray-600 text-sm">Сумма к оплате</span>
+        <span className="text-gray-600 text-sm">Сума до оплати</span>
         <span className="text-xl font-bold text-gray-800">
           {formatProductPrice(totalPrice)}
         </span>
@@ -55,7 +55,7 @@ export default function PaymentForm() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm text-gray-500 mb-1">
-            Номер карты
+            Номер карти
           </label>
           <input
             type="text"
@@ -70,7 +70,7 @@ export default function PaymentForm() {
         </div>
         <div>
           <label className="block text-sm text-gray-500 mb-1">
-            Имя владельца
+            Им’я володаря карти
           </label>
           <input
             type="text"
@@ -85,7 +85,7 @@ export default function PaymentForm() {
         <div className="flex gap-4">
           <div className="flex-1">
             <label className="block text-sm text-gray-500 mb-1">
-              Срок действия
+              Термін дії
             </label>
             <input
               type="text"

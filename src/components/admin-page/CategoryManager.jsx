@@ -21,12 +21,12 @@ const CategoryManager = () => {
         {/* Форма добавления категории */}
         <div>
           <h3 className="text-sm font-medium text-gray-600 mb-3">
-            Добавить категорию
+            Додати категорію
           </h3>
           <div className="space-y-3">
             <div>
               <label className="block text-sm text-gray-500 mb-1">
-                Название *
+                Назва *
               </label>
               <input
                 type="text"
@@ -42,7 +42,7 @@ const CategoryManager = () => {
               />
             </div>
             <div>
-              <label className="block text-sm text-gray-500 mb-1">Иконка</label>
+              <label className="block text-sm text-gray-500 mb-1">Іконка</label>
               <div className="flex flex-wrap gap-2">
                 {CATEGORY_ICONS.map((icon) => (
                   <button
@@ -61,7 +61,7 @@ const CategoryManager = () => {
               </div>
             </div>
             <div>
-              <label className="block text-sm text-gray-500 mb-1">Цвет</label>
+              <label className="block text-sm text-gray-500 mb-1">Колір</label>
               <div className="flex flex-wrap gap-2">
                 {CATEGORY_COLORS.map(({ label, value }) => (
                   <button
@@ -83,7 +83,7 @@ const CategoryManager = () => {
             >
               <span className="text-3xl">{categoryForm.icon}</span>
               <span className="font-semibold">
-                {categoryForm.name || "Название категории"}
+                {categoryForm.name || "Назва категорії"}
               </span>
             </div>
             {categoryError && (
@@ -96,7 +96,7 @@ const CategoryManager = () => {
               onClick={handleAddCategory}
               className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition"
             >
-              Добавить категорию
+              Додати категорію
             </button>
           </div>
         </div>
@@ -104,7 +104,7 @@ const CategoryManager = () => {
         {/* Список категорий */}
         <div>
           <h3 className="text-sm font-medium text-gray-600 mb-3">
-            Существующие{" "}
+            Існуючі{" "}
             <span className="text-gray-400">({categories.length})</span>
           </h3>
           <div className="space-y-2 max-h-80 overflow-y-auto pr-1">
@@ -125,7 +125,7 @@ const CategoryManager = () => {
                   onClick={() => deleteCategory(cat.id)}
                   className="text-red-400 hover:text-red-600 text-xs border border-red-200 hover:border-red-400 px-2 py-1 rounded-lg transition"
                 >
-                  Удалить
+                  Видалити
                 </button>
               </div>
             ))}

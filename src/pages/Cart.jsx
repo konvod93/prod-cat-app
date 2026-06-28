@@ -17,7 +17,7 @@ function Cart() {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <h2 className="text-xl font-semibold text-gray-600">Загрузка...</h2>
+        <h2 className="text-xl font-semibold text-gray-600">Завантаження...</h2>
       </div>
     );
   }
@@ -25,13 +25,13 @@ function Cart() {
   if (!items || items.length === 0) {
     return (
       <div className="text-center py-10">
-        <h2 className="text-2xl font-bold text-gray-700">Корзина пуста</h2>
-        <p className="text-gray-500 mt-2">Добавьте товары в корзину</p>
+        <h2 className="text-2xl font-bold text-gray-700">Кошик порожній</h2>
+        <p className="text-gray-500 mt-2">Додайте товари в кошик</p>
         <Link
           to="/products"
           className="mt-4 inline-block px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
         >
-          Перейти к товарам
+          Перейти до товарів
         </Link>
         <div className="mt-6">
           <img
@@ -42,7 +42,7 @@ function Cart() {
         </div>
         <div className="mt-4">
           <p className="text-gray-500">
-            Вы можете начать покупки, перейдя в раздел товаров.
+            Ви можете почати покупки, перейшовши в розділ товарів.
           </p>
         </div>
       </div>
@@ -54,13 +54,13 @@ function Cart() {
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800">
-          Корзина ({totalItems})
+          Кошик ({totalItems})
         </h2>
         <button
           onClick={clearCart}
           className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
         >
-          Очистить корзину
+          Очистити кошик
         </button>
       </div>
 
@@ -93,7 +93,7 @@ function Cart() {
                   -
                 </button>
                 <span className="text-sm text-gray-700">
-                  Количество: {item.quantity}
+                  Кількість: {item.quantity}
                 </span>
                 <button
                   onClick={() => updateQuantity(item.id, item.quantity + 1)}
@@ -104,14 +104,14 @@ function Cart() {
               </div>
 
               <p className="mt-2 text-gray-700">
-                Сумма: {formatProductPrice(item.price * item.quantity)}
+                Сума: {formatProductPrice(item.price * item.quantity)}
               </p>
 
               <button
                 onClick={() => removeFromCart(item.id)}
                 className="mt-2 text-sm text-red-500 hover:underline"
               >
-                Удалить из корзины
+                Видалити з кошика
               </button>
             </div>
           </div>
@@ -122,16 +122,16 @@ function Cart() {
       <div className="mt-6 border-t pt-4 flex flex-col md:flex-row justify-between items-center">
         <div className="text-gray-800">
           <h3 className="text-xl font-bold">
-            Общая сумма: {formatProductPrice(totalPrice)}
+            Загальна сума: {formatProductPrice(totalPrice)}
           </h3>
-          <p className="text-sm text-gray-600">Всего товаров: {totalItems}</p>
+          <p className="text-sm text-gray-600">Всього товарів: {totalItems}</p>
         </div>
 
         <Link
           to="/checkout"
           className="mt-4 md:mt-0 px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition"
         >
-          Оформить заказ
+          Оформить замовлення
         </Link>
       </div>
     </div>

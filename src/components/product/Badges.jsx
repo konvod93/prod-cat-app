@@ -18,12 +18,12 @@ const Badges = ({ product, productInCart, itemQuantity }) => {
       )}
       {!product.inStock && (
         <span className="bg-gray-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
-          НЕТ В НАЛИЧИИ
+          НЕМАЄ У НАЯВНОСТІ
         </span>
       )}
       {productInCart && (
         <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
-          В КОРЗИНЕ ({itemQuantity})
+          В КОШИКУ ({itemQuantity})
         </span>
       )}
     </div>

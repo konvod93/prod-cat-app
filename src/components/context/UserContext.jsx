@@ -48,7 +48,7 @@ export const UserProvider = ({ children }) => {
     dispatch({ type: USER_ACTIONS.REGISTER_START });
     try {
       if (registerData.password !== registerData.confirmPassword) {
-        throw new Error("Пароли не совпадают");
+        throw new Error("Паролі не співпадають");
       }
 
       const { data, error } = await supabase.auth.signUp({
@@ -83,7 +83,7 @@ export const UserProvider = ({ children }) => {
   const logout = async () => {
     await supabase.auth.signOut();
     dispatch({ type: USER_ACTIONS.LOGOUT });
-    showNotification("Вы успешно вышли из системы", "info");
+    showNotification("Ви успішно вийшли з системи", "info");
   };
 
   // Функция обновления профиля
@@ -99,7 +99,7 @@ export const UserProvider = ({ children }) => {
       if (error) throw new Error(error.message);
 
       dispatch({ type: USER_ACTIONS.UPDATE_PROFILE, payload: profileData });
-      showNotification("Профиль обновлен", "success");
+      showNotification("Профіль оновлено", "success");
       return { success: true };
     } catch (error) {
       showNotification(error.message, "error");

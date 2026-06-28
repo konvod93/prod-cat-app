@@ -41,7 +41,7 @@ export const CategoriesProvider = ({ children }) => {
 
         dispatch({ type: "SET_CATEGORIES", payload: data });
       } catch (error) {
-        console.error("Ошибка загрузки категорий:", error);
+        console.error("Помилка завантаження категорій:", error);
         dispatch({ type: "SET_LOADING", payload: false });
       }
     };
@@ -68,7 +68,7 @@ export const CategoriesProvider = ({ children }) => {
           // unique violation
           return {
             success: false,
-            error: "Категория с таким названием уже существует",
+            error: "Категорія з таким назвою вже існує",
           };
         }
         throw error;
@@ -77,7 +77,7 @@ export const CategoriesProvider = ({ children }) => {
       dispatch({ type: "ADD_CATEGORY", payload: data });
       return { success: true };
     } catch (error) {
-      console.error("Ошибка добавления категории:", error);
+      console.error("Помилка додавання категорії:", error);
       return { success: false, error: error.message };
     }
   };
@@ -91,7 +91,7 @@ export const CategoriesProvider = ({ children }) => {
       dispatch({ type: "DELETE_CATEGORY", payload: id });
       return { success: true };
     } catch (error) {
-      console.error("Ошибка удаления категории:", error);
+      console.error("Помилка видалення категорії:", error);
       return { success: false, error: error.message };
     }
   };

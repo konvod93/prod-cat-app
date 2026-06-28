@@ -65,7 +65,7 @@ export const WishlistProvider = ({ children }) => {
 
         dispatch({ type: "SET_ITEMS", payload: items });
       } catch (error) {
-        console.error("Ошибка загрузки избранного:", error);
+        console.error("Помилка завантаження обраного:", error);
         dispatch({ type: "SET_LOADING", payload: false });
       }
     };
@@ -77,7 +77,7 @@ export const WishlistProvider = ({ children }) => {
           dispatch({ type: "SET_ITEMS", payload: JSON.parse(saved) });
         }
       } catch (error) {
-        console.error("Ошибка загрузки избранного из localStorage:", error);
+        console.error("Помилка завантаження обраного з localStorage:", error);
       }
     };
 
@@ -103,7 +103,7 @@ export const WishlistProvider = ({ children }) => {
           .insert([{ user_id: user.id, product_id: product.id }]);
         if (error) throw error;
       } catch (error) {
-        console.error("Ошибка добавления в избранное:", error);
+        console.error("Помилка додавання в обране:", error);
         return;
       }
     }
@@ -120,7 +120,7 @@ export const WishlistProvider = ({ children }) => {
           .eq("product_id", productId);
         if (error) throw error;
       } catch (error) {
-        console.error("Ошибка удаления из избранного:", error);
+        console.error("Помилка видалення з обраного:", error);
         return;
       }
     }

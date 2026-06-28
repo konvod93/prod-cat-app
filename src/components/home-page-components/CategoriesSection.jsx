@@ -27,7 +27,7 @@ const CategoriesSection = () => {
         icon: categoryInfo?.icon || "📦",
         color: categoryInfo?.color || "from-gray-500 to-gray-600",
         productsCount: productsInCategory.length,
-        description: `Откройте для себя ${productsInCategory.length} товаров в этой категории.`,
+        description: `Відкрийте для себе ${productsInCategory.length} товарів в цій категорії.`,
       };
     });
 
@@ -50,7 +50,7 @@ const CategoriesSection = () => {
         icon: categoryInfo?.icon || "📦",
         color: categoryInfo?.color || "from-gray-500 to-gray-600",
         productsCount: productsInCategory.length,
-        description: `Откройте для себя ${productsInCategory.length} товаров в этой категории.`,
+        description: `Відкрийте для себе ${productsInCategory.length} товарів в цій категорії.`,
       };
     });
 
@@ -60,13 +60,13 @@ const CategoriesSection = () => {
   return (
     <section className="py-12 px-6 bg-white">
       <div className="flex justify-between items-center mb-8 max-w-5xl mx-auto">
-        <h2 className="text-3xl font-bold">📦 Популярные категории</h2>
+        <h2 className="text-3xl font-bold">📦 Популярні категорії</h2>
         <button
           onClick={refreshCategories}
           className="text-sm bg-blue-100 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-200 transition"
-          title="Обновить категории"
+          title="Оновити категорії"
         >
-          🔄 Обновить
+          🔄 Оновити
         </button>
       </div>
 
@@ -84,7 +84,7 @@ const CategoriesSection = () => {
                   {category.icon}
                 </span>
                 <span className="text-sm bg-gray-100 text-gray-600 px-3 py-1 rounded-full">
-                  {category.productsCount} товаров
+                  {category.productsCount} товарів
                 </span>
               </div>
 
@@ -98,7 +98,7 @@ const CategoriesSection = () => {
 
               {/* Кнопка действия */}
               <div className="flex items-center text-blue-600 font-medium">
-                <span>Посмотреть товары</span>
+                <span>Переглянути товари</span>
                 <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">
                   →
                 </span>
@@ -114,7 +114,7 @@ const CategoriesSection = () => {
           to="/Categories"
           className="inline-flex items-center text-blue-600 font-medium hover:text-blue-700 transition-colors"
         >
-          Посмотреть все категории
+          Переглянути всі категорії
           <span className="ml-2">→</span>
         </Link>
       </div>

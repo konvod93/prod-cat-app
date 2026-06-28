@@ -8,14 +8,14 @@ const SearchBar = ({ searchQuery, setSearchQuery, handleSearch }) => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Поиск товаров..."
+              placeholder="Пошук товарів..."
               className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
               type="submit"
               className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
-              Найти
+              Знайти
             </button>
           </form>
         </div>

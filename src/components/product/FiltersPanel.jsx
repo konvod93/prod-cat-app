@@ -35,7 +35,7 @@ const FiltersPanel = ({
             onClick={clearAllFilters}
             className="text-red-600 hover:text-red-700 text-sm font-medium"
           >
-            Очистить все
+            Очистити все
           </button>
         )}
       </div>
@@ -46,14 +46,14 @@ const FiltersPanel = ({
           {/* Фильтр по категории */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Категория
+              Категорія
             </label>
             <select
               value={currentFilters.category}
               onChange={(e) => updateFilter("category", e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="">Все категории</option>
+              <option value="">Всі категоріи</option>
               {categories.map((category) => (
                 <option key={category} value={category}>
                   {category}
@@ -65,12 +65,12 @@ const FiltersPanel = ({
           {/* Фильтр по цене */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Цена
+              Ціна
             </label>
             <div className="flex gap-2">
               <input
                 type="number"
-                placeholder="От"
+                placeholder="Від"
                 value={currentFilters.minPrice}
                 onChange={(e) => updateFilter("minPrice", e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -88,35 +88,35 @@ const FiltersPanel = ({
           {/* Фильтр по рейтингу */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Минимальный рейтинг
+              Мінімальний рейтинг
             </label>
             <select
               value={currentFilters.minRating}
               onChange={(e) => updateFilter("minRating", e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="">Любой рейтинг</option>
-              <option value="4">4+ звезды</option>
-              <option value="4.5">4.5+ звезд</option>
-              <option value="5">5 звезд</option>
+              <option value="">Будь-який рейтинг</option>
+              <option value="4">4+ зірки</option>
+              <option value="4.5">4.5+ зірок</option>
+              <option value="5">5 зірок</option>
             </select>
           </div>
 
           {/* Сортировка */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Сортировка
+              Сортування
             </label>
             <select
               value={currentFilters.sortBy}
               onChange={(e) => updateFilter("sortBy", e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="default">По умолчанию</option>
-              <option value="price-asc">Цена: по возрастанию</option>
-              <option value="price-desc">Цена: по убыванию</option>
-              <option value="rating-desc">Рейтинг: по убыванию</option>
-              <option value="name-asc">Название: А-Я</option>
+              <option value="default">За замовчуванням</option>
+              <option value="price-asc">Ціна: за зростанням</option>
+              <option value="price-desc">Ціна: за спаданням</option>
+              <option value="rating-desc">Рейтинг: за спаданням</option>
+              <option value="name-asc">Назва: А-Я</option>
             </select>
           </div>
         </div>

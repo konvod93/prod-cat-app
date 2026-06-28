@@ -17,7 +17,7 @@ const ProfileEditForm = ({ isEditing, setIsEditing }) => {
       {isEditing ? (
         <div className="space-y-4">
           <div>
-            <label className="block text-sm text-gray-500 mb-1">Имя</label>
+            <label className="block text-sm text-gray-500 mb-1">Им’я</label>
             <input
               type="text"
               value={formData.name}
@@ -64,7 +64,7 @@ const ProfileEditForm = ({ isEditing, setIsEditing }) => {
               onClick={() => setIsEditing(false)}
               className="text-gray-500 px-5 py-2 rounded-lg text-sm border hover:bg-gray-50 transition"
             >
-              Отмена
+              Відмінити
             </button>
           </div>
         </div>

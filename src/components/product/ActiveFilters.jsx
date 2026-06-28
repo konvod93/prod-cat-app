@@ -5,11 +5,11 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 const ActiveFilters = ({ currentFilters, clearFilter, clearAllFilters }) => {
   return (
     <div className="mb-6 p-4 bg-blue-50 rounded-lg">
-      <h3 className="text-lg font-semibold mb-2">Активные фильтры:</h3>
+      <h3 className="text-lg font-semibold mb-2">Активні фільтри:</h3>
       <div className="flex flex-wrap gap-2">
         {currentFilters.search && (
           <div className="flex items-center bg-blue-100 text-blue-800 px-3 py-1 rounded-full">
-            <span>Поиск: "{currentFilters.search}"</span>
+            <span>Пошук: "{currentFilters.search}"</span>
             <button
               onClick={() => clearFilter("search")}
               className="ml-2 text-blue-600 hover:text-blue-800"
@@ -20,7 +20,7 @@ const ActiveFilters = ({ currentFilters, clearFilter, clearAllFilters }) => {
         )}
         {currentFilters.category && (
           <div className="flex items-center bg-green-100 text-green-800 px-3 py-1 rounded-full">
-            <span>Категория: {currentFilters.category}</span>
+            <span>Категорія: {currentFilters.category}</span>
             <button
               onClick={() => clearFilter("category")}
               className="ml-2 text-green-600 hover:text-green-800"
@@ -32,7 +32,7 @@ const ActiveFilters = ({ currentFilters, clearFilter, clearAllFilters }) => {
         {(currentFilters.minPrice || currentFilters.maxPrice) && (
           <div className="flex items-center bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full">
             <span>
-              Цена: {currentFilters.minPrice && `от ${currentFilters.minPrice}`}
+              Ціна: {currentFilters.minPrice && `від ${currentFilters.minPrice}`}
               {currentFilters.minPrice && currentFilters.maxPrice && " "}
               {currentFilters.maxPrice && `до ${currentFilters.maxPrice}`}
             </span>
@@ -49,7 +49,7 @@ const ActiveFilters = ({ currentFilters, clearFilter, clearAllFilters }) => {
         )}
         {currentFilters.minRating && (
           <div className="flex items-center bg-purple-100 text-purple-800 px-3 py-1 rounded-full">
-            <span>Рейтинг: от {currentFilters.minRating}</span>
+            <span>Рейтинг: від {currentFilters.minRating}</span>
             <button
               onClick={() => clearFilter("minRating")}
               className="ml-2 text-purple-600 hover:text-purple-800"
@@ -61,15 +61,15 @@ const ActiveFilters = ({ currentFilters, clearFilter, clearAllFilters }) => {
         {currentFilters.sortBy && currentFilters.sortBy !== "default" && (
           <div className="flex items-center bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full">
             <span>
-              Сортировка:{" "}
+              Сортування:{" "}
               {currentFilters.sortBy === "price-asc"
-                ? "Цена ↑"
+                ? "Ціна ↑"
                 : currentFilters.sortBy === "price-desc"
-                  ? "Цена ↓"
+                  ? "Ціна ↓"
                   : currentFilters.sortBy === "rating-desc"
                     ? "Рейтинг ↓"
                     : currentFilters.sortBy === "name-asc"
-                      ? "Название ↑"
+                      ? "Назва ↑"
                       : currentFilters.sortBy}
             </span>
             <button
@@ -82,7 +82,7 @@ const ActiveFilters = ({ currentFilters, clearFilter, clearAllFilters }) => {
         )}
         {currentFilters.productId && (
           <div className="flex items-center bg-red-100 text-red-800 px-3 py-1 rounded-full">
-            <span>Выбранный товар</span>
+            <span>Обраний товар</span>
             <button
               onClick={clearAllFilters}
               className="ml-2 text-red-600 hover:text-red-800"

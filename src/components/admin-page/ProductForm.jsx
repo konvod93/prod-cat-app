@@ -26,15 +26,15 @@ const ProductForm = () => {
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-semibold text-gray-800">
             {editingProduct
-              ? `Редактировать: ${editingProduct.name}`
-              : "Добавить товар"}
+              ? `Редагувати: ${editingProduct.name}`
+              : "Додати товар"}
           </h2>
           {editingProduct && (
             <button
               onClick={cancelEditing}
               className="text-sm text-gray-400 hover:text-gray-600"
             >
-              Отмена
+              Відміна
             </button>
           )}
         </div>
@@ -73,14 +73,14 @@ const ProductForm = () => {
           {/* Краткое описание */}
           <div>
             <label className="block text-sm text-gray-500 mb-1">
-              Краткое описание
+              Короткий опис
             </label>
             <textarea
               value={form.description}
               onChange={(e) =>
                 setForm({ ...form, description: e.target.value })
               }
-              placeholder="Краткое описание товара"
+              placeholder="Короткий опис товару"
               rows={2}
               className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"
             />
@@ -89,14 +89,14 @@ const ProductForm = () => {
           {/* Подробное описание */}
           <div>
             <label className="block text-sm text-gray-500 mb-1">
-              Подробное описание
+              Докладний опис
             </label>
             <textarea
               value={form.detailedDescription}
               onChange={(e) =>
                 setForm({ ...form, detailedDescription: e.target.value })
               }
-              placeholder="Подробное описание, особенности, преимущества..."
+              placeholder="Докладний опис, особливості, переваги..."
               rows={4}
               className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"
             />
@@ -114,14 +114,14 @@ const ProductForm = () => {
               className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             {form.image && (
-              <img
+              <imgе
                 src={form.image}
-                alt="Предпросмотр"
+                alt="Предперегляд"
                 className="mt-2 w-24 h-24 object-cover rounded-lg border"
               />
             )}
             <p className="text-xs text-gray-400 mt-1">
-              Или вставьте ссылку на изображение:
+              Або вставте посилання на зображення:
             </p>
             <input
               type="text"
@@ -164,7 +164,7 @@ const ProductForm = () => {
                     onChange={(e) =>
                       updateSpecRow(index, "value", e.target.value)
                     }
-                    placeholder="Значение (напр. Apple)"
+                    placeholder="Значення (напр. Apple)"
                     className="flex-1 border rounded-lg px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
                   <button
@@ -203,7 +203,7 @@ const ProductForm = () => {
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition"
           >
-            {editingProduct ? "Сохранить изменения" : "Добавить товар"}
+            {editingProduct ? "Зберегти зміни" : "Додати товар"}
           </button>
         </form>
       </div>
@@ -211,7 +211,7 @@ const ProductForm = () => {
       {/* ── Список товаров ── */}
       <div className="bg-white rounded-2xl shadow p-6">
         <h2 className="text-lg font-semibold text-gray-800 mb-4">
-          Товары{" "}
+          Товари{" "}
           <span className="text-gray-400 text-sm font-normal">
             ({products.length})
           </span>
@@ -239,13 +239,13 @@ const ProductForm = () => {
                 onClick={() => handleEditProduct(product)}
                 className="text-blue-400 hover:text-blue-600 text-xs border border-blue-200 hover:border-blue-400 px-2 py-1 rounded-lg transition flex-shrink-0"
               >
-                Изменить
+                Редагувати
               </button>
               <button
                 onClick={() => deleteProduct(product.id)}
                 className="text-red-400 hover:text-red-600 text-xs border border-red-200 hover:border-red-400 px-2 py-1 rounded-lg transition flex-shrink-0"
               >
-                Удалить
+                Видалити
               </button>
             </div>
           ))}

@@ -52,7 +52,7 @@ export default function ResetPassword() {
       <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
         <div className="bg-white rounded-2xl shadow p-10 max-w-md w-full text-center">
           <div className="text-4xl mb-4">⏳</div>
-          <p className="text-gray-500">Проверяем ссылку...</p>
+          <p className="text-gray-500">Перевіряємо посилання...</p>
         </div>
       </div>
     );
@@ -62,10 +62,10 @@ export default function ResetPassword() {
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
       <div className="bg-white rounded-2xl shadow p-10 max-w-md w-full">
         <h1 className="text-2xl font-bold text-gray-800 mb-2 text-center">
-          Новый пароль
+          Новий пароль
         </h1>
         <p className="text-sm text-gray-500 text-center mb-6">
-          Придумайте новый пароль для вашего аккаунта
+          Придумайте новий пароль для вашего аккаунта. Він повинен містити не менше 8 символів.
         </p>
 
         {error && (
@@ -77,7 +77,7 @@ export default function ResetPassword() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Новый пароль
+              Новий пароль
             </label>
             <input
               type="password"
@@ -91,7 +91,7 @@ export default function ResetPassword() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Подтвердите пароль
+              Підтвердьте пароль
             </label>
             <input
               type="password"

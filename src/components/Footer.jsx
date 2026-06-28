@@ -4,15 +4,15 @@ const Footer = () => (
   <footer className="fixed bottom-0 left-0 w-full bg-blue-900 dark:bg-gray-800 text-white text-sm lg:text-lg py-6 mt-8 transition-colors duration-300">
     <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-between gap-4">
       <div className="text-sm">
-        © {new Date().getFullYear()} ProductCat. Все права защищены.
+        © {new Date().getFullYear()} ProductCat. Всі права захищені.
       </div>
       <div className="flex flex-wrap justify-center space-x-6 text-center">
         <Link to="/about" className="hover:underline transition-colors duration-200">О нас</Link>
-        <Link to="/contacts" className="hover:underline transition-colors duration-200">Контакты</Link>
-        <Link to="/policy" className="hover:underline transition-colors duration-200">Политика конфиденциальности</Link>
+        <Link to="/contacts" className="hover:underline transition-colors duration-200">Контакти</Link>
+        <Link to="/policy" className="hover:underline transition-colors duration-200">Політика конфіденційності</Link>
       </div>
       <div className="text-xs text-blue-200 dark:text-gray-300">
-        Сделано с <span className="text-pink-400">♥</span> для Telegram Mini Apps
+        Зроблено з <span className="text-pink-400">♥</span> для Telegram Mini Apps
       </div>
     </div>
   </footer>

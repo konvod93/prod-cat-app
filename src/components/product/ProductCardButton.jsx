@@ -24,20 +24,20 @@ const ProductCardButton = ({ product, productInCart, itemQuantity }) => {
         {isAddingToCart ? (
           <>
             <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-            Добавляем...
+            Додаємо...
           </>
         ) : !product.inStock ? (
           <>
             <ShoppingCartIcon className="h-4 w-4" />
-            Нет в наличии
+            Немає в наявності
           </>
         ) : productInCart ? (
           <>
-            <CheckIcon className="h-4 w-4" />В корзине ({itemQuantity})
+            <CheckIcon className="h-4 w-4" />В кошику ({itemQuantity})
           </>
         ) : (
           <>
-            <ShoppingCartIcon className="h-4 w-4" />В корзину
+            <ShoppingCartIcon className="h-4 w-4" />В кошик
           </>
         )}
       </button>

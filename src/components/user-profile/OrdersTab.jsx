@@ -22,12 +22,12 @@ const OrdersTab = () => {
   return (
     <div className="bg-white rounded-2xl shadow p-6">
       <h2 className="text-lg font-semibold text-gray-800 mb-6">
-        История заказов
+        Історія замовлень
       </h2>
       {ordersLoading ? (
-        <p className="text-gray-400 text-sm">Загрузка...</p>
+        <p className="text-gray-400 text-sm">Завантаження...</p>
       ) : orders.length === 0 ? (
-        <p className="text-gray-400 text-sm">Заказов пока нет</p>
+        <p className="text-gray-400 text-sm">Замовлень доки немає</p>
       ) : (
         <div className="space-y-4">
           {orders.map((order) => {
@@ -39,11 +39,11 @@ const OrdersTab = () => {
               >
                 <div>
                   <p className="font-medium text-gray-800">
-                    Заказ №{order.id.slice(0, 8).toUpperCase()}
+                    Замовлення №{order.id.slice(0, 8).toUpperCase()}
                   </p>
                   <p className="text-sm text-gray-500">
                     {new Date(order.created_at).toLocaleDateString("ru-RU")} ·{" "}
-                    {order.items.length} товара
+                    {order.items.length} товару
                   </p>
                 </div>
                 <div className="text-right flex flex-col items-end gap-2">

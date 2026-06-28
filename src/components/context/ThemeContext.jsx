@@ -22,7 +22,7 @@ export const ThemeProvider = ({ children }) => {
         setIsDark(systemPrefersDark);        
       }
     } catch (error) {
-      console.error('Ошибка загрузки темы:', error);
+      console.error('Помилка завантаження теми:', error);
     }
   }, []);
 
@@ -42,7 +42,7 @@ export const ThemeProvider = ({ children }) => {
       const themeValue = isDark ? 'dark' : 'light';
       localStorage.setItem('theme', themeValue);
     } catch (error) {
-      console.error('Ошибка сохранения темы:', error);
+      console.error('Помилка збереження теми:', error);
     }    
     
   }, [isDark]);

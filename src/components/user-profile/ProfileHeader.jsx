@@ -26,7 +26,7 @@ const ProfileHeader = ({ user }) => {
         onClick={() => handleLogout({ logout, navigate })}
         className="text-sm text-red-500 hover:text-red-700 border border-red-300 hover:border-red-500 px-4 py-2 rounded-lg transition"
       >
-        Выйти
+        Вийти
       </button>
     </div>
   );

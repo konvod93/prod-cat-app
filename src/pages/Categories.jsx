@@ -22,10 +22,10 @@ const Categories = () => {
         {/* Заголовок */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 bg-clip-text text-transparent">
-            🛍️ Категории товаров
+            🛍️ Категорії товарів
           </h1>
           <p className="text-xl text-gray-600 categories-text max-w-2xl mx-auto transition-colors duration-300">
-            Выберите интересующую вас категорию и откройте для себя мир качественных товаров
+            Виберіть інтересуючу вас категорію і відкрийте для себе світ якісних товарів
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-4 rounded-full"></div>
         </div>
@@ -51,14 +51,14 @@ const Categories = () => {
                       {category.icon || '📦'}
                     </span>
                     <div className="bg-gray-300 bg-opacity-20 rounded-full px-3 py-1">
-                      <span className="text-sm font-medium text-amber-400">{count} товаров</span>
+                      <span className="text-sm font-medium text-amber-400">{count} товарів</span>
                     </div>
                   </div>
                   <h2 className="text-xl font-bold mb-2 group-hover:text-yellow-300 transition-colors duration-300">
                     {category.name}
                   </h2>
                   <div className="flex items-center text-sm opacity-90">
-                    <span>Посмотреть все</span>
+                    <span>Переглянути все</span>
                     <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">→</span>
                   </div>
                 </div>                
@@ -72,38 +72,38 @@ const Categories = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             <div className="p-4">
               <div className="text-3xl font-bold text-blue-600 stat-blue mb-2">{categories.length}</div>
-              <div className="text-gray-600 categories-text">Категорий</div>
+              <div className="text-gray-600 categories-text">Категорій</div>
             </div>
             <div className="p-4">
               <div className="text-3xl font-bold text-green-600 stat-green mb-2">{products.length}</div>
-              <div className="text-gray-600 categories-text">Товаров</div>
+              <div className="text-gray-600 categories-text">Товарів</div>
             </div>
             <div className="p-4">
               <div className="text-3xl font-bold text-purple-600 stat-purple mb-2">24/7</div>
-              <div className="text-gray-600 categories-text">Поддержка</div>
+              <div className="text-gray-600 categories-text">Підтримка</div>
             </div>
           </div>
         </div>
 
         {/* Призыв к действию */}
         <div className="bg-white white-block rounded-2xl shadow-lg p-8 text-center transition-all duration-300">
-          <h3 className="text-2xl font-bold text-gray-800 categories-heading mb-4">Не нашли что искали?</h3>
+          <h3 className="text-2xl font-bold text-gray-800 categories-heading mb-4">Не знайшли що шукали?</h3>
           <p className="text-gray-600 categories-text mb-6">
-            Мы всегда готовы помочь вам найти именно то, что вам нужно
+            Ми завжди готові допомогти вам знайти саме те, що вам потрібно
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link to="/contacts" className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 btn-blue text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105">
-              📞 Связаться с нами
+              📞 Зв’язатися з нами
             </Link>
             <Link to="/" className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-gray-500 to-gray-600 btn-gray text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105">
-              🏠 Главная страница
+              🏠 Головна сторінка
             </Link>
             <Link to="/products" className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 btn-green text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105">
-              📋 Все товары
+              📋 Всі товари
             </Link>
           </div>
           <p className="mt-6 text-gray-500 categories-text italic transition-colors duration-300">
-            Спасибо за выбор нашего магазина! 🎉
+            Дякуємо за вибір нашого магазина! 🎉
           </p>
         </div>
       </div>

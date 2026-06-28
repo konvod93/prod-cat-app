@@ -20,7 +20,7 @@ const AddressesTab = () => {
           onClick={() => setShowAddForm(!showAddForm)}
           className="text-sm text-blue-600 hover:underline"
         >
-          {showAddForm ? "Отмена" : "+ Добавить"}
+          {showAddForm ? "Відмінити" : "+ Додати"}
         </button>
       </div>
 
@@ -28,7 +28,7 @@ const AddressesTab = () => {
         <div className="mb-4 space-y-2 border rounded-xl p-4">
           <input
             type="text"
-            placeholder="Название (например: Дом)"
+            placeholder="Назва (наприклад: Дом)"
             value={newAddress.label}
             onChange={(e) =>
               setNewAddress({ ...newAddress, label: e.target.value })
@@ -37,7 +37,7 @@ const AddressesTab = () => {
           />
           <input
             type="text"
-            placeholder="Адрес доставки"
+            placeholder="Адреса доставки"
             value={newAddress.address}
             onChange={(e) =>
               setNewAddress({ ...newAddress, address: e.target.value })
@@ -55,15 +55,15 @@ const AddressesTab = () => {
             }
             className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition"
           >
-            Сохранить
+            Зберегти
           </button>
         </div>
       )}
 
       {addressesLoading ? (
-        <p className="text-gray-400 text-sm">Загрузка...</p>
+        <p className="text-gray-400 text-sm">Завантаження...</p>
       ) : addresses.length === 0 ? (
-        <p className="text-gray-400 text-sm">Адресов пока нет</p>
+        <p className="text-gray-400 text-sm">Адрес доки немає</p>
       ) : (
         <div className="space-y-3">
           {addresses.map((addr) => (
@@ -79,7 +79,7 @@ const AddressesTab = () => {
                 onClick={() => deleteAddress(addr.id)}
                 className="text-sm text-red-400 hover:text-red-600 transition"
               >
-                Удалить
+                Видалити
               </button>
             </div>
           ))}

@@ -60,7 +60,7 @@ export const ProductsProvider = ({ children }) => {
 
         dispatch({ type: "SET_PRODUCTS", payload: normalized });
       } catch (error) {
-        console.error("Ошибка загрузки товаров:", error);
+        console.error("Помилка завантаження товарів:", error);
         dispatch({ type: "SET_ERROR", payload: error.message });   
       }
     };
@@ -115,7 +115,7 @@ export const ProductsProvider = ({ children }) => {
       dispatch({ type: "ADD_PRODUCT", payload: normalized });
       return { success: true };
     } catch (error) {
-      console.error("Ошибка добавления товара:", error);
+      console.error("Помилка додавання товару:", error);
       return { success: false, error: error.message };
     }
   };
@@ -167,12 +167,12 @@ export const ProductsProvider = ({ children }) => {
       dispatch({ type: "UPDATE_PRODUCT", payload: normalized });
       return { success: true };
     } catch (error) {
-      console.error("Ошибка обновления товара:", error);
+      console.error("Помилка оновлення товару:", error);
       return { success: false, error: error.message };
     }
   };
 
-  // Удаление товара
+  // Видалення товару
   const deleteProduct = async (id) => {
     try {
       const { error } = await supabase.from("products").delete().eq("id", id);
@@ -182,7 +182,7 @@ export const ProductsProvider = ({ children }) => {
       dispatch({ type: "DELETE_PRODUCT", payload: id });
       return { success: true };
     } catch (error) {
-      console.error("Ошибка удаления товара:", error);
+      console.error("Помилка видалення товару:", error);
       return { success: false, error: error.message };
     }
   };

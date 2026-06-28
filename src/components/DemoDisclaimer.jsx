@@ -17,20 +17,20 @@ const DemoDisclaimer = () => {
           <div className="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center text-blue-500">
             ℹ️
           </div>
-          <h2 className="text-lg font-semibold">Демонстрационный сайт</h2>
+          <h2 className="text-lg font-semibold">Демонстраційний сайт</h2>
         </div>
 
         <p className="text-gray-500 text-sm mb-3 leading-relaxed">
-          Это учебный проект для портфолио. Товары и цены вымышленные, оплата не
-          работает. Регистрация и корзина функционируют в полном объёме в целях
-          тестирования.
+          Це є навчальний проект для портфоліо. Товари и ціни вигадані, оплата не
+          працює. Реєстрація та кошик функціонують у повному обсязі з метою
+          тестування.
         </p>
 
         <button
           onClick={() => setVisible(false)}
           className="w-full py-2.5 text-sm font-medium border border-gray-200 rounded-lg hover:bg-gray-50 transition"
         >
-          Понятно, продолжить
+          Зрозуміло, продовжити
         </button>
       </div>
     </div>

@@ -5,15 +5,15 @@ const SearchResults = ({ currentFilters, filteredProducts }) => {
         <div className="mb-4">
         <h2 className="text-2xl font-bold">
           {currentFilters.productId
-            ? "Выбранный товар"
+            ? "Обранийй товар"
             : currentFilters.search
-              ? `Результаты поиска "${currentFilters.search}"`
+              ? `Результати пошуку "${currentFilters.search}"`
               : currentFilters.category
-                ? `Товары в категории "${currentFilters.category}"`
-                : "Все товары"}
+                ? `Товари в категорії "${currentFilters.category}"`
+                : "Всі товари"}
         </h2>
         <p className="text-gray-600">
-          Найдено товаров: {filteredProducts.length}
+          Знайдено товарів: {filteredProducts.length}
         </p>
       </div>
     );

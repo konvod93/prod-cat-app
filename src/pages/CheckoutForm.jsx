@@ -42,7 +42,7 @@ function CheckoutForm() {
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">
-        Оформление заказа
+        Оформлення замовлення
       </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
@@ -67,7 +67,7 @@ function CheckoutForm() {
         {/* Сохранённые адреса */}
         {addresses.length > 0 && (
           <div className="space-y-2">
-            <p className="text-sm text-gray-500">Сохранённые адреса:</p>
+            <p className="text-sm text-gray-500">Збережені адреси:</p>
             <div className="flex flex-wrap gap-2">
               {addresses.map((addr) => (
                 <button
@@ -107,14 +107,14 @@ function CheckoutForm() {
                   onChange={(e) => setSaveAddress(e.target.checked)}
                   className="rounded"
                 />
-                Сохранить адрес в профиле
+                Зберегти адресу в профілі
               </label>
             )}
         </div>
 
         <textarea
           name="comment"
-          placeholder="Комментарий к заказу (необязательно)"
+          placeholder="Коментар до замовлення (необов’язково)"
           value={formData.comment}
           onChange={handleChange}
           className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"

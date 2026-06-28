@@ -26,9 +26,9 @@ const AdminLogin = ({ setIsAuthenticated }) => {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="bg-white rounded-2xl shadow p-8 w-full max-w-sm">
         <h1 className="text-2xl font-bold text-gray-800 mb-2 text-center">
-          Админ панель
+          Адмін панель
         </h1>
-        <p className="text-gray-400 text-sm text-center mb-6">Доступ только для администраторов</p>
+        <p className="text-gray-400 text-sm text-center mb-6">Доступ тільки для адміністраторів</p>
         {authError && (
           <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg text-sm">
             {authError}
@@ -70,7 +70,7 @@ const AdminLogin = ({ setIsAuthenticated }) => {
           onClick={() => navigate("/")}
           className="mt-4 w-full text-sm text-gray-400 hover:text-gray-600 text-center transition"
         >
-          ← На главную
+          ← На головну
         </button>
       </div>
     </div>

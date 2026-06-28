@@ -29,13 +29,13 @@ const ForgotPasswordForm = ({ onClose, onSwitchToLogin }) => {
       <div className="text-center">
         <div className="text-4xl mb-4">📧</div>
         <p className="text-gray-700 mb-6">
-          Письмо отправлено на <strong>{email}</strong>. Проверьте почту.
+          Лист відправлено на <strong>{email}</strong>. Перевірте пошту.
         </p>
         <button
           onClick={onClose}
           className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
         >
-          Закрыть
+          Закрити
         </button>
       </div>
     );
@@ -74,7 +74,7 @@ const ForgotPasswordForm = ({ onClose, onSwitchToLogin }) => {
           onClick={onSwitchToLogin}
           className="text-sm text-blue-600 hover:text-blue-700"
         >
-          ← Вернуться ко входу
+          ← Повернутися ко входу
         </button>
       </div>
     </form>

@@ -31,13 +31,13 @@ export default function ProductPage() {
     return (
       <div className="text-center py-20">
         <h2 className="text-2xl font-bold text-gray-700 mb-4">
-          Товар не найден
+          Товар не знайдено
         </h2>
         <button
           onClick={() => navigate("/products")}
           className="text-blue-600 hover:underline"
         >
-          ← Вернуться к товарам
+          ← Повернутися до товарів
         </button>
       </div>
     );

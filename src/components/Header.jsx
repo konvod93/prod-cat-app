@@ -220,7 +220,7 @@ const Header = () => {
                     onFocus={() =>
                       searchQuery.length > 1 && setShowSuggestions(true)
                     }
-                    placeholder="Поиск товаров..."
+                    placeholder="Пошук товарів..."
                     className="w-full pl-10 pr-4 py-2 rounded-l-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-500 focus:border-transparent border border-gray-200 dark:border-gray-600 transition-colors duration-300"
                   />
                   <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500">
@@ -231,7 +231,7 @@ const Header = () => {
                   type="submit"
                   className="px-4 py-2 bg-white dark:bg-gray-600 hover:bg-gray-50 dark:hover:bg-gray-500 text-blue-600 dark:text-gray-100 rounded-r-lg border-l border-gray-200 dark:border-gray-500 font-medium transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-500"
                 >
-                  Найти
+                  Знайти
                 </button>
               </form>
 
@@ -253,14 +253,14 @@ const Header = () => {
                           </div>
                           {suggestion.category && (
                             <div className="text-sm text-gray-500 dark:text-gray-400">
-                              в категории: {suggestion.category}
+                              в категорії: {suggestion.category}
                             </div>
                           )}
                         </div>
                         <div className="text-xs text-blue-600 dark:text-blue-400 font-medium">
                           {suggestion.type === "product"
                             ? "Товар"
-                            : "Категория"}
+                            : "Категорія"}
                         </div>
                       </div>
                     </div>
@@ -285,7 +285,7 @@ const Header = () => {
                     <ArrowRightEndOnRectangleIcon className="h-5 w-5 block sm:hidden" />
                     {/* Текст — скрыт на малых, виден на md и выше */}
                     <span className="hidden sm:inline">
-                      {userLoading ? "Загрузка" : "Вход"}
+                      {userLoading ? "Завантаження" : "Вхід"}
                     </span>
                   </button>
                   <button
@@ -297,7 +297,7 @@ const Header = () => {
                     <UserPlusIcon className="h-5 w-5 block sm:hidden" />
                     {/* Текст — скрыт на малых, виден на md и выше */}
                     <span className="hidden sm:inline">
-                      {userLoading ? "Загрузка..." : "Регистрация"}
+                      {userLoading ? "Завантаження..." : "Реєстрація"}
                     </span>
                   </button>
                 </>
@@ -313,7 +313,7 @@ const Header = () => {
                       />
                     )}
                     <span className="hidden md:inline text-sm font-medium">
-                      Привет, {user?.name || "Пользователь"}!
+                      Привет, {user?.name || "Користувач"}!
                     </span>
                   </div>
                   {/* Profile Button */}
@@ -332,7 +332,7 @@ const Header = () => {
                   <button
                     onClick={handleCartClick}
                     className="relative p-2 bg-blue-700 dark:bg-gray-700 hover:bg-blue-800 dark:hover:bg-gray-600 rounded-lg transition-colors duration-300 group"
-                    title="Корзина"
+                    title="Кошик"
                   >
                     <ShoppingCartIcon className="h-6 w-6" />
                     {totalItems > 0 && (
@@ -341,7 +341,7 @@ const Header = () => {
                       </span>
                     )}
                     <span className="absolute top-full mt-2 left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-800 dark:bg-gray-700 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
-                      Корзина ({totalItems})
+                      Кошик ({totalItems})
                     </span>
                   </button>
 
@@ -353,7 +353,7 @@ const Header = () => {
                     {/* Иконка — видна только на малых экранах */}
                     <ArrowLeftEndOnRectangleIcon className="h-5 w-5 block sm:hidden" />
                     {/* Текст — скрыт на малых, виден на md и выше */}
-                    <span className="hidden sm:inline">Выйти</span>
+                    <span className="hidden sm:inline">Вийти</span>
                   </button>
                 </>
               )}
@@ -366,7 +366,7 @@ const Header = () => {
       <Modal isOpen={isLoginFormOpen} onClose={closeModals}>
         <div className="px-6 pb-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-            Вход в аккаунт
+            Вхід в аккаунт
           </h2>
 
           {/* Показываем ошибку, если есть */}
@@ -438,23 +438,23 @@ const Header = () => {
               {userLoading ? (
                 <>
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                  Входим...
+                  Заходимо...
                 </>
               ) : (
-                "Войти"
+                "Увійти"
               )}
             </button>
           </form>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
-              Нет аккаунта?{" "}
+              Немає аккаунту?{" "}
               <button
                 onClick={switchToRegister}
                 className="text-blue-600 hover:text-blue-700 font-medium"
                 disabled={userLoading}
               >
-                Зарегистрироваться
+                Зареєструватися
               </button>
             </p>
           </div>
@@ -466,7 +466,7 @@ const Header = () => {
       <Modal isOpen={isRegisterFormOpen} onClose={closeModals}>
         <div className="px-6 pb-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-            Регистрация
+            Реєстрація
           </h2>
 
           {/* Показываем ошибку, если есть */}
@@ -482,7 +482,7 @@ const Header = () => {
                 htmlFor="register-name"
                 className="block text-sm font-medium text-gray-700 mb-1"
               >
-                Имя
+                Ім’я
               </label>
               <input
                 id="register-name"
@@ -492,7 +492,7 @@ const Header = () => {
                   setRegisterData({ ...registerData, name: e.target.value })
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Ваше имя"
+                placeholder="Ваше ім’я"
                 required
                 disabled={userLoading}
               />
@@ -574,23 +574,23 @@ const Header = () => {
               {userLoading ? (
                 <>
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                  Регистрируемся...
+                  Реєструємося...
                 </>
               ) : (
-                "Зарегистрироваться"
+                "Зареєструватися"
               )}
             </button>
           </form>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
-              Уже есть аккаунт?{" "}
+              Вже є аккаунт?{" "}
               <button
                 onClick={switchToLogin}
                 className="text-blue-600 hover:text-blue-700 font-medium"
                 disabled={userLoading}
               >
-                Войти
+                Війти
               </button>
             </p>
           </div>
@@ -599,10 +599,10 @@ const Header = () => {
       <Modal isOpen={isForgotPasswordOpen} onClose={closeModals}>
         <div className="px-6 pb-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">
-            Восстановление пароля
+            Відновлення паролю
           </h2>
           <p className="text-sm text-gray-500 text-center mb-6">
-            Введите email и мы отправим ссылку для сброса пароля
+            Введіть email і ми надішлемо посилання для скидання пароля
           </p>
           <ForgotPasswordForm
             onClose={closeModals}

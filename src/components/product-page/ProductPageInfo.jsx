@@ -32,9 +32,9 @@ const ProductPageInfo = ({ product, discount }) => {
           {/* Наличие */}
           <div className="mb-6">
             {product.inStock ? (
-              <span className="text-green-600 font-medium">✓ В наличии</span>
+              <span className="text-green-600 font-medium">✓ У наявності</span>
             ) : (
-              <span className="text-red-500 font-medium">✗ Нет в наличии</span>
+              <span className="text-red-500 font-medium">✗ Немає в наявності</span>
             )}
           </div>
         </>

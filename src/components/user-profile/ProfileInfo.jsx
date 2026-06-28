@@ -9,13 +9,13 @@ const ProfileInfo = () => {
   return (
     <div className="bg-white rounded-2xl shadow p-6">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-lg font-semibold text-gray-800">Личные данные</h2>
+        <h2 className="text-lg font-semibold text-gray-800">Особисті дані</h2>
         {!isEditing && (
           <button
             onClick={() => setIsEditing(true)}
             className="text-sm text-blue-600 hover:underline"
           >
-            Редактировать
+            Редагувати
           </button>
         )}
       </div>

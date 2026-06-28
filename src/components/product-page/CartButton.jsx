@@ -24,16 +24,16 @@ const CartButton = ({
       {isAddingToCart ? (
         <>
           <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-          Добавляем...
+          Додаємо...
         </>
       ) : productInCart ? (
         <>
-          <CheckIcon className="h-5 w-5" />В корзине ({itemQuantity})
+          <CheckIcon className="h-5 w-5" />В кошику ({itemQuantity})
         </>
       ) : (
         <>
           <ShoppingCartIcon className="h-5 w-5" />
-          Добавить в корзину
+          Додати в кошик
         </>
       )}
     </button>

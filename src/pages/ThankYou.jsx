@@ -7,20 +7,20 @@ export default function ThankYou() {
         <div className="text-5xl mb-4">✅</div>
         <h1 className="text-3xl font-bold text-gray-800 mb-3">Заказ оформлен!</h1>
         <p className="text-gray-500 mb-8">
-          Спасибо за покупку. Ваш заказ принят и уже обрабатывается.
+          Дякуємо за покупку. Ваш замовлення прийнято і вже обробляється.
         </p>
         <div className="flex flex-col gap-3">
           <Link
             to="/profile"
             className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-center"
           >
-            Мои заказы
+            Мої замовлення
           </Link>
           <Link
             to="/products"
             className="px-6 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 transition text-center"
           >
-            Продолжить покупки
+            Продовжити покупки
           </Link>
         </div>
       </div>
