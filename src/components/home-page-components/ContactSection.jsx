@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const ContactSection = () => {
     return (
         <section className="py-12 px-6 text-center">
-        <h2 className="text-3xl font-bold mb-4">📞 Связаться с нами</h2>
+        <h2 className="text-3xl font-bold mb-4">📞 Зв’язатися з нами</h2>
         <p className="text-lg text-gray-700 mb-6">
           Є питання? Ми завжди готові допомогти. Перейдіть в розділ{" "}
           <span className="text-blue-600 font-medium">"Контакти"</span>.
