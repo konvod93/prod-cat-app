@@ -1,5 +1,3 @@
-import fetch from "node-fetch";
-
 export async function handler() {
   const SUPABASE_URL =
     "https://tfgbohpqatvinfrcuzxw.supabase.co/rest/v1/categories";
