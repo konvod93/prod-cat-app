@@ -1,5 +1,5 @@
 [functions]
-  node_version = "18"
+  runtime = "nodejs18.x"
 
 [[redirects]]
   from = "/*"
