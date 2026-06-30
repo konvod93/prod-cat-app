@@ -1,3 +1,6 @@
+[functions]
+  node_version = "18"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
