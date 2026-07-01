@@ -1,7 +1,7 @@
 export async function handler() {
   const SUPABASE_URL =
     "https://tfgbohpqatvinfrcuzxw.supabase.co/rest/v1/categories";
-  const SUPABASE_KEY = import.meta.env.SUPABASE_ANON_KEY;
+  const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
   try {
     const responce = await fetch(
       `${SUPABASE_URL}/rest/v1/categories?select=id&limit=1`,
