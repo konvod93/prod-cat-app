@@ -1,5 +1,6 @@
-[functions]
-  runtime = "nodejs18.x"
+
+[build.environment]
+  NODE_VERSION = "18"
 
 [[redirects]]
   from = "/*"
